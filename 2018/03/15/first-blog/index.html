@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="caozhenwei 在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="caozhenwei" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        first_blog｜caozhenwei&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://github.com/caozhenwei/2018/03/15/first-blog/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('http://img2.imgtn.bdimg.com/it/u=3588772980,2454248748&amp;fm=27&amp;gp=0.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    caozhenwei
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://img2.imgtn.bdimg.com/it/u=3588772980,2454248748&fm=27&gp=0.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://img2.imgtn.bdimg.com/it/u=3588772980,2454248748&fm=27&gp=0.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>first_blog</h1>
+                    
+                    <span class="meta">
+                         作者 caozhenwei
+                        <span>
+                          日期 2018-03-15
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            first_blog
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>本文章介绍了自己用 Octopress 搭建 blog 的过程，其中查了好多资料，看了好多文章，也走了不少弯路。现在记录下来，方便后人学习，自己也做个备忘。废话不多说，开工！</p>
+<a id="more"></a>
+<p>###搭建 blog 时的本机环境：</p>
+<p>macOS High Sierra (10.13.3)</p>
+<p>ruby 2.3.1p112</p>
+<p>gem 2.5.1</p>
+<p>bundle 1.16.1</p>
+<p>git version 2.14.3 (Apple Git-98)</p>
+<p>###1 安装 Octopress<br>什么是 Octopress ？</p>
+<p>Octopress 是一个基于 Ruby 的开源 Blogging Framework，从写 blog，到发布，你完全可以用 Shell 里面的命令搞定。这样，写起 Blog 来，会让技术控们觉得很有成就感。。。</p>
+<p>安装 Octopress</p>
+<pre><code>$ git clone git://github.com/imathis/octopress.git octopress
+$ cd octopress
+</code></pre><p>因为墙的原因，所以要修改 gem 的 source</p>
+<pre><code>$ gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+$ gem sources -l
+*** CURRENT SOURCES ***
+
+https://ruby.taobao.org
+//请确保只有 ruby.taobao.org
+</code></pre><p>安装依赖    </p>
+<pre><code>$ gem install bundler
+$ bundle install
+</code></pre><p>安装默认的 Octopress 主题</p>
+<pre><code>rake install
+</code></pre><p>###2 在 github 上创建仓库</p>
+<p>#####2.1 到 github 上创建仓库<br>到 github 上创建一个 <code>username.github.io</code> 的 repo，比如我的github 名字为 <code>caozhenwei</code> ，我就创建了一个名字为 <code>caozhenwei.github.io</code> 的仓库。</p>
+<p>#####2.2 完成 github 和 Octopress 的关联<br>执行下面的命令并依照提示完成 github 和 Octopress 的关联</p>
+<pre><code>$ rake setup_github_pages
+
+//提示如下：
+(For example, &apos;git@github.com:your_username/your_username.github.io.git)
+       or &apos;https://github.com/your_username/your_username.github.io&apos;)
+</code></pre><p>比如我的我就输入如下：</p>
+<pre><code>git@github.com: caozhenwei/caozhenwei.github.io.git           
+</code></pre><p>###3 创建配置</p>
+<p>#####3.1 生成博客</p>
+<pre><code>$ rake generate
+$ rake deploy
+</code></pre><p>生成后 push 到 github 上，在这之前需要配置下 SSH Key。在终端下输入：</p>
+<pre><code>ssh-keygen -t rsa -C &quot;邮箱地址&quot;
+</code></pre><p>按三次回车即可，成功后就可以在用户目录下找到 .ssh 目录，里面有 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 两个文件，把 <code>id_rsa.pub</code> 放到 github 的 SSH keys 即可。</p>
+<p>git 用户账户信息的配置：</p>
+<pre><code>git config --global user.name &quot;你的github用户名&quot;
+git config --global user.email &quot;你的github邮箱地址&quot;
+</code></pre><p>然后再提交：</p>
+<pre><code>$ git add .
+$ git commit -m &apos;create blog&apos;
+$ git push origin source
+</code></pre><p>完成后等待几秒就能访问 <code>http://username.github.io</code> 看到自己的博客了。</p>
+<p>当然，你也可以在 push 到 github 上之前先在本地预览一下，命令如下</p>
+<pre><code>$ rake preview
+</code></pre><p>你可以在本地的浏览器里打开 <code>localhost:4000</code>     来预览生成的 blog 。</p>
+<p>#####3.2 安装第三方主题<br>如果你喜欢上面的默认的主题，这里的步骤就没必要执行了。我比较 abacus 主题，下面是安装步骤：</p>
+<pre><code>$ cd octopress
+  $ git clone https://github.com/bhrigu123/abacus.themes/abacus
+  $ rake install[&apos;abacus&apos;]
+  $ rake generate
+</code></pre><p>到这一步，你的 blog 已经基本搭建完了，终于能写了。blog 是用 Markdown 语言来写的。Markdown 是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。在 mac 下可以使用 MacDown 软件来写。想下载 MacDown <a href="http://macdown.uranusjr.com/" target="_blank" rel="noopener">点我</a>。<br>需要更多的主题<a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">点我</a>。</p>
+<p>开始写 blog：</p>
+<pre><code>$ rake new_post[&apos;title&apos;] ＃title 是你要写的 blog 的标题
+</code></pre><p>执行完上面的命令后会在 <code>source/_posts</code> 下面生成 xxx.markdown 文件，我们的 blog 就在 xxx.markdown 中编写。<br>编写完后执行：</p>
+<pre><code>$ rake generate
+$ rake preview    
+//在浏览器输入： localhost:4000 在本地先预览效果，满意后在 push 到 github 上。
+
+$ git add .
+$ git commit -m &quot;comment&quot; 
+$ git push origin source
+$ rake deploy
+</code></pre><p>###6 折腾后的收获</p>
+<p>在执行 <code>gem install bundler</code>的时候，一会儿切换源，一会说 ruby 版本不对。看来是对 gem 不熟悉。那什么是RubyGems？<br>RubyGems 是一个方便而强大的 Ruby 程序包管理器，Ruby 的第三方插件是用 gem 方式来管理，非常容易发布和共享，一个简单的命令就可以安装上第三方的扩展库。特点：能远程安装包，包之间依赖关系的管理，简单可靠的卸载，查询机制，能查询本地和远程服务器的包信息，能保持一个包的不同版本，基于 Web 的查看接口，能查看你安装的 gem 的信息。Ruby1.9.1 以后的版本自带 RubyGems。要切换 ruby 版本用什么好呢？笔者刚开始用了 <code>rvm</code>, 后来又用了 <code>rbenv</code>。安装的时候又用到了 <code>homebrew</code>。本着 <code>生命不息，折腾不止</code>的精神，重新的学习了以上各命令的用法。常用方法如下：</p>
+<p>rvm 常用命令</p>
+<pre><code>rvm remove ruby-1.8.7 --docs —gems ＃删除某个版本的ruby，并且把文档和gems都删除
+rvm use ruby-1.8.7 --default ＃选择版本
+rvm info ＃查询当前版本
+rvm list ＃列出版本
+rvm implode ＃删除rvm命令
+</code></pre><p>rbenv 常用命令</p>
+<pre><code>rbenv install --list ＃列出所有可以安装的Ruby版本
+rbenv install version ＃version是具体要安装的版本，在上面列出的可以安装的目录中选择一个
+rbenv versions ＃查看本地安装的ruby版本
+rbenv global version #设置全局使用的ruby版本
+rbenv shell version ＃设置在当前shell中使用的ruby版本，生成了一个RBENV_VERSION的变量
+rbenv local version ＃设置在当前目录中的ruby版本，会在当前目录下生成.rbenv-version文件。
+rbenv uninstall 2.00 #卸载指定ruby版本
+rbenv rehash #每当安装新的 Ruby 版本，或 gem 都要运行一下，不然有可能会出现新安装的不起作用的现象
+</code></pre><p>Homebrew 常用命令</p>
+<pre><code>brew uninstall rbenv ＃卸载rbenv
+brew list ＃列出已安装的软件
+brew update ＃更新brew
+brew home ＃用浏览器打开 brew 的官方网站
+brew info ＃显示软件信息
+brew deps ＃ 显示包依赖    
+</code></pre><p>###附录 参考链接：<br><a href="http://octopress.org/docs/configuring" target="_blank" rel="noopener">Octopress 的配置</a>、<a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">Octopress 主题</a>、<a href="https://ruby.taobao.org/" target="_blank" rel="noopener">RubyGems 镜像</a>、<a href="https://github.com/Homebrew/legacy-homebrew">homebrew</a>、<a href="http://brew.sh/index_zh-cn.html" target="_blank" rel="noopener">homebrew 官网</a>、<a href="https://github.com/rbenv/rbenv">rbenv</a>、<a href="https://github.com/rvm/rvm">rvm</a> </p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/03/15/hello-world/" data-toggle="tooltip" data-placement="top"
+                           title="Hello World">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/caozhenwei">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; caozhenwei 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://github.com/caozhenwei/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://img2.imgtn.bdimg.com/it/u=3588772980,2454248748&amp;fm=27&amp;gp=0.jpg">
+</body>
+
+</html>
