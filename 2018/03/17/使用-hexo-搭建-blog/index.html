@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Hello World｜caozhenwei&#39;s blog
+        使用 hexo 搭建 blog｜caozhenwei&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://github.com/caozhenwei/2018/03/19/hello-world/">
+    <link rel="canonical" href="https://github.com/caozhenwei/2018/03/17/使用-hexo-搭建-blog/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -137,13 +137,13 @@
 <!--only post-->
 
 
-<img class="wechat-title-img" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg">
+<img class="wechat-title-img" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/hexo_blog/hexo_bg.jpg">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg');
+        background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/hexo_blog/hexo_bg.jpg');
     }
 
     
@@ -154,18 +154,15 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
+                    <h1>使用 hexo 搭建 blog</h1>
                     
                     <span class="meta">
                          作者 caozhenwei
                         <span>
-                          日期 2018-03-19
+                          日期 2018-03-17
                          </span>
                     </span>
                     <div class="tags text-center">
-                        
-                        <a class="tag" href="/tags/#开发"
-                           title="开发">开发</a>
                         
                     </div>
                 </div>
@@ -174,7 +171,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Hello World
+            使用 hexo 搭建 blog
         </span>
     </div>
 </header>
@@ -185,16 +182,36 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<p>/frac{7x+5}</p>
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>上篇文章刚介绍用了 Octopress 搭建 blog，这边又用 hexo 来搭建 blog，到底是几个意思？你过来，我保证不打死你！问起原因，只能说 Octopress 构建的时候有些慢并且我不喜欢它的主题（虽然它的主题很多，不喜欢就不喜欢呗，还找这么多理由干什么）。下面开始介绍怎么用 hexo 搭建 blog。</p>
+<h2 id="本机相关环境"><a href="#本机相关环境" class="headerlink" title="本机相关环境"></a>本机相关环境</h2><p>macOS High Sierra 10.13.3 </p>
+<p>node v8.10.0</p>
+<p>npm 5.6.0</p>
+<p>git version 2.14.3 (Apple Git-98)</p>
+<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>什么是 Hexo？Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>需要的环境<br>Node.js  和 Git</p>
+<h3 id="安装-Hexo-1"><a href="#安装-Hexo-1" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>初始化</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br></pre></td></tr></table></figure>
+<p>进入初始化的文件夹</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br></pre></td></tr></table></figure>
+<p>安装相关模块</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<p>在 _config.yml 中配置相关的信息</p>
+<h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new [layout] &lt;title&gt;</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>然后就能在 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 看到效果了</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="到-github-上创建相关的仓库"><a href="#到-github-上创建相关的仓库" class="headerlink" title="到 github 上创建相关的仓库"></a>到 github 上创建相关的仓库</h3><p>到 github 上创建一个 username.github.io 的 rep</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo-deployer-git.</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h2><h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><h4 id="1-clone"><a href="#1-clone" class="headerlink" title="1.clone"></a>1.clone</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Haojen/hexo-theme-Anisina.git themes/Anisina</span><br></pre></td></tr></table></figure>
+<h4 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h4><p>修改 _config.yml 中的 themes 为 Anisina 即可。</p>
+<h3 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h3><p>注册来必力，在 _config.yml 中增加相应的 id 。</p>
+<h3 id="图片地址"><a href="#图片地址" class="headerlink" title="图片地址"></a>图片地址</h3><p>在配置中经常要用到某一张图片的 url ，这是我们可以把图片传到 github 的仓库中，然后在仓库中查看图像即可获得相应的图片的 url 。</p>
+<h3 id="社交平台的配置"><a href="#社交平台的配置" class="headerlink" title="社交平台的配置"></a>社交平台的配置</h3><p>github 只需要用户名就行。微博的可以在设置中配置个性域名，然后把个性域名配置到  _config.yml 中。</p>
+<h2 id="番外"><a href="#番外" class="headerlink" title="番外"></a>番外</h2><p>Node.js 是什么？</p>
+<p>Node.js 就是运行在服务端的 JavaScript。Node.js 是一个基于 Chrome JavaScript 运行时建立的一个平台。Node.js 是一个事件驱动 I/O 服务端JavaScript 环境，基于 Google 的 V8 引擎，V8 引擎执行 Javascript 的速度非常快，性能非常好。</p>
+<p>用 Homebrew 装 Node.js</p>
+<h4 id="1、安装-Homebrew"><a href="#1、安装-Homebrew" class="headerlink" title="1、安装 Homebrew"></a>1、安装 Homebrew</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、安装-Node-js"><a href="#2、安装-Node-js" class="headerlink" title="2、安装 Node.js"></a>2、安装 Node.js</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install node</span><br></pre></td></tr></table></figure>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://hexo.io/" target="_blank" rel="noopener">hexo 官网</a>、<a href="https://livere.com/" target="_blank" rel="noopener">来必力评论模块</a>、<a href="https://github.com/haojen/hexo-theme-Anisina">Anisina 主题</a></p>
 
                 <hr>
                 
@@ -202,14 +219,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/03/19/常用-git-命令总结/" data-toggle="tooltip" data-placement="top"
-                           title="常用 git 命令总结">&larr; Previous Post</a>
+                        <a href="/2018/03/19/春天里的故事/" data-toggle="tooltip" data-placement="top"
+                           title="春天里的故事">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/03/19/春天里的故事/" data-toggle="tooltip" data-placement="top"
-                           title="春天里的故事">Next Post &rarr;</a>
+                        <a href="/2018/03/16/用-Octopress-搭建属于自己的-github-博客/" data-toggle="tooltip" data-placement="top"
+                           title="用 Octopress 搭建属于自己的 github 博客 ">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -244,7 +261,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本机相关环境"><span class="toc-text">本机相关环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Hexo"><span class="toc-text">安装 Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Hexo-1"><span class="toc-text">安装 Hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写文章"><span class="toc-text">写文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署"><span class="toc-text">部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#到-github-上创建相关的仓库"><span class="toc-text">到 github 上创建相关的仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#美化"><span class="toc-text">美化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主题"><span class="toc-text">主题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-clone"><span class="toc-text">1.clone</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-配置"><span class="toc-text">2.配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评论"><span class="toc-text">评论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片地址"><span class="toc-text">图片地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#社交平台的配置"><span class="toc-text">社交平台的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#番外"><span class="toc-text">番外</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、安装-Homebrew"><span class="toc-text">1、安装 Homebrew</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、安装-Node-js"><span class="toc-text">2、安装 Node.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录"><span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a></li></ol></li></ol>
                 </div>
             </div>
         </div>
@@ -265,9 +282,6 @@
                         <a href="/tags/">FEATURED TAGS</a>
                     </h5>
                     <div class="tags">
-                        
-                        <a class="tag" href="/tags/#开发"
-                           title="开发">开发</a>
                         
                     </div>
                 </section>
