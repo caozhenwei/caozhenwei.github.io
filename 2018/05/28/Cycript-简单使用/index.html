@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        caozhenwei&#39;s blog
+        Cycript 简单使用｜caozhenwei&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://github.com/caozhenwei/archives/">
+    <link rel="canonical" href="https://github.com/caozhenwei/2018/05/28/Cycript-简单使用/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
 " data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -133,237 +133,186 @@
 </script>
 
 <!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg">
+
+
 <style>
-    .intro-header .site-heading {
-        margin: 50px;
-    }
     
     header.intro-header {
-        background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg')
+        background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg');
     }
+
     
 </style>
 
-<!-- Page Header -->
 <header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading text-center">
-                    <h1>archives</h1>
-                    <span class="subheading">可以根据归档日期检索所有文件</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Cycript 简单使用</h1>
+                    
+                    <span class="meta">
+                         作者 caozhenwei
+                        <span>
+                          日期 2018-05-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="post-title-haojen">
+        <span>
+            Cycript 简单使用
+        </span>
+    </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- archive list -->
-            
-				
-				
-				
-					
-					
-					<div class="archive archive-year" data-date="2018">
-						<h2 class="archive-title">
-						<span class="fa fa-archive">
-							<a href="/archives/2018">2018</a>
-						</span>
-						</h2>
-				
-				
-					
-					
-					<div class="archive archive-month" data-date="201806">
-						<h3 class="archive-title">
-							<a href="/archives/2018/06">06</a>
-						</h3>
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/06/11/css-学习/">
-                        <h4 class="post-title">
-                            css 学习
-                        </h4>
-                        
-                    </a>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>cycript 官方文档 <a href="http://www.cycript.org/manual/" target="_blank" rel="noopener">http://www.cycript.org/manual/</a>    </p>
+<p>Cycript 允许开发人员在 iOS 或 Mac OS X 上使用 objective - c++ 和 JavaScript 语法的混合工具来探索和修改运行的应用程序，通过一个具有语法高亮和标签完成功能的交互式控制台。(它还能在 Android 和 Linux 上独立运行，并提供对 Java 的访问，但没有注入。)</p>
+<pre><code>Cycript allows developers to explore and modify running applications on either iOS or Mac OS X using a hybrid of Objective-C++ and JavaScript syntax through an interactive console that features syntax highlighting and tab completion.
+(It also runs standalone on Android and Linux and provides access to Java, but without injection.)
+</code></pre><p>ssh 到手机后，启动 app 并且确保它在前台运行，然后执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cycript -p WeChat</span><br></pre></td></tr></table></figure>
+<p>出现 <code>cy#</code> 提示符号表示成功。 </p>
+<p>常用操作</p>
+<ul>
+<li><p>显示 alert<br>alertView = [[UIAlertView alloc] initWithTitle:@”test” message:@”Cycript” delegate:nil cancelButtonTitle:@”OK” otherButtonTitles:nil];<br>[alertView show];</p>
+</li>
+<li><p>查看当前控制器<br>UIApp.keyWindow.rootViewController.visibleViewController</p>
+</li>
+<li><p>获取 bundle info<br>[[NSBundle mainBundle] infoDictionary].toString()</p>
+</li>
+<li><p>显示 Controller 的层次结构<br>_printHierarchy 是 UIViewController 的一个私有方法，你可以用它将 view controller 层次打印到控制台。<br>[[[UIWindow keyWindow] rootViewController] _printHierarchy].toString()</p>
+</li>
+<li><p>修改某个 label 的文字<br><code>#0x1530cd5f0.text = @&quot;111&quot;</code></p>
+</li>
+<li><p>修改某个 view 的 backgroundColor<br><code>#0x1409777b0.backgroundColor = [UIColor redColor]</code></p>
+</li>
+<li><p>打印 view 层级<br>[[UIApp keyWindow] recursiveDescription].toString()</p>
+</li>
+<li><p>打印层级树<br>[[UIApp keyWindow] _autolayoutTrace].toString()</p>
+</li>
+<li><p>_ivarDescription    获取某个类的属性<br>[choose(FixTitleColorButton)[0] _ivarDescription].toString()</p>
+</li>
+<li><p>_methodDescription<br>[choose(FixTitleColorButton)[0] _methodDescription].toString()</p>
+</li>
+<li><p>打印视图的响应者 <code>[#0x12e5629f0 nextResponder]</code></p>
+</li>
+</ul>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/06/11/css-学习/" data-toggle="tooltip" data-placement="top"
+                           title="css 学习">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/05/28/iOS-逆向之砸壳/" data-toggle="tooltip" data-placement="top"
+                           title="iOS 逆向之砸壳">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDg5MS8xMTQyOA==">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
                 </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-					
-					</div><!--month-->
-					
-					
-					<div class="archive archive-month" data-date="201805">
-						<h3 class="archive-title">
-							<a href="/archives/2018/05">05</a>
-						</h3>
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/05/28/Cycript-简单使用/">
-                        <h4 class="post-title">
-                            Cycript 简单使用
-                        </h4>
-                        
-                    </a>
+                <!-- City版安装代码已完成 -->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
                 </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/05/28/iOS-逆向之砸壳/">
-                        <h4 class="post-title">
-                            iOS 逆向之砸壳
-                        </h4>
-                        
-                    </a>
-                </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/05/24/Logos-语法/">
-                        <h4 class="post-title">
-                            Logos 语法
-                        </h4>
-                        
-                    </a>
-                </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/05/22/Mach-O-学习/">
-                        <h4 class="post-title">
-                            Mach-O 学习
-                        </h4>
-                        
-                    </a>
-                </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-					
-					</div><!--month-->
-					
-					
-					<div class="archive archive-month" data-date="201803">
-						<h3 class="archive-title">
-							<a href="/archives/2018/03">03</a>
-						</h3>
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/03/19/常用-git-命令总结/">
-                        <h4 class="post-title">
-                            常用 git 命令总结
-                        </h4>
-                        
-                    </a>
-                </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/03/19/hello-world/">
-                        <h4 class="post-title">
-                            Hello World
-                        </h4>
-                        
-                    </a>
-                </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/03/19/春天里的故事/">
-                        <h4 class="post-title">
-                            春天里的故事
-                        </h4>
-                        
-                    </a>
-                </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/03/17/使用-hexo-搭建-blog/">
-                        <h4 class="post-title">
-                            使用 hexo 搭建 blog
-                        </h4>
-                        
-                    </a>
-                </div>
-				<hr>
-				</div>
-            
-				
-				
-				
-				
-				<div class="one-tag-list">
-                <div class="post-preview">
-                    <a href="/2018/03/16/用-Octopress-搭建属于自己的-github-博客/">
-                        <h4 class="post-title">
-                            用 Octopress 搭建属于自己的 github 博客 
-                        </h4>
-                        
-                        <h4 class="post-subtitle">
-                            blog 搭建
-                        </h4>
-                        
-                    </a>
-                </div>
-				<hr>
-				</div>
-            
+            </div>
         </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="http://hcysun.me/">HcySunYang</a></li>
+                        
+                        <li><a href="https://caozhenwei.github.io/">test</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
     </div>
+</article>
+
+
+
+
+
+
 
 <!-- Footer -->
 <!-- Footer -->
