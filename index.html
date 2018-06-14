@@ -1,699 +1,517 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<!-- Head tag -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="caozhenwei 在 Github 上的个人博客">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/header_image_small.jpeg">
-    <link rel="alternate" type="application/atom+xml" title="caozhenwei" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        caozhenwei&#39;s blog
-        
-    </title>
-
-    <link rel="canonical" href="https://github.com/caozhenwei/">
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
-
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>caozhenwei</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/railscasts.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
-
-<style>
-
-    header.intro-header {
-        background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
-" data-ishome = "true" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    caozhenwei
-                </span>
-                's Blog
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-                        
-							
-                        <li>
-                            <a href="/Tags/">Tags</a>
-                        </li>
-							
-						
-                    
-                        
-							
-								
-							
-						
-                    
-					
-					
-						<li>
-							<a href="/about">About</a>
-						</li>
-					
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-<!-- Main Content -->
-
-
-<style>
-
-    .custom-haojen-container .post-preview:nth-of-type(1),
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        text-align: center;
-        background-repeat: no-repeat;
-        border-radius: 3px;
-        background-size: cover;
-        padding: 0;
-        height: 300px;
-        display: table;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.16);
-    }
-
-    /*去掉诗歌的背景图片*/
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
-        background-image: none !important;
-        background-color: rgba(255, 248, 220, 0.5);
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) h2,
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta,
-    .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-        text-shadow: 0 0 40px rgba(0, 0, 0, 1);
-        letter-spacing: 1px;
-        color: #fff;
-        margin-top: 0;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-
-    .custom-haojen-container .post-preview:nth-child(1) .post-meta {
-        font-size: .9em;
-        font-weight: 300;
-        margin-top: 0;
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-child(1) .post-subtitle {
-        letter-spacing: 6px;
-        font-size: 18px;
-        font-family: unset;
-        font-weight: 400;
-        color: rgba(0, 0, 0, .75)
-    }
-
-    /*不显示摘要*/
-    .custom-haojen-container .post-preview:nth-child(1) .post-content-preview {
-        display: none
-    }
-
-    /*只第一个显示背景图片*/
-    .custom-haojen-container .post-preview:not(:nth-child(1)) {
-        background-image: none !important;
-    }
-
-    /*第一个分界线去掉*/
-    .custom-haojen-container hr:nth-of-type(1) {
-        display: none;
-    }
-
-    /*主题*/
-    .custom-haojen-container .post-preview:nth-of-type(1) > a {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    /*诗词标题*/
-    .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-        font-size: 35px;
-        font-family: STKaiti;
-        color: rgba(0, 0, 0, .8);
-    }
-
-    .custom-haojen-container .post-preview-poetry:nth-of-type(1) .post-meta {
-        color: #0e2231;
-    }
-
-    @media (max-width: 768px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 240px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 28px !important;
-            margin-top: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 18px;
-            font-weight: 400;
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .custom-haojen-container .post-preview:nth-of-type(1) > a {
-            padding: 20px
-        }
-    }
-
-    /*手机屏幕*/
-    @media (max-width: 400px) {
-        .custom-haojen-container .post-preview:nth-child(1) {
-            height: 195px;
-        }
-
-        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
-            font-size: 20px !important;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
-            font-size: 16px;
-        }
-
-        .custom-haojen-container .post-preview:nth-child(1) a {
-            padding: 30px 20px;
-        }
-    }
-</style>
-
-<!-- Page Header -->
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
-    <div class="row">
-        <header class="intro-header">
-            <div class="container">
-                <div class="site-heading text-center">
-                    <div class="about-me">
-                        <!--移动端头部显示-->
-                        <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/tx.png"/>
-                        <h5><a href="/about/">caozhenwei</a></h5>
-                        <p>Where there is life there is struggle！</p>
-                    </div>
-                </div>
-            </div>
-        </header>
-    </div>
-</div>
-<!-- Main Content -->
-<div class="container custom-haojen-container">
-    <!-- Post Container -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
-            <!-- Main Content -->
-
-
-
-<div class="post-preview  "
-     style="background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg')">
-    <a href="/2018/06/11/css-学习/">
-        <h2 class="post-title">
-            css 学习
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-06-11
-        </p>
+<body>
+    <header>
+    <span class="banner"><a href="/">caozhenwei</a></span>
+    <span class="menu">Menu</span>
+    <ul class="menu_list hide">
         
-        <div class="post-content-preview">
-            <p>
-                CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。要设置 HTML 元素的样式，首先我们要选中 HTML 元素。常用的选中方式有 id 选择器和类选择器。 id 选择器以 # 来定义，类选择器以 . 来定义。CSS 的语法如下：..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview  "
-     style="background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg')">
-    <a href="/2018/05/28/Cycript-简单使用/">
-        <h2 class="post-title">
-            Cycript 简单使用
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-05-28
-        </p>
+            <li><a href="/" >Home</a></li>
         
-        <div class="post-content-preview">
-            <p>
-                cycript 官方文档 http://www.cycript.org/manual/    
-Cycript 允许开发人员在 iOS 或 Mac OS X 上使用 objective - c++ 和 JavaScript 语法的混合工具来探索和修改运行的应用程序，通过一个具有语法高亮和标签完成..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview  "
-     style="background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/iOS-%E9%80%86%E5%90%91%E4%B9%8B%E7%A0%B8%E5%A3%B3/hammer_bag.png')">
-    <a href="/2018/05/28/iOS-逆向之砸壳/">
-        <h2 class="post-title">
-            iOS 逆向之砸壳
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-05-28
-        </p>
+            <li><a href="/archives" >Archives</a></li>
         
-        <div class="post-content-preview">
-            <p>
-                前言从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview  "
-     style="background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg')">
-    <a href="/2018/05/24/Logos-语法/">
-        <h2 class="post-title">
-            Logos 语法
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-05-24
-        </p>
+            <li><a href="/about" >About</a></li>
         
-        <div class="post-content-preview">
-            <p>
-                前言这篇文章翻译自 http://iphonedevwiki.net/index.php/Logos，主要是 logos 语法。Logos 是 Theos 开发套件的一个组成部分，它允许使用一组特殊的预处理器指令，轻松地、清晰地编写方法来 hook 代码。
-综述
-
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview  "
-     style="background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/Mach-O%20%E5%AD%A6%E4%B9%A0/back.PNG')">
-    <a href="/2018/05/22/Mach-O-学习/">
-        <h2 class="post-title">
-            Mach-O 学习
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-05-22
-        </p>
+    </ul>
+</header>
+    <div class="main">
         
-        <div class="post-content-preview">
-            <p>
-                Mach-O，是 Mach object 文件格式的缩写，同样也是 OS X 和 iOS 系统中可执行文件格式。类似于 Linux 下的 elf。除了可执行文件外，动态链接库、静态链接库等都是这种格式的。了解 Mach-O ，也助于我们更好的学习 iOS 逆向工程。
-
-Mach-O 结构简单介绍..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview  "
-     style="background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/git.jpg')">
-    <a href="/2018/03/19/常用-git-命令总结/">
-        <h2 class="post-title">
-            常用 git 命令总结
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-03-19
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                前言1.git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 ..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview  "
-     style="background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg')">
-    <a href="/2018/03/19/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-03-19
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer i..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview  "
-     style="background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/spring_story/%E4%B9%A6%E6%A1%8C%E5%9B%BE%E7%89%87%E8%83%8C%E6%99%AF.JPG')">
-    <a href="/2018/03/19/春天里的故事/">
-        <h2 class="post-title">
-            春天里的故事
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-03-19
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                春天的颜色真是五彩缤纷，太阳是红灿灿的，天空是湛蓝的，树梢是嫩绿的，迎春花是娇黄的……难怪诗人爱吟咏春天，画家爱描绘春天，因为春天是世界一切美的融合，一切色彩的总会。
-
- 我的小情人喔！
- 调皮的小宝宝 
-
- 我也来逛逛吧 
-春天的水，平平的，静静的。春天的水，没有风的时候就像一面平滑的玻璃镜子..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<!-- 翻页 pager -->
-
-<ul class="pager">
     
+    <article>
+    <h4 class="post-title"><a href="/2018/06/12/css-学习（二）/">css 学习（二）</a></h4>
+    <!-- <h6 class="date"><i class="iconfont">&#xf0069;</i>2018-06-12</h6>
     
-    <li class="next">
-        <a href="/page/2/">Older Posts &rarr;</a>
-    </li>
+    <section class="md post-content">
+        
+            
+        
+        
+            <p>###Flex布局是什么？<br>Flex 是 Flexible Box 的缩写，意为”弹性盒子”，用来为盒状模型提供最大的灵活性。弹性盒子的模型如下所示。<br>
+        
+    </section>
     
+        <a href="/2018/06/12/css-学习（二）/" class="more">阅读更多</a>
+     -->
+</article>
+
+
+    
+    <article>
+    <h4 class="post-title"><a href="/2018/06/11/css-学习/">css 学习</a></h4>
+    <!-- <h6 class="date"><i class="iconfont">&#xf0069;</i>2018-06-11</h6>
+    
+    <section class="md post-content">
+        
+            
+        
+        
+            <p>CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。要设置 HTML 元素的样式，首先我们要选中 HTML 元素。常用的选中方式有 id 选择器和类选择器。 id 选择器以 <code>#</code> 来定义，类选择器以 <code>.</code> 来定义。<br>CSS 的语法如下：<br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/css%E5%AD%A6%E4%B9%A0/css%E8%AF%AD%E6%B3%95.jpg" alt="a"><br>例子如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>选择器<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">	#p &#123;</span></span><br><span class="line"><span class="undefined">		background-color: yellow;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.div1 &#123;</span></span><br><span class="line"><span class="undefined">		background-color: red;</span></span><br><span class="line"><span class="undefined">		width: 100px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.pos_abs2 &#123;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">id</span>=<span class="string">"body"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>div1<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p"</span>&gt;</span>这里要用id选择器来选中<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里我们用类选择器选中 div 标签并把它的背景设置为红色，宽高分别为 100px ，用 id 选择器选中 p 标签元算并把它的背景设置为黄色。<br>效果如下：</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/css%E5%AD%A6%E4%B9%A0/1.jpg" alt=""></p>
+<p>通过上面的介绍我们知道了正如上面的例子所示，为什么我写 p 标签元素的时候它给我换行了呢，并且还自动的有了边距，这是什么鬼？这就涉及到了行内元素和块级元素。所谓的行内元素指的是书写完成后不会自动换行，并且元素没有宽和高，块级元素写完后会自动换行，有宽高可以修改。例如上例中的 div 和 p 都是块级元素，这就是写完 div 后，p 为什么会另起一行的原因。那么自动加上的边距又是什么情况呢？这里介绍下盒子模型。用 Firefox 打开上面的例子后查看元素，如下所示</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/css%E5%AD%A6%E4%B9%A0/firefox.jpg" alt=""></p>
+<p>我们可以看到浏览器默认给 body 元素加了 8px 的外边距。盒模型是有两种标准的，一个是标准模型，一个是 IE 模型。</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/css%E5%AD%A6%E4%B9%A0/%E6%A0%87%E5%87%86%E6%A8%A1%E5%9E%8B.jpg" alt=""><br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/css%E5%AD%A6%E4%B9%A0/ie%E6%A8%A1%E5%9E%8B.jpg" alt=""></p>
+<p>这两种模型相似之处是从里到外都是 content ,padding ,border ,margin 。不同之处是标准模型的宽高只是内容（content）的宽高，而在 IE 模型中盒模型的宽高是内容(content)+填充(padding)+边框(border)的总宽高。</p>
+<p>position 属性<br>position 属性指定一个元素的定位方法的类型，分别是 static、fixed、relative、absolute。</p>
+<p>static 定位是 HTML 元素的默认值，即没有定位，元素出现在正常的流中。</p>
+<p>relative 是以自身在正常文档流的位置进行相应的偏移。</p>
+<p>absolute 如果某个元素的 position 为 absolute ，那么这个元素就会按照其祖先元素中设置了 position 属性的元素来定位（从 padding 开始的地方），如果不存在这样设置了 position 的祖先元素，则会以 body 为定位对象。这个元素在文档流中溢出后，其文档流中的下一个元素将获得其位置。</p>
+<p>fixed 是特殊的 absolute，即 fixed 总是以浏览器的可视窗口进行定位。下面来看几个简单的例子。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>postion相关属性<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">	#body &#123;</span></span><br><span class="line"><span class="undefined">		background-color: #ccc;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.pos_sta &#123;</span></span><br><span class="line"><span class="undefined">		background-color: red;</span></span><br><span class="line"><span class="undefined">		width: 100px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">		position: static;</span></span><br><span class="line"><span class="undefined">		left: 200px;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">id</span>=<span class="string">"body"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_sta"</span>&gt;</span> </span><br><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span>div1<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/css%E5%AD%A6%E4%B9%A0/pos_static.jpg" alt=""><br>从上的例子中可以看出，static 这种定位不会受到 top ，bottom ,left ,right 的影响。</p>
+<p>定位为 relative 时</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>postion相关属性<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">	#body &#123;</span></span><br><span class="line"><span class="undefined">		background-color: #ccc;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.pos_relative1 &#123;</span></span><br><span class="line"><span class="undefined">		background-color: red;</span></span><br><span class="line"><span class="undefined">		width: 100px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.pos_relative2 &#123;</span></span><br><span class="line"><span class="undefined">		background-color: green;</span></span><br><span class="line"><span class="undefined">		width: 100px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">		position: relative;</span></span><br><span class="line"><span class="undefined">		left: 150px;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.pos_relative3 &#123;</span></span><br><span class="line"><span class="undefined">		background-color: blue;</span></span><br><span class="line"><span class="undefined">		width: 100px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">id</span>=<span class="string">"body"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_relative1"</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>div1<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_relative2"</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>div2<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_relative3"</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>div3<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/css%E5%AD%A6%E4%B9%A0/pos_re.jpg" alt=""><br>从上述代码可以看出，当对 div2 设置 position 为 relative 时，只是在它原来的基础上进行偏移，并没有影响下面的元素</p>
+<p>定位为 absolute 时,</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>postion相关属性<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">	#body &#123;</span></span><br><span class="line"><span class="undefined">		background-color: #ccc;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.pos_abs1 &#123;</span></span><br><span class="line"><span class="undefined">		background-color: red;</span></span><br><span class="line"><span class="undefined">		width: 100px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.pos_abs2_parent &#123;</span></span><br><span class="line"><span class="undefined">		background-color: Pink;</span></span><br><span class="line"><span class="undefined">		width: 100px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">		position: absolute;</span></span><br><span class="line"><span class="undefined">		left: 50px;</span></span><br><span class="line"><span class="undefined">		top: 50px;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.pos_abs2 &#123;</span></span><br><span class="line"><span class="undefined">		background-color: green;</span></span><br><span class="line"><span class="undefined">		width: 100px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">		position: absolute;</span></span><br><span class="line"><span class="undefined">		left: 50px;</span></span><br><span class="line"><span class="undefined">		top: 50px;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined">	.pos_abs3 &#123;</span></span><br><span class="line"><span class="undefined">		background-color: blue;</span></span><br><span class="line"><span class="undefined">		width: 100px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">id</span>=<span class="string">"body"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_abs1"</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>div1<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_abs2_parent"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_abs2"</span>&gt;</span> </span><br><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span>div2<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_abs3"</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>div3<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/css%E5%AD%A6%E4%B9%A0/pos_abs.jpg" alt="abs"></p>
+<p>从上述代码可以看出，当对 div2 设置 position 为 absolute 时,它就从正常的文档流中脱离出来了，如果 pos_abs2 有祖先元素设置了 position 属性，则以其设置了 position 属性的元素为祖先元素来定位。</p>
+<pre><code class="html"><span class="tag">&lt;<span class="name">html</span>&gt;</span>
+<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span>
+<span class="tag">&lt;<span class="name">title</span>&gt;</span>postion相关属性<span class="tag">&lt;/<span class="name">title</span>&gt;</span>
+<span class="tag">&lt;<span class="name">head</span>&gt;</span>
+<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span>
+<span class="undefined">    #body {</span>
+<span class="undefined">        background-color: #ccc;</span>
+<span class="undefined">    }</span>
+<span class="undefined">    .pos_abs1 {</span>
+<span class="undefined">        background-color: red;</span>
+<span class="undefined">        width: 100px;</span>
+<span class="undefined">        height: 100px;</span>
+<span class="undefined">    }</span>
+<span class="undefined">    .pos_abs2_parent {</span>
+<span class="undefined">        background-color: Pink;</span>
+<span class="undefined">        width: 100px;</span>
+<span class="undefined">        height: 100px;</span>
+<span class="undefined">        position: absolute;</span>
+<span class="undefined">        left: 150px;</span>
+<span class="undefined">        top: 150px;</span>
+<span class="undefined">    }</span>
+<span class="undefined">    .pos_abs2 {</span>
+<span class="undefined">        background-color: green;</span>
+<span class="undefined">        width: 100px;</span>
+<span class="undefined">        height: 100px;</span>
+<span class="undefined">        position: fixed;</span>
+<span class="undefined">        left: 50px;</span>
+<span class="undefined">        top: 50px;</span>
+<span class="undefined">    }</span>
+<span class="undefined">    .pos_abs3 {</span>
+<span class="undefined">        background-color: blue;</span>
+<span class="undefined">        width: 100px;</span>
+<span class="undefined">        height: 100px;</span>
+<span class="undefined">    }</span>
+<span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">head</span>&gt;</span>
+
+<span class="tag">&lt;<span class="name">body</span> <span class="attr">id</span>=<span class="string">"body"</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_abs1"</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>div1<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_abs2_parent"</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_abs2"</span>&gt;</span> 
+        <span class="tag">&lt;<span class="name">p</span>&gt;</span>div2<span class="tag">&lt;/<span class="name">p</span>&gt;</span> 
+    <span class="tag">&lt;/<span class="name">div</span>&gt;</span>    
+    <span class="tag">&lt;/<span class="name">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pos_abs3"</span>&gt;</span> <span class="tag">&lt;<span class="name">p</span>&gt;</span>div3<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">body</span>&gt;</span>
+
+<span class="tag">&lt;/<span class="name">html</span>&gt;</span>
+
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/css%E5%AD%A6%E4%B9%A0/pos_fixed.jpg" alt=""> </p>
+<p>从上述代码可以看出，当对 div2 设置 position 为 fixed 时,总是以浏览器的可视窗口进行定位。</p>
+<p> <a href="http://www.w3school.com.cn" target="_blank" rel="noopener">http://www.w3school.com.cn</a></p>
+
+        
+    </section>
+     -->
+</article>
+
+
+    
+    <article>
+    <h4 class="post-title"><a href="/2018/05/28/Cycript-简单使用/">Cycript 简单使用</a></h4>
+    <!-- <h6 class="date"><i class="iconfont">&#xf0069;</i>2018-05-28</h6>
+    
+    <section class="md post-content">
+        
+            
+        
+        
+            <p>cycript 官方文档 <a href="http://www.cycript.org/manual/" target="_blank" rel="noopener">http://www.cycript.org/manual/</a>    </p>
+<p>Cycript 允许开发人员在 iOS 或 Mac OS X 上使用 objective - c++ 和 JavaScript 语法的混合工具来探索和修改运行的应用程序，通过一个具有语法高亮和标签完成功能的交互式控制台。(它还能在 Android 和 Linux 上独立运行，并提供对 Java 的访问，但没有注入。)</p>
+<pre><code>Cycript allows developers to explore and modify running applications on either iOS or Mac OS X using a hybrid of Objective-C++ and JavaScript syntax through an interactive console that features syntax highlighting and tab completion.
+(It also runs standalone on Android and Linux and provides access to Java, but without injection.)
+</code></pre><p>ssh 到手机后，启动 app 并且确保它在前台运行，然后执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cycript -p WeChat</span><br></pre></td></tr></table></figure>
+<p>出现 <code>cy#</code> 提示符号表示成功。 </p>
+<p>常用操作</p>
+<ul>
+<li><p>显示 alert<br>alertView = [[UIAlertView alloc] initWithTitle:@”test” message:@”Cycript” delegate:nil cancelButtonTitle:@”OK” otherButtonTitles:nil];<br>[alertView show];</p>
+</li>
+<li><p>查看当前控制器<br>UIApp.keyWindow.rootViewController.visibleViewController</p>
+</li>
+<li><p>获取 bundle info<br>[[NSBundle mainBundle] infoDictionary].toString()</p>
+</li>
+<li><p>显示 Controller 的层次结构<br>_printHierarchy 是 UIViewController 的一个私有方法，你可以用它将 view controller 层次打印到控制台。<br>[[[UIWindow keyWindow] rootViewController] _printHierarchy].toString()</p>
+</li>
+<li><p>修改某个 label 的文字<br><code>#0x1530cd5f0.text = @&quot;111&quot;</code></p>
+</li>
+<li><p>修改某个 view 的 backgroundColor<br><code>#0x1409777b0.backgroundColor = [UIColor redColor]</code></p>
+</li>
+<li><p>打印 view 层级<br>[[UIApp keyWindow] recursiveDescription].toString()</p>
+</li>
+<li><p>打印层级树<br>[[UIApp keyWindow] _autolayoutTrace].toString()</p>
+</li>
+<li><p>_ivarDescription    获取某个类的属性<br>[choose(FixTitleColorButton)[0] _ivarDescription].toString()</p>
+</li>
+<li><p>_methodDescription<br>[choose(FixTitleColorButton)[0] _methodDescription].toString()</p>
+</li>
+<li><p>打印视图的响应者 <code>[#0x12e5629f0 nextResponder]</code></p>
+</li>
 </ul>
 
+        
+    </section>
+     -->
+</article>
 
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
 
-            <!-- About Me -->
-            <section class="visible-md visible-lg" style="padding: 0 18px">
-                <div class="short-about">
-                    <!--侧边栏头像-->
-                    
-                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/tx.png"/>
-                    
-                    <h5><a href="/about/">caozhenwei</a></h5>
-                    
-                    <p>Where there is life there is struggle！</p>
-                    
-                    <hr>
-                    <!-- SNS Link 社交 -->
-                    <ul class="list-inline">
-                        
-                        
-                        
-
-                        
-                        <li>
-                            <a target="_blank" href="http://weibo.com/caozhenwei666">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                        </span>
-                            </a>
-                        </li>
-                        
-
-                        
-
-                        
-                        <li>
-                            <a target="_blank" href="https://github.com/caozhenwei">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                            </a>
-                        </li>
-                        
-
-                        
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Featured Tags  标签 -->
+    
+    <article>
+    <h4 class="post-title"><a href="/2018/05/28/iOS-逆向之砸壳/">iOS 逆向之砸壳</a></h4>
+    <!-- <h6 class="date"><i class="iconfont">&#xf0069;</i>2018-05-28</h6>
+    
+    <section class="md post-content">
+        
             
-            <section>
-                <div class="tags">
-                    
-                    
-                    <a href="/tags/#开发" title="开发"
-                       rel="3">开发</a>
-                    
-                    
-                    
-                    
-                </div>
-            </section>
-            
+        
+        
+            <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有好多种，其核心原理就是将内存中已解密的镜像 “dump” 出来，再生成新的镜像文件，从而达到解密的效果。可执行程序要想运行起来，必须由操作系统把可执行文件加载进内存，iOS 中用的是 DYLD。</p>
+<h4 id="一、dumpdecrypted"><a href="#一、dumpdecrypted" class="headerlink" title="一、dumpdecrypted"></a>一、dumpdecrypted</h4><p>dumpdecrypted 就是由越狱社区的知名人士 Stefan Esser（ @i0n1c） 出品的一款砸壳工具， 被越狱社区广泛运用在 iOS 逆向工程研究中。下面介绍怎么用 dumpdecrypted 给 app 砸壳。<br>下载 dumpdecrypted 地址为 <a href="https://github.com/stefanesser/dumpdecrypted/">https://github.com/stefanesser/dumpdecrypted/</a><br>下载完成后直接 make （如果安装了不同的 iOS SDK，可以调整 Makefile 文件），一切顺利的话会生成名为 dumpdecrypted.dylib 的动态库，先暂时放在这里留着备用。</p>
+<h4 id="二、SSH-连接越狱-iDivice"><a href="#二、SSH-连接越狱-iDivice" class="headerlink" title="二、SSH 连接越狱 iDivice"></a>二、SSH 连接越狱 iDivice</h4><p>为了书写和描述，我们把 iPhone、iPad、iPod 等 统称为 iDivice 。iDivice 越狱后有 root 和 mobile 两个账户，默认密码为 alpine ，建议马上修改这个默认的密码，防止其他人通过这个默认密码登录 iDivice 。修改命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ su root</span><br><span class="line">$ passwd</span><br><span class="line">Changing password <span class="keyword">for</span> root.</span><br><span class="line">New password:</span><br><span class="line">Retype new password:</span><br></pre></td></tr></table></figure>
+<p>越狱 iDivice 使用 Cydia 搜索 openSSH ，安装即可。连接方式有两种</p>
+<h5 id="2-1-WiFi-连接"><a href="#2-1-WiFi-连接" class="headerlink" title="2.1 WiFi 连接"></a>2.1 WiFi 连接</h5><p>首先确保 iDivice 和 电脑在统一局域网，连接操作如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh root@x.x.x.x</span><br></pre></td></tr></table></figure>
+<p>其中 x.x.x.x 为 iDivice 的 ip 地址。</p>
+<h5 id="2-2-USB连接"><a href="#2-2-USB连接" class="headerlink" title="2.2 USB连接"></a>2.2 USB连接</h5><h5 id="2-2-1-安装-usbmuxd"><a href="#2-2-1-安装-usbmuxd" class="headerlink" title="2.2.1 安装 usbmuxd"></a>2.2.1 安装 usbmuxd</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ brew install usbmuxd</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-2-端口映射"><a href="#2-2-2-端口映射" class="headerlink" title="2.2.2 端口映射"></a>2.2.2 端口映射</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ iproxy 2345 22</span><br></pre></td></tr></table></figure>
+<p>相当于把 iDivice 的 22 端口映射到电脑的 2345 端口</p>
+<h5 id="2-2-3-连接"><a href="#2-2-3-连接" class="headerlink" title="2.2.3 连接"></a>2.2.3 连接</h5><p>新开一个终端窗口，并且保持 2.2 中的终端窗口没有被关闭</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh -p 2345 root@127.0.0.1</span><br></pre></td></tr></table></figure>
+<h4 id="三、获取两个路径"><a href="#三、获取两个路径" class="headerlink" title="三、获取两个路径"></a>三、获取两个路径</h4><p>查看 app 进程，这里以 WeChat 为例    ，这里要保证 WeChat 在前台运行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ps -ef | grep /var/mobile/</span><br><span class="line">  501   506     1   0   0:00.00 ??         1:19.23 /var/mobile/Containers/Bundle/Application/F14174A6-AEC8-4AD4-A09A-9049FDCBB55E/WeChat.app/WeChat</span><br><span class="line">    0  1529  1482   0   0:00.00 ttys001    0:00.01 grep /var/mobile/</span><br></pre></td></tr></table></figure>
+<p>先记下这个路径备用</p>
+<p>查看 app Document 路径<br>这个需要用到 cycript 这个工具。cycript 是混合了 oc 与 js 语法的一个工具, 让开发者在命令行下和应用交互，在运行时查看和修改应用，挂钩相关的进程后，我们就可以用 oc 的方法来查看 app Document 路径了。<br>挂钩进程    </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cycript -p WeChat</span><br><span class="line">cy<span class="comment"># [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask]</span></span><br><span class="line">@[<span class="comment">#"file:///var/mobile/Containers/Data/Application/6475E209-3EF7-4264-ADC5-FBE0264516BF/Documents/"]</span></span><br><span class="line">cy<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>退出 cy# 模式的快捷键为 ctl + d，把上面输出的路径也记下来备用。</p>
+<h4 id="四、把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下"><a href="#四、把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下" class="headerlink" title="四、把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下"></a>四、把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下</h4><p>该操作要用到 scp 命令。scp 是 secure copy 的缩写, 基于 ssh 登陆进行安全的远程文件拷贝命令。例子：两台机器IP分别为：A 192.168.11.10，B 192.168.11.11，如果想把 A 根目录上的 a.jpg 文件拷到 B 上，命令如下：在A服务器上操作 命令为：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ scp /a.jpg root@192.168.11.11:/</span><br></pre></td></tr></table></figure>
+<p>所以此时把生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录，命令如下：<br>在 mac的终端上操作</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ scp dumpdecrypted.dylib root@x.x.x.x:/var/mobile/Containers/Data/Application/6475E209-3EF7-4264-ADC5-FBE0264516BF/Documents/</span><br></pre></td></tr></table></figure>
+<h4 id="五、开始砸壳"><a href="#五、开始砸壳" class="headerlink" title="五、开始砸壳"></a>五、开始砸壳</h4><p>进入 Document    目录<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /var/mobile/Containers/Data/Application/6475E209-3EF7-4264-ADC5-FBE0264516BF/Documents/</span><br></pre></td></tr></table></figure></p>
+<p>砸壳</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Containers/Bundle/Application/F14174A6-AEC8-4AD4-A09A-9049FDCBB55E/WeChat.app/WeChat</span><br><span class="line">mach-o decryption dumper</span><br><span class="line"></span><br><span class="line">DISCLAIMER: This tool is only meant <span class="keyword">for</span> security research purposes, not <span class="keyword">for</span> application crackers.</span><br><span class="line"></span><br><span class="line">[+] detected 64bit ARM binary <span class="keyword">in</span> memory.</span><br><span class="line">[+] offset to cryptid found: @0x1000fcca8(from 0x1000fc000) = ca8</span><br><span class="line">[+] Found encrypted data at address 00004000 of length 58818560 bytes - <span class="built_in">type</span> 1.</span><br><span class="line">[+] Opening /private/var/mobile/Containers/Bundle/Application/F14174A6-AEC8-4AD4-A09A-9049FDCBB55E/WeChat.app/WeChat <span class="keyword">for</span> reading.</span><br><span class="line">[+] Reading header</span><br><span class="line">[+] Detecting header <span class="built_in">type</span></span><br><span class="line">[+] Executable is a plain MACH-O image</span><br><span class="line">[+] Opening WeChat.decrypted <span class="keyword">for</span> writing.</span><br><span class="line">[+] Copying the not encrypted start of the file</span><br><span class="line">[+] Dumping the decrypted data into the file</span><br><span class="line">[+] Copying the not encrypted remainder of the file</span><br><span class="line">[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset ca8</span><br><span class="line">[+] Closing original file</span><br><span class="line">[+] Closing dump file</span><br><span class="line">$ ls</span><br><span class="line">00000000000000000000000000000000  MMResourceMgr  OpenImResource    db.globalconfig</span><br><span class="line">CrashReport			  MMappedKV	 SafeMode.dat	   dumpdecrypted.dylib</span><br><span class="line">LocalInfo.lst			  MemoryStat	 WeChat.decrypted  heavy_user_id_mapping.dat</span><br></pre></td></tr></table></figure>
+<p>此时就可以在当前目录下看到被砸壳后的 WeChat.decrypted。</p>
+<h4 id="六、获取可执行文件的所有头文件"><a href="#六、获取可执行文件的所有头文件" class="headerlink" title="六、获取可执行文件的所有头文件"></a>六、获取可执行文件的所有头文件</h4><p>从 iDvice 上把解密后的文件拷到电脑的桌面上，在电脑终端上操作</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ scp root@x.x.x.x:/var/mobile/Containers/Data/Application/6475E209-3EF7-4264-ADC5-FBE0264516BF/Documents/WeChat.decrypted ~/Desktop/</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">获取 .h 文件需要用到 class-dump 工具，下载地址为 http://stevenygard.com/projects/class-dump/。把砸壳后的可执行文件的所有 .h 文件输出到 wechat_test_h 文件夹下</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">class-dump -H WeChat.decrypted -o wechat_test_h</span><br></pre></td></tr></table></figure>
+<p>这时候就能看到所有 WeChat 的头文件了。</p>
+<h4 id="七、相关链接"><a href="#七、相关链接" class="headerlink" title="七、相关链接"></a>七、相关链接</h4><p>FairPlay <a href="https://en.wikipedia.org/wiki/FairPlay" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/FairPlay</a><br>dumpdecrypted <a href="https://github.com/stefanesser/dumpdecrypted/">https://github.com/stefanesser/dumpdecrypted/</a><br>class-dump <a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="noopener">http://stevenygard.com/projects/class-dump/</a></p>
 
-            
-            <hr>
-            <h5 style="text-align: center;">Friends</h5>
-            <ul class="list-inline" style="text-align: center;">
-                
-                <li><a href="http://hcysun.me/" target="_blank">HcySunYang</a></li>
-                
-                <li><a href="https://caozhenwei.github.io/" target="_blank">test</a></li>
-                
-            </ul>
-            
+        
+    </section>
+     -->
+</article>
 
-        </div>
-    </div>
+
+    
+    <article>
+    <h4 class="post-title"><a href="/2018/05/24/Logos-语法/">Logos 语法</a></h4>
+    <!-- <h6 class="date"><i class="iconfont">&#xf0069;</i>2018-05-24</h6>
+    
+    <section class="md post-content">
+        
+            
+        
+        
+            <p>前言<br>这篇文章翻译自 <a href="http://iphonedevwiki.net/index.php/Logos，主要是" target="_blank" rel="noopener">http://iphonedevwiki.net/index.php/Logos，主要是</a> logos 语法。Logos 是 Theos 开发套件的一个组成部分，它允许使用一组特殊的预处理器指令，轻松地、清晰地编写方法来 hook 代码。</p>
+<p>综述</p>
+
+        
+    </section>
+     -->
+</article>
+
+
+    
+    <article>
+    <h4 class="post-title"><a href="/2018/05/22/Mach-O-学习/">Mach-O 学习</a></h4>
+    <!-- <h6 class="date"><i class="iconfont">&#xf0069;</i>2018-05-22</h6>
+    
+    <section class="md post-content">
+        
+            
+        
+        
+            <p>Mach-O，是 Mach object 文件格式的缩写，同样也是 OS X 和 iOS 系统中可执行文件格式。类似于 Linux 下的 elf。除了可执行文件外，动态链接库、静态链接库等都是这种格式的。了解 Mach-O ，也助于我们更好的学习 iOS 逆向工程。</p>
+        
+    </section>
+    
+        <a href="/2018/05/22/Mach-O-学习/" class="more">阅读更多</a>
+     -->
+</article>
+
+
+    
+    <article>
+    <h4 class="post-title"><a href="/2018/03/19/常用-git-命令总结/">常用 git 命令总结</a></h4>
+    <!-- <h6 class="date"><i class="iconfont">&#xf0069;</i>2018-03-19</h6>
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发/">开发</a></li></ul>
+    <section class="md post-content">
+        
+            
+        
+        
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="1-git-是什么"><a href="#1-git-是什么" class="headerlink" title="1.git 是什么"></a>1.git 是什么</h2><p>它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git 是在商业公司 BitKeeper 停止与 Linux 开源社区合作后，由 Linux 开源社区开发的版本控制工具。</p>
+<h2 id="2-git-基础操作"><a href="#2-git-基础操作" class="headerlink" title="2.git 基础操作"></a>2.git 基础操作</h2><h3 id="配置-git"><a href="#配置-git" class="headerlink" title="配置 git"></a>配置 git</h3><p>/etc/gitconfig 文件：系统中对所有用户都普遍适用的配置。若使用 <code>git config</code> 时用 <code>--system</code> 选项，读写的就是这个文件。</p>
+<p>~/.gitconfig 文件：用户目录下的配置文件只适用于该用户。若使用 <code>git config</code> 时用 <code>--global</code> 选项，读写的就是这个文件。</p>
+<p>当前项目的 git 目录中的配置文件（也就是工作目录中的 .git/config 文件）：这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 .git/config 里的配置会覆盖 /etc/gitconfig 中的同名变量。</p>
+<h6 id="配置用户信息"><a href="#配置用户信息" class="headerlink" title="配置用户信息"></a>配置用户信息</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name “你的名字<span class="string">"</span></span><br><span class="line"><span class="string">$ git config --global user.email “你的邮箱”</span></span><br></pre></td></tr></table></figure>
+<h6 id="检查配置信息"><a href="#检查配置信息" class="headerlink" title="检查配置信息"></a>检查配置信息</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --list</span><br><span class="line">$ git config user.name //检查 git 的某一项配置，例如名字</span><br></pre></td></tr></table></figure>
+<h6 id="gitignore-里配置需要忽略的文件。"><a href="#gitignore-里配置需要忽略的文件。" class="headerlink" title="gitignore 里配置需要忽略的文件。"></a>gitignore 里配置需要忽略的文件。</h6><p>养成初始化就配置 gitignore 文件的习惯，要不每回 <code>git status</code> 的时候会看到一大堆没必要提交的文件，Xcode 里可以做如下配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Xcode</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore &amp; Swift.gitignore</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Build generated</span></span><br><span class="line">build/</span><br><span class="line">DerivedData/</span><br><span class="line"></span><br><span class="line"><span class="comment">## Various settings</span></span><br><span class="line">*.pbxuser</span><br><span class="line">!default.pbxuser</span><br><span class="line">*.mode1v3</span><br><span class="line">!default.mode1v3</span><br><span class="line">*.mode2v3</span><br><span class="line">!default.mode2v3</span><br><span class="line">*.perspectivev3</span><br><span class="line">!default.perspectivev3</span><br><span class="line">xcuserdata/</span><br><span class="line"></span><br><span class="line"><span class="comment">## Other</span></span><br><span class="line">*.moved-aside</span><br><span class="line">*.xccheckout</span><br><span class="line">*.xcscmblueprint</span><br><span class="line"></span><br><span class="line"><span class="comment">## Obj-C/Swift specific</span></span><br><span class="line">*.hmap</span><br><span class="line">*.ipa</span><br><span class="line">*.dSYM.zip</span><br><span class="line">*.dSYM</span><br><span class="line"></span><br><span class="line"><span class="comment"># CocoaPods</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># We recommend against adding the Pods directory to your .gitignore. However</span></span><br><span class="line"><span class="comment"># you should judge for yourself, the pros and cons are mentioned at:</span></span><br><span class="line"><span class="comment"># https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Pods/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Carthage</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Add this line if you want to avoid checking in source code from Carthage dependencies.</span></span><br><span class="line"><span class="comment"># Carthage/Checkouts</span></span><br><span class="line"></span><br><span class="line">Carthage/Build</span><br><span class="line"></span><br><span class="line"><span class="comment"># fastlane</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the</span></span><br><span class="line"><span class="comment"># screenshots whenever they are needed.</span></span><br><span class="line"><span class="comment"># For more information about the recommended setup visit:</span></span><br><span class="line"><span class="comment"># https://docs.fastlane.tools/best-practices/source-control/#source-control</span></span><br><span class="line"></span><br><span class="line">fastlane/report.xml</span><br><span class="line">fastlane/Preview.html</span><br><span class="line">fastlane/screenshots</span><br><span class="line">fastlane/test_output</span><br><span class="line"></span><br><span class="line"><span class="comment"># Code Injection</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># After new code Injection tools there's a generated folder /iOSInjectionProject</span></span><br><span class="line"><span class="comment"># https://github.com/johnno1962/injectionforxcode</span></span><br><span class="line"></span><br><span class="line">iOSInjectionProject/</span><br></pre></td></tr></table></figure>
+<p>更多的配置可以参考<a href="https://github.com/github/gitignore"> 这里</a>。</p>
+<h3 id="获取-git-仓库"><a href="#获取-git-仓库" class="headerlink" title="获取 git 仓库"></a>获取 git 仓库</h3><h4 id="在现有目录中初始化仓库"><a href="#在现有目录中初始化仓库" class="headerlink" title="在现有目录中初始化仓库"></a>在现有目录中初始化仓库</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+<h4 id="克隆现有的仓库"><a href="#克隆现有的仓库" class="headerlink" title="克隆现有的仓库"></a>克隆现有的仓库</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> &lt;url&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="克隆一个带子模块的项目"><a href="#克隆一个带子模块的项目" class="headerlink" title="克隆一个带子模块的项目"></a>克隆一个带子模块的项目</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> &lt;url&gt;</span><br><span class="line">$ git submodule init</span><br><span class="line">$ git submodule update</span><br></pre></td></tr></table></figure>
+<h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><p>用 git 管理文件后，对于任何一个文件，在 git 内都只有三种状态：已提交（committed），已修改（modified）和已暂存（staged）。</p>
+<p>已提交:表示该文件已经被安全地保存在本地数据库中了；</p>
+<p>已修改:表示修改了某个文件，但还没有提交保存；</p>
+<p>已暂存:表示把已修改的文件放在下次提交时要保存的清单中。</p>
+<p>文件流转的三个工作区域：git 的工作目录，暂存区域，以及本地仓库。<br>从项目中取出某个版本的所有文件和目录，用以开始后续工作的叫做工作目录。这些文件实际上都是从 git 目录中的压缩对象数据库中提取出来的，接下来就可以在工作目录中对这些文件进行编辑。</p>
+<p>所谓的暂存区域只不过是个简单的文件，一般都放在 git 目录中。有时候人们会把这个文件叫做索引文件，不过标准说法还是叫暂存区域。<br>基本的 git 工作流程如下：</p>
+<ol>
+<li>在工作目录中修改某些文件。 </li>
+<li>对修改后的文件进行快照，然后保存到暂存区域。 </li>
+<li>提交更新，将保存在暂存区域的文件快照永久转储到 Git 目录中。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git status  //检查当前文件状态</span><br><span class="line">$ git add .	//添加文件到暂存区</span><br><span class="line">$ git commit -m <span class="string">"message"</span>	//提交更新</span><br></pre></td></tr></table></figure>
+<p>其实 <code>git add</code> 的潜台词就是把目标文件快照放入暂存区域，也就是 add file into staged area，同时未曾跟踪过的文件标记为需要跟踪。这样就好理解后续 add 操作的实际意义了。它是一个多功能命令，可以用它开始跟踪新文件，或者把已跟踪的文件放到暂存区，还能用于合并时把有冲突的文件标记为已解决状态等。</p>
+<h6 id="移除文件"><a href="#移除文件" class="headerlink" title="移除文件"></a>移除文件</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git rm 文件</span><br></pre></td></tr></table></figure>
+<h6 id="删除文件但是让文件留在磁盘上"><a href="#删除文件但是让文件留在磁盘上" class="headerlink" title="删除文件但是让文件留在磁盘上"></a>删除文件但是让文件留在磁盘上</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git rm --cached README</span><br></pre></td></tr></table></figure>
+<h6 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<h6 id="用-oneline-将每个提交放在一行显示"><a href="#用-oneline-将每个提交放在一行显示" class="headerlink" title="用 oneline 将每个提交放在一行显示"></a>用 oneline 将每个提交放在一行显示</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=oneline</span><br></pre></td></tr></table></figure>
+<h6 id="用-ASCII-字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况"><a href="#用-ASCII-字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况" class="headerlink" title="用 ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况"></a>用 ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> --pretty=format:<span class="string">"%h %s"</span> --graph</span><br></pre></td></tr></table></figure>
+<p>format 常用的格式占位符写法及其代表的意义</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%H</td>
+<td>提交对象（commit）的完整哈希字串</td>
+</tr>
+<tr>
+<td>%h</td>
+<td>提交对象的简短哈希字串</td>
+</tr>
+<tr>
+<td>%T</td>
+<td>树对象（tree）的完整哈希字串</td>
+</tr>
+<tr>
+<td>%t</td>
+<td>树对象的简短哈希字串</td>
+</tr>
+<tr>
+<td>%P</td>
+<td>父对象（parent）的完整哈希字串</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>父对象的简短哈希字串</td>
+</tr>
+<tr>
+<td>%an</td>
+<td>作者（author）的名字</td>
+</tr>
+<tr>
+<td>%ae</td>
+<td>作者的电子邮件地址</td>
+</tr>
+<tr>
+<td>%ad</td>
+<td>作者修订日期（可以用 -date= 选项定制格式）</td>
+</tr>
+<tr>
+<td>%ar</td>
+<td>作者修订日期，按多久以前的方式显示</td>
+</tr>
+<tr>
+<td>%cn</td>
+<td>提交者(committer)的名字</td>
+</tr>
+<tr>
+<td>%ce</td>
+<td>提交者的电子邮件地址</td>
+</tr>
+<tr>
+<td>%cd</td>
+<td>提交日期</td>
+</tr>
+<tr>
+<td>%cr</td>
+<td>提交日期，按多久以前的方式显示</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>提交说明</td>
+</tr>
+</tbody>
+</table>
+<p>例如，列出所有最近两周内的提交：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --since=2.weeks</span><br></pre></td></tr></table></figure></p>
+<p>git log 支持的选项</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-p</td>
+<td>按补丁格式显示每个更新之间的差异</td>
+</tr>
+<tr>
+<td>–stat</td>
+<td>显示每次更新的文件修改统计信息</td>
+</tr>
+<tr>
+<td>–shortstat</td>
+<td>只显示 –stat 中最后的行数修改添加移除统计</td>
+</tr>
+<tr>
+<td>–name-only</td>
+<td>仅在提交信息后显示已修改的文件清单</td>
+</tr>
+<tr>
+<td>–name-status</td>
+<td>显示新增、修改、删除的文件清单</td>
+</tr>
+<tr>
+<td>–abbrev-commit</td>
+<td>仅显示 SHA-1 的前几个字符，而非所有的 40 个字符</td>
+</tr>
+<tr>
+<td>–relative-date</td>
+<td>使用较短的相对时间显示（比如，“2 weeks ago”）</td>
+</tr>
+<tr>
+<td>–graph</td>
+<td>显示 ASCII 图形表示的分支合并历史</td>
+</tr>
+<tr>
+<td>–pretty</td>
+<td>使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式）。</td>
+</tr>
+</tbody>
+</table>
+<h6 id="撤消对文件的修改"><a href="#撤消对文件的修改" class="headerlink" title="撤消对文件的修改"></a>撤消对文件的修改</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -- [file]</span><br></pre></td></tr></table></figure>
+<h6 id="撤消对所有文件的修改"><a href="#撤消对所有文件的修改" class="headerlink" title="撤消对所有文件的修改"></a>撤消对所有文件的修改</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -- . 或者 $ git checkout .</span><br></pre></td></tr></table></figure>
+<h6 id="显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异"><a href="#显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异" class="headerlink" title="显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异"></a>显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git diff</span><br></pre></td></tr></table></figure>
+<h6 id="已经暂存起来的文件和上次提交时的快照之间的差异"><a href="#已经暂存起来的文件和上次提交时的快照之间的差异" class="headerlink" title="已经暂存起来的文件和上次提交时的快照之间的差异"></a>已经暂存起来的文件和上次提交时的快照之间的差异</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git diff --cached //git 1.6.1 及更高版本还允许使用 git diff --staged，效果是相同的</span><br></pre></td></tr></table></figure>
+<h6 id="git-别名"><a href="#git-别名" class="headerlink" title="git 别名"></a>git 别名</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global alias.st status</span><br></pre></td></tr></table></figure>
+<p>这意味着，当要输入 <code>git status</code> 时，只需要输入 <code>git st</code>。查看别名的位置可以使用上面提到的 <code>git config -—list</code> 命令。如果想要执行外部命令，可以在命令前面加入 <code>!</code> 符号，操作如下：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global alias.ls <span class="string">'!ls'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-git-分支"><a href="#3-git-分支" class="headerlink" title="3.git 分支"></a>3.git 分支</h2><h3 id="3-1分支基础"><a href="#3-1分支基础" class="headerlink" title="3.1分支基础"></a>3.1分支基础</h3><p>分支是 git 最大的亮点，也是它的杀手锏。git 的分支分为远程分支，远程跟踪分支和跟踪分支。</p>
+<p>远程分支就是在远程仓库上的普通分支。</p>
+<p>远程跟踪分支是在本地的只读的记录远程分支状态的分支，其指向用户无法移动，当你做任何网络通信操作时，它们会自动移动。</p>
+<p>跟踪分支是从远程跟踪分支上生成的本地分支。</p>
+<h3 id="3-2分支常用命令"><a href="#3-2分支常用命令" class="headerlink" title="3.2分支常用命令"></a>3.2分支常用命令</h3><h6 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch</span><br></pre></td></tr></table></figure>
+<h6 id="分支创建"><a href="#分支创建" class="headerlink" title="分支创建"></a>分支创建</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch 分支名</span><br></pre></td></tr></table></figure>
+<h6 id="分支切换"><a href="#分支切换" class="headerlink" title="分支切换"></a>分支切换</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout 分支名</span><br></pre></td></tr></table></figure>
+<h6 id="查看每一个分支的最后一次提交"><a href="#查看每一个分支的最后一次提交" class="headerlink" title="查看每一个分支的最后一次提交"></a>查看每一个分支的最后一次提交</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch -v</span><br></pre></td></tr></table></figure>
+<h6 id="查看哪些分支已经合并到当前分支"><a href="#查看哪些分支已经合并到当前分支" class="headerlink" title="查看哪些分支已经合并到当前分支"></a>查看哪些分支已经合并到当前分支</h6><p><code>$ git branch —merged</code></p>
+<h6 id="查看所有包含未合并工作的分支"><a href="#查看所有包含未合并工作的分支" class="headerlink" title="查看所有包含未合并工作的分支"></a>查看所有包含未合并工作的分支</h6><p><code>$ git branch --no-merged</code></p>
+<h6 id="分支合并，如把-test-分支合并到-master-分支"><a href="#分支合并，如把-test-分支合并到-master-分支" class="headerlink" title="分支合并，如把 test 分支合并到 master 分支"></a>分支合并，如把 test 分支合并到 master 分支</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">$ git merge <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h6 id="查看分支历史"><a href="#查看分支历史" class="headerlink" title="查看分支历史"></a>查看分支历史</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline --graph</span><br></pre></td></tr></table></figure>
+<h6 id="新建一个分支并同时切换到该分支上"><a href="#新建一个分支并同时切换到该分支上" class="headerlink" title="新建一个分支并同时切换到该分支上"></a>新建一个分支并同时切换到该分支上</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -b 分支名</span><br></pre></td></tr></table></figure>
+<h6 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch -d 分支名</span><br></pre></td></tr></table></figure>
+<h6 id="查看当前配置有哪些远程仓库"><a href="#查看当前配置有哪些远程仓库" class="headerlink" title="查看当前配置有哪些远程仓库"></a>查看当前配置有哪些远程仓库</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote</span><br></pre></td></tr></table></figure>
+<h6 id="显示对应的克隆地址"><a href="#显示对应的克隆地址" class="headerlink" title="显示对应的克隆地址"></a>显示对应的克隆地址</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
+<h6 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote add [shortname] [url]</span><br></pre></td></tr></table></figure>
+<h6 id="推送数据到远程仓库"><a href="#推送数据到远程仓库" class="headerlink" title="推送数据到远程仓库"></a>推送数据到远程仓库</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+<h6 id="远程仓库的重命名"><a href="#远程仓库的重命名" class="headerlink" title="远程仓库的重命名"></a>远程仓库的重命名</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote rename a b</span><br></pre></td></tr></table></figure>
+<h6 id="远程仓库的删除"><a href="#远程仓库的删除" class="headerlink" title="远程仓库的删除"></a>远程仓库的删除</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote rm xxx</span><br></pre></td></tr></table></figure>
+<h6 id="查看远端仓库的详细信息"><a href="#查看远端仓库的详细信息" class="headerlink" title="查看远端仓库的详细信息"></a>查看远端仓库的详细信息</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote show origin</span><br></pre></td></tr></table></figure>
+<h6 id="某个远程仓库在本地的简短名称，比如想把-pb-改成-paul"><a href="#某个远程仓库在本地的简短名称，比如想把-pb-改成-paul" class="headerlink" title="某个远程仓库在本地的简短名称，比如想把 pb 改成 paul"></a>某个远程仓库在本地的简短名称，比如想把 pb 改成 paul</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote rename pb paul</span><br></pre></td></tr></table></figure>
+<h2 id="4-git-tag"><a href="#4-git-tag" class="headerlink" title="4.git tag"></a>4.git tag</h2><p>打标签是我们经常用到的命令，通常是在发布新版本或者切换到以前的特定版本修改 bug 的时候用。<br>git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。<br>轻量标签很像一个不会改变的分支，它只是一个特定提交的引用。<br>附注标签是存储在 git 数据库中的一个完整对象。</p>
+<h6 id="创建附注标签"><a href="#创建附注标签" class="headerlink" title="创建附注标签"></a>创建附注标签</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag -a v1.4 -m <span class="string">'my version 1.4’</span></span><br></pre></td></tr></table></figure>
+<h6 id="创建轻量标签"><a href="#创建轻量标签" class="headerlink" title="创建轻量标签"></a>创建轻量标签</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag v1.4-lw</span><br></pre></td></tr></table></figure>
+<h6 id="后期打标签"><a href="#后期打标签" class="headerlink" title="后期打标签"></a>后期打标签</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag -a v1.2 9fceb02 （需要在命令的末尾指定提交的校验和或部分校验和）</span><br></pre></td></tr></table></figure>
+<h6 id="列出标签"><a href="#列出标签" class="headerlink" title="列出标签"></a>列出标签</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag</span><br></pre></td></tr></table></figure>
+<h6 id="把标签推送到远程仓库服务器上"><a href="#把标签推送到远程仓库服务器上" class="headerlink" title="把标签推送到远程仓库服务器上"></a>把标签推送到远程仓库服务器上</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push origin [tagname]</span><br></pre></td></tr></table></figure>
+<h6 id="检出标签（也就是在特定的标签上创建一个新分支）"><a href="#检出标签（也就是在特定的标签上创建一个新分支）" class="headerlink" title="检出标签（也就是在特定的标签上创建一个新分支）"></a>检出标签（也就是在特定的标签上创建一个新分支）</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -b version2 v2.0.0</span><br></pre></td></tr></table></figure>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2</a></p>
+
+        
+    </section>
+     -->
+</article>
+
+
+    
+    <article>
+    <h4 class="post-title"><a href="/2018/03/19/春天里的故事/">春天里的故事</a></h4>
+    <!-- <h6 class="date"><i class="iconfont">&#xf0069;</i>2018-03-19</h6>
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
+    <section class="md post-content">
+        
+            
+        
+        
+            <p>春天的颜色真是五彩缤纷，太阳是红灿灿的，天空是湛蓝的，树梢是嫩绿的，迎春花是娇黄的……难怪诗人爱吟咏春天，画家爱描绘春天，因为春天是世界一切美的融合，一切色彩的总会。</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/spring_story/%E6%88%91%E7%9A%84%E5%B0%8F%E6%83%85%E4%BA%BA.jpg" alt="我的小情人喔！"></p>
+<p><center> 我的小情人喔！</center><br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/spring_story/%E7%9C%8B%E6%88%91%E5%AE%B6%E7%9A%84%E5%B0%8F%E5%AE%9D%E5%AE%9D.jpg" alt="调皮的小宝宝"></p>
+<p><center> 调皮的小宝宝 </center></p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/spring_story/%E5%B0%8F%E7%8B%97%E7%8B%97.jpg" alt="我也来逛逛吧"></p>
+<p><center> 我也来逛逛吧 </center></p>
+<p>春天的水，平平的，静静的。春天的水，没有风的时候就像一面平滑的玻璃镜子一样。有风时，春天的水，在阳光的照耀下，泛起水波，闪闪发光，就像春姑娘佩戴的闪亮亮的头饰一样。春天的水，流过庄稼、田地，悄悄地给足充分的营养。春天的水活了，便孕育了一批批新的生命——鱼儿欢快地在水中游来游去。</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/spring_story/%E5%8F%AF%E5%92%8C%E5%AE%9D%E5%A6%88.jpg" alt="可和宝妈"></p>
+<p><center> 可和宝妈 </center></p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/spring_story/%E5%A5%B9%E6%9C%80%E7%88%B1%E7%9A%84%E7%8E%A9%E5%85%B7.jpg" alt="我现在最爱的玩具就它了！"></p>
+<p><center> 我现在最爱的玩具就它了！ </center></p>
+<p>我很奇怪，这五彩缤纷的色彩为什么会不约而同地选择春天来到大地?每个人都有春天。无论是你，或者是我，每个人在春天里都可以有欢笑，有爱情，有陶醉。</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/spring_story/%E5%B0%8F%E7%8B%97%E7%8B%97%E5%9B%9E%E5%A4%B4.jpg" alt="小狗狗回头"></p>
+<p><center> 小狗狗回头 </center></p>
+
+        
+    </section>
+     -->
+</article>
+
+
+<div class="pagination">
+	<span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next</a>
 </div>
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-                    <li>
-                        <a target="_blank" href="http://weibo.com/caozhenwei666">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/caozhenwei">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; caozhenwei 2018
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
-                </p>
-
-            </div>
-        </div>
     </div>
+    <footer>
+    <div class="info"><span>Powered By <a href="https://hexo.io/" target="blank">Hexo</a></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Theme by <a href="https://github.com/showonne/hexo_showonne" target="blank">ccc</a></span></div>
 </footer>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/blog.js"></script>
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://github.com/caozhenwei/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-<!-- Google Analytics -->
-
-
-
-<!-- Baidu Tongji -->
-
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/tx.png">
+    <script src="/js/index.js"></script>
 </body>
-
 </html>
