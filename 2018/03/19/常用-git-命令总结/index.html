@@ -1,196 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow-night.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-
-<!-- Head tag -->
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="caozhenwei 在 Github 上的个人博客">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/header_image_small.jpeg">
-    <link rel="alternate" type="application/atom+xml" title="caozhenwei" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        常用 git 命令总结｜caozhenwei&#39;s blog
-        
-    </title>
+  <meta charset="utf-8">
+  
+  <title>常用 git 命令总结 | caozhenwei</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="开发" />
+  
+  
+  
+  
+  <meta name="description" content="前言1.git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。g">
+<meta name="keywords" content="开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用 git 命令总结">
+<meta property="og:url" content="https://github.com/caozhenwei/2018/03/19/常用-git-命令总结/index.html">
+<meta property="og:site_name" content="caozhenwei">
+<meta property="og:description" content="前言1.git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。g">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-23T06:52:40.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用 git 命令总结">
+<meta name="twitter:description" content="前言1.git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。g">
+  
+    <link rel="alternate" href="/atom.xml" title="caozhenwei" type="application/atom+xml">
+  
 
-    <link rel="canonical" href="https://github.com/caozhenwei/2018/03/19/常用-git-命令总结/">
+  
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
 
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+
 </head>
 
-<style>
 
-    header.intro-header {
-        background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/bag.jpg')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
-" data-ishome = "false" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    caozhenwei
-                </span>
-                's Blog
-            </a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-                        
-							
-                        <li>
-                            <a href="/Tags/">Tags</a>
-                        </li>
-							
-						
-                    
-                        
-							
-								
-							
-						
-                    
-					
-					
-						<li>
-							<a href="/about">About</a>
-						</li>
-					
-                </ul>
+            
+              <a class="brand" style="
+                 border-width: 0px;  margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="80px" height="80px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Startseite</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archive</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="index.search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="https://github.com/caozhenwei"></form>
+
+</div></li>
             </div>
-        </div>
+          </div>
+                
+      </div>
     </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-<!-- Main Content -->
-
-<!--only post-->
-
-
-<img class="wechat-title-img" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/git.jpg">
-
-
-<style>
-    
-    header.intro-header {
-        background-image: url('https://raw.githubusercontent.com/caozhenwei/blog_pic/master/git.jpg');
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>常用 git 命令总结</h1>
-                    
-                    <span class="meta">
-                         作者 caozhenwei
-                        <span>
-                          日期 2018-03-19
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                        <a class="tag" href="/tags/#开发"
-                           title="开发">开发</a>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="post-title-haojen">
-        <span>
-            常用 git 命令总结
-        </span>
-    </div>
 </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="1-git-是什么"><a href="#1-git-是什么" class="headerlink" title="1.git 是什么"></a>1.git 是什么</h2><p>它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git 是在商业公司 BitKeeper 停止与 Linux 开源社区合作后，由 Linux 开源社区开发的版本控制工具。</p>
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-常用-git-命令总结" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      常用 git 命令总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/03/19/常用-git-命令总结/" class="article-date">
+	  <time datetime="2018-03-19T12:17:59.000Z" itemprop="datePublished">2018-03-19</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="1-git-是什么"><a href="#1-git-是什么" class="headerlink" title="1.git 是什么"></a>1.git 是什么</h2><p>它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git 是在商业公司 BitKeeper 停止与 Linux 开源社区合作后，由 Linux 开源社区开发的版本控制工具。</p>
 <h2 id="2-git-基础操作"><a href="#2-git-基础操作" class="headerlink" title="2.git 基础操作"></a>2.git 基础操作</h2><h3 id="配置-git"><a href="#配置-git" class="headerlink" title="配置 git"></a>配置 git</h3><p>/etc/gitconfig 文件：系统中对所有用户都普遍适用的配置。若使用 <code>git config</code> 时用 <code>--system</code> 选项，读写的就是这个文件。</p>
 <p>~/.gitconfig 文件：用户目录下的配置文件只适用于该用户。若使用 <code>git config</code> 时用 <code>--global</code> 选项，读写的就是这个文件。</p>
 <p>当前项目的 git 目录中的配置文件（也就是工作目录中的 .git/config 文件）：这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 .git/config 里的配置会覆盖 /etc/gitconfig 中的同名变量。</p>
@@ -376,224 +339,250 @@
 <h6 id="检出标签（也就是在特定的标签上创建一个新分支）"><a href="#检出标签（也就是在特定的标签上创建一个新分支）" class="headerlink" title="检出标签（也就是在特定的标签上创建一个新分支）"></a>检出标签（也就是在特定的标签上创建一个新分支）</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -b version2 v2.0.0</span><br></pre></td></tr></table></figure>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2</a></p>
 
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2018/05/22/Mach-O-学习/" data-toggle="tooltip" data-placement="top"
-                           title="Mach-O 学习">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2018/03/19/春天里的故事/" data-toggle="tooltip" data-placement="top"
-                           title="春天里的故事">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-
-                <!--加入新的评论系统-->
-                
-                <!-- 来必力City版安装代码 -->
-                <div id="lv-container" data-id="city" data-uid="MTAyMC8zNDg5MS8xMTQyOA==">
-                    <script type="text/javascript">
-                        (function(d, s) {
-                            var j, e = d.getElementsByTagName(s)[0];
-
-                            if (typeof LivereTower === 'function') { return; }
-
-                            j = d.createElement(s);
-                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                            j.async = true;
-
-                            e.parentNode.insertBefore(j, e);
-                        })(document, 'script');
-                    </script>
-                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-                </div>
-                <!-- City版安装代码已完成 -->
-                
-            </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-git-是什么"><span class="toc-text">1.git 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-git-基础操作"><span class="toc-text">2.git 基础操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置-git"><span class="toc-text">配置 git</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#配置用户信息"><span class="toc-text">配置用户信息</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#检查配置信息"><span class="toc-text">检查配置信息</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#gitignore-里配置需要忽略的文件。"><span class="toc-text">gitignore 里配置需要忽略的文件。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取-git-仓库"><span class="toc-text">获取 git 仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在现有目录中初始化仓库"><span class="toc-text">在现有目录中初始化仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#克隆现有的仓库"><span class="toc-text">克隆现有的仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#克隆一个带子模块的项目"><span class="toc-text">克隆一个带子模块的项目</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基础命令"><span class="toc-text">基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#移除文件"><span class="toc-text">移除文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#删除文件但是让文件留在磁盘上"><span class="toc-text">删除文件但是让文件留在磁盘上</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看提交历史"><span class="toc-text">查看提交历史</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#用-oneline-将每个提交放在一行显示"><span class="toc-text">用 oneline 将每个提交放在一行显示</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#用-ASCII-字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况"><span class="toc-text">用 ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#撤消对文件的修改"><span class="toc-text">撤消对文件的修改</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#撤消对所有文件的修改"><span class="toc-text">撤消对所有文件的修改</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异"><span class="toc-text">显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#已经暂存起来的文件和上次提交时的快照之间的差异"><span class="toc-text">已经暂存起来的文件和上次提交时的快照之间的差异</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#git-别名"><span class="toc-text">git 别名</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-git-分支"><span class="toc-text">3.git 分支</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1分支基础"><span class="toc-text">3.1分支基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2分支常用命令"><span class="toc-text">3.2分支常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#查看分支"><span class="toc-text">查看分支</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#分支创建"><span class="toc-text">分支创建</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#分支切换"><span class="toc-text">分支切换</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看每一个分支的最后一次提交"><span class="toc-text">查看每一个分支的最后一次提交</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看哪些分支已经合并到当前分支"><span class="toc-text">查看哪些分支已经合并到当前分支</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看所有包含未合并工作的分支"><span class="toc-text">查看所有包含未合并工作的分支</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#分支合并，如把-test-分支合并到-master-分支"><span class="toc-text">分支合并，如把 test 分支合并到 master 分支</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看分支历史"><span class="toc-text">查看分支历史</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#新建一个分支并同时切换到该分支上"><span class="toc-text">新建一个分支并同时切换到该分支上</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#删除分支"><span class="toc-text">删除分支</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看当前配置有哪些远程仓库"><span class="toc-text">查看当前配置有哪些远程仓库</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#显示对应的克隆地址"><span class="toc-text">显示对应的克隆地址</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#添加远程仓库"><span class="toc-text">添加远程仓库</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#推送数据到远程仓库"><span class="toc-text">推送数据到远程仓库</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#远程仓库的重命名"><span class="toc-text">远程仓库的重命名</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#远程仓库的删除"><span class="toc-text">远程仓库的删除</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看远端仓库的详细信息"><span class="toc-text">查看远端仓库的详细信息</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#某个远程仓库在本地的简短名称，比如想把-pb-改成-paul"><span class="toc-text">某个远程仓库在本地的简短名称，比如想把 pb 改成 paul</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-git-tag"><span class="toc-text">4.git tag</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建附注标签"><span class="toc-text">创建附注标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#创建轻量标签"><span class="toc-text">创建轻量标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#后期打标签"><span class="toc-text">后期打标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#列出标签"><span class="toc-text">列出标签</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#把标签推送到远程仓库服务器上"><span class="toc-text">把标签推送到远程仓库服务器上</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#检出标签（也就是在特定的标签上创建一个新分支）"><span class="toc-text">检出标签（也就是在特定的标签上创建一个新分支）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a></li></ol></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5 class="text-center">
-                        <a href="/tags/">FEATURED TAGS</a>
-                    </h5>
-                    <div class="tags">
-                        
-                        <a class="tag" href="/tags/#开发"
-                           title="开发">开发</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <div style="margin-top: 20px;">
-                    <h5 class="text-center">FRIENDS</h5>
-                    <ul class="list-inline text-center">
-                        
-                        <li><a href="http://hcysun.me/">HcySunYang</a></li>
-                        
-                        <li><a href="https://caozhenwei.github.io/">test</a></li>
-                        
-                    </ul>
-                </div>
-                
-            </div>
-        </div>
-
+      
     </div>
+    <footer class="article-footer">
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8zNDg5MS8xMTQyOA==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/22/Mach-O-学习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Mach-O 学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/19/春天里的故事/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">春天里的故事</div>
+    </a>
+  
+</nav>
+
+  
 </article>
 
+<!-- Table of Contents -->
 
-
-
-
-
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-                    <li>
-                        <a target="_blank" href="http://weibo.com/caozhenwei666">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                
-                    <li>
-                        <a target="_blank"  href="https://github.com/caozhenwei">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; caozhenwei 2018
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
-                </p>
-
-            </div>
-        </div>
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Inhalt</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-git-是什么"><span class="nav-number">2.</span> <span class="nav-text">1.git 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-git-基础操作"><span class="nav-number">3.</span> <span class="nav-text">2.git 基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-git"><span class="nav-number">3.1.</span> <span class="nav-text">配置 git</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#配置用户信息"><span class="nav-number">3.1.0.0.1.</span> <span class="nav-text">配置用户信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#检查配置信息"><span class="nav-number">3.1.0.0.2.</span> <span class="nav-text">检查配置信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#gitignore-里配置需要忽略的文件。"><span class="nav-number">3.1.0.0.3.</span> <span class="nav-text">gitignore 里配置需要忽略的文件。</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-git-仓库"><span class="nav-number">3.2.</span> <span class="nav-text">获取 git 仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在现有目录中初始化仓库"><span class="nav-number">3.2.1.</span> <span class="nav-text">在现有目录中初始化仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#克隆现有的仓库"><span class="nav-number">3.2.2.</span> <span class="nav-text">克隆现有的仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#克隆一个带子模块的项目"><span class="nav-number">3.2.3.</span> <span class="nav-text">克隆一个带子模块的项目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础命令"><span class="nav-number">3.3.</span> <span class="nav-text">基础命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#移除文件"><span class="nav-number">3.3.0.0.1.</span> <span class="nav-text">移除文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除文件但是让文件留在磁盘上"><span class="nav-number">3.3.0.0.2.</span> <span class="nav-text">删除文件但是让文件留在磁盘上</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看提交历史"><span class="nav-number">3.3.0.0.3.</span> <span class="nav-text">查看提交历史</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#用-oneline-将每个提交放在一行显示"><span class="nav-number">3.3.0.0.4.</span> <span class="nav-text">用 oneline 将每个提交放在一行显示</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#用-ASCII-字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况"><span class="nav-number">3.3.0.0.5.</span> <span class="nav-text">用 ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#撤消对文件的修改"><span class="nav-number">3.3.0.0.6.</span> <span class="nav-text">撤消对文件的修改</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#撤消对所有文件的修改"><span class="nav-number">3.3.0.0.7.</span> <span class="nav-text">撤消对所有文件的修改</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异"><span class="nav-number">3.3.0.0.8.</span> <span class="nav-text">显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#已经暂存起来的文件和上次提交时的快照之间的差异"><span class="nav-number">3.3.0.0.9.</span> <span class="nav-text">已经暂存起来的文件和上次提交时的快照之间的差异</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#git-别名"><span class="nav-number">3.3.0.0.10.</span> <span class="nav-text">git 别名</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-git-分支"><span class="nav-number">4.</span> <span class="nav-text">3.git 分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1分支基础"><span class="nav-number">4.1.</span> <span class="nav-text">3.1分支基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2分支常用命令"><span class="nav-number">4.2.</span> <span class="nav-text">3.2分支常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#查看分支"><span class="nav-number">4.2.0.0.1.</span> <span class="nav-text">查看分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分支创建"><span class="nav-number">4.2.0.0.2.</span> <span class="nav-text">分支创建</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分支切换"><span class="nav-number">4.2.0.0.3.</span> <span class="nav-text">分支切换</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看每一个分支的最后一次提交"><span class="nav-number">4.2.0.0.4.</span> <span class="nav-text">查看每一个分支的最后一次提交</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看哪些分支已经合并到当前分支"><span class="nav-number">4.2.0.0.5.</span> <span class="nav-text">查看哪些分支已经合并到当前分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看所有包含未合并工作的分支"><span class="nav-number">4.2.0.0.6.</span> <span class="nav-text">查看所有包含未合并工作的分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分支合并，如把-test-分支合并到-master-分支"><span class="nav-number">4.2.0.0.7.</span> <span class="nav-text">分支合并，如把 test 分支合并到 master 分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看分支历史"><span class="nav-number">4.2.0.0.8.</span> <span class="nav-text">查看分支历史</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#新建一个分支并同时切换到该分支上"><span class="nav-number">4.2.0.0.9.</span> <span class="nav-text">新建一个分支并同时切换到该分支上</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除分支"><span class="nav-number">4.2.0.0.10.</span> <span class="nav-text">删除分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看当前配置有哪些远程仓库"><span class="nav-number">4.2.0.0.11.</span> <span class="nav-text">查看当前配置有哪些远程仓库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#显示对应的克隆地址"><span class="nav-number">4.2.0.0.12.</span> <span class="nav-text">显示对应的克隆地址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#添加远程仓库"><span class="nav-number">4.2.0.0.13.</span> <span class="nav-text">添加远程仓库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#推送数据到远程仓库"><span class="nav-number">4.2.0.0.14.</span> <span class="nav-text">推送数据到远程仓库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#远程仓库的重命名"><span class="nav-number">4.2.0.0.15.</span> <span class="nav-text">远程仓库的重命名</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#远程仓库的删除"><span class="nav-number">4.2.0.0.16.</span> <span class="nav-text">远程仓库的删除</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看远端仓库的详细信息"><span class="nav-number">4.2.0.0.17.</span> <span class="nav-text">查看远端仓库的详细信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#某个远程仓库在本地的简短名称，比如想把-pb-改成-paul"><span class="nav-number">4.2.0.0.18.</span> <span class="nav-text">某个远程仓库在本地的简短名称，比如想把 pb 改成 paul</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-git-tag"><span class="nav-number">5.</span> <span class="nav-text">4.git tag</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建附注标签"><span class="nav-number">5.0.0.0.1.</span> <span class="nav-text">创建附注标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#创建轻量标签"><span class="nav-number">5.0.0.0.2.</span> <span class="nav-text">创建轻量标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#后期打标签"><span class="nav-number">5.0.0.0.3.</span> <span class="nav-text">后期打标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#列出标签"><span class="nav-number">5.0.0.0.4.</span> <span class="nav-text">列出标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#把标签推送到远程仓库服务器上"><span class="nav-number">5.0.0.0.5.</span> <span class="nav-text">把标签推送到远程仓库服务器上</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#检出标签（也就是在特定的标签上创建一个新分支）"><span class="nav-number">5.0.0.0.6.</span> <span class="nav-text">检出标签（也就是在特定的标签上创建一个新分支）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">5.1.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol>
+    
     </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2018 caozhenwei All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
 </footer>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
+<!-- min height -->
 
-<!-- Custom Theme JavaScript -->
-<script src="/js/blog.js"></script>
-
-<!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
     }
 </script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav> -->
+    
 
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://github.com/caozhenwei/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
     }
+  });
 </script>
 
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
 </script>
 
-<!-- Google Analytics -->
-
-
-
-<!-- Baidu Tongji -->
-
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
 </script>
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
-<!--wechat title img-->
-<img class="wechat-title-img" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/tx.png">
+
+
+<script src="/js/scripts.js"></script>
+
+
+  <script src="/js/home.js"></script>
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            caozhenwei
+          </div>
+          <div class="panel-body">
+            Copyright © 2018 caozhenwei All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
 </body>
-
 </html>
