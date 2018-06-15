@@ -96,11 +96,43 @@
                 
                   <li> <a class="main-nav-link" href="/">Home</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                  <li> <a class="main-nav-link" href="/archives">Archive</a> </li>
                 
                   <li><div id="search-form-wrap">
 
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="index.search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="https://github.com/caozhenwei"></form>
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Schreib etwas..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Beiträge',
+            PAGES: 'Seiten',
+            CATEGORIES: 'Kategorien',
+            TAGS: 'Tags',
+            UNTITLED: '(Unbenannt)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
 
 </div></li>
             </div>
@@ -118,54 +150,6 @@
       <div id="content" class="outer">
         
           <section id="main" style="float:none;">
-  
-    <article id="post-css-学习（二）"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/06/12/css-学习（二）/">css 学习（二）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/06/12/css-学习（二）/" class="article-date">
-	  <time datetime="2018-06-12T09:22:18.000Z" itemprop="datePublished">2018-06-12</time>
-	</a>
-
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          ###Flex布局是什么？Flex 是 Flexible Box 的缩写，意为”弹性盒子”，用来为盒状模型提供最大的灵活性。弹性盒子的模型如下所示。
-弹性盒子有两条轴，默认的水平主轴和竖直轴。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。
-上面的这段对于没接触过 CS...
-        </p>
-        <p class="article-more-link">
-          <a href="/2018/06/12/css-学习（二）/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
   
     <article id="post-css-学习"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
@@ -197,7 +181,7 @@
 &lt;html&gt;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;&lt;ti...
         </p>
         <p class="article-more-link">
-          <a href="/2018/06/11/css-学习/#more">Read More</a>
+          <a href="/2018/06/11/css-学习/#more">weiter lesen</a>
         </p>
       
     </div>
@@ -245,7 +229,7 @@ Cycript 允许开发人员在 iOS 或 Mac OS X 上使用 objective - c++ 和 Jav
 Cycript allows developers to explore an...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/28/Cycript-简单使用/#more">Read More</a>
+          <a href="/2018/05/28/Cycript-简单使用/#more">weiter lesen</a>
         </p>
       
     </div>
@@ -289,10 +273,10 @@ Cycript allows developers to explore an...
       
         <p class="article-excerpt-content">
           前言从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有好多种，其核心原理就是将内存中已解密的镜像 “dump” 出来，再生成新的镜像文件，从而达到解密的效果。可执行程序要想运行起来，必须由操作系统把可执行文件加载进内存，iOS 中用的是 DYLD。
-一...
+d...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/28/iOS-逆向之砸壳/#more">Read More</a>
+          <a href="/2018/05/28/iOS-逆向之砸壳/#more">weiter lesen</a>
         </p>
       
     </div>
@@ -340,7 +324,7 @@ Cycript allows developers to explore an...
 
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/24/Logos-语法/#more">Read More</a>
+          <a href="/2018/05/24/Logos-语法/#more">weiter lesen</a>
         </p>
       
     </div>
@@ -389,7 +373,7 @@ Mach-O 结构简单介绍Mach-O 主要由三部分组成：Header、Load command
 Header保存了 Mach-O 的一些基本信息，包括了平台、文件类型、Lo...
         </p>
         <p class="article-more-link">
-          <a href="/2018/05/22/Mach-O-学习/#more">Read More</a>
+          <a href="/2018/05/22/Mach-O-学习/#more">weiter lesen</a>
         </p>
       
     </div>
@@ -432,10 +416,57 @@ Header保存了 Mach-O 的一些基本信息，包括了平台、文件类型、
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          前言1.git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git 是在商业公司 BitKeeper 停止与 Linux 开源社区合作后，由 Linux 开...
+          前言git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git 是在商业公司 BitKeeper 停止与 Linux 开源社区合作后，由 Linux 开源社...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/19/常用-git-命令总结/#more">Read More</a>
+          <a href="/2018/03/19/常用-git-命令总结/#more">weiter lesen</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-hello-world"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/03/19/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/03/19/hello-world/" class="article-date">
+	  <time datetime="2018-03-19T00:57:22.000Z" itemprop="datePublished">2018-03-19</time>
+	</a>
+
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick StartCreate a new post$ hexo new "My New Post"...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/03/19/hello-world/#more">weiter lesen</a>
         </p>
       
     </div>
@@ -487,7 +518,7 @@ Header保存了 Mach-O 的一些基本信息，包括了平台、文件类型、
 春天的水，平平的，静静的。春天的水，没有风的时候就像一面平滑的玻璃镜子一样。有风时，春天的水，在阳光的照耀下，泛起水波，闪闪发光，就像春姑娘佩戴的闪亮亮的头饰一样。春天的水，流过庄稼、田地，悄悄地给足充分的营养。春天的水活了，便孕育了一批批新的生命——鱼儿欢快地在水中...
         </p>
         <p class="article-more-link">
-          <a href="/2018/03/19/春天里的故事/#more">Read More</a>
+          <a href="/2018/03/19/春天里的故事/#more">weiter lesen</a>
         </p>
       
     </div>
@@ -508,7 +539,7 @@ Header保存了 Mach-O 的一些基本信息，包括了平台、文件类型、
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
   </nav>
 
 </section>

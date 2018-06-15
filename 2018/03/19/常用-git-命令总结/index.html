@@ -11,17 +11,17 @@
   
   
   
-  <meta name="description" content="前言1.git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。g">
+  <meta name="description" content="前言git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git">
 <meta name="keywords" content="开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用 git 命令总结">
 <meta property="og:url" content="https://github.com/caozhenwei/2018/03/19/常用-git-命令总结/index.html">
 <meta property="og:site_name" content="caozhenwei">
-<meta property="og:description" content="前言1.git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。g">
-<meta property="og:updated_time" content="2018-03-23T06:52:40.511Z">
+<meta property="og:description" content="前言git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git">
+<meta property="og:updated_time" content="2018-06-15T07:41:41.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用 git 命令总结">
-<meta name="twitter:description" content="前言1.git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。g">
+<meta name="twitter:description" content="前言git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git">
   
     <link rel="alternate" href="/atom.xml" title="caozhenwei" type="application/atom+xml">
   
@@ -100,11 +100,43 @@
                 
                   <li> <a class="main-nav-link" href="/">Home</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                  <li> <a class="main-nav-link" href="/archives">Archive</a> </li>
                 
                   <li><div id="search-form-wrap">
 
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="index.search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="https://github.com/caozhenwei"></form>
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Schreib etwas..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Beiträge',
+            PAGES: 'Seiten',
+            CATEGORIES: 'Kategorien',
+            TAGS: 'Tags',
+            UNTITLED: '(Unbenannt)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
 
 </div></li>
             </div>
@@ -152,13 +184,15 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="1-git-是什么"><a href="#1-git-是什么" class="headerlink" title="1.git 是什么"></a>1.git 是什么</h2><p>它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git 是在商业公司 BitKeeper 停止与 Linux 开源社区合作后，由 Linux 开源社区开发的版本控制工具。</p>
-<h2 id="2-git-基础操作"><a href="#2-git-基础操作" class="headerlink" title="2.git 基础操作"></a>2.git 基础操作</h2><h3 id="配置-git"><a href="#配置-git" class="headerlink" title="配置 git"></a>配置 git</h3><p>/etc/gitconfig 文件：系统中对所有用户都普遍适用的配置。若使用 <code>git config</code> 时用 <code>--system</code> 选项，读写的就是这个文件。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="git-是什么"><a href="#git-是什么" class="headerlink" title="git 是什么"></a>git 是什么</h2><p>它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git 是在商业公司 BitKeeper 停止与 Linux 开源社区合作后，由 Linux 开源社区开发的版本控制工具。</p>
+<h2 id="git-基础操作"><a href="#git-基础操作" class="headerlink" title="git 基础操作"></a>git 基础操作</h2><h3 id="配置-git"><a href="#配置-git" class="headerlink" title="配置 git"></a>配置 git</h3><p>/etc/gitconfig 文件：系统中对所有用户都普遍适用的配置。若使用 <code>git config</code> 时用 <code>--system</code> 选项，读写的就是这个文件。</p>
 <p>~/.gitconfig 文件：用户目录下的配置文件只适用于该用户。若使用 <code>git config</code> 时用 <code>--global</code> 选项，读写的就是这个文件。</p>
 <p>当前项目的 git 目录中的配置文件（也就是工作目录中的 .git/config 文件）：这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 .git/config 里的配置会覆盖 /etc/gitconfig 中的同名变量。</p>
-<h6 id="配置用户信息"><a href="#配置用户信息" class="headerlink" title="配置用户信息"></a>配置用户信息</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name “你的名字<span class="string">"</span></span><br><span class="line"><span class="string">$ git config --global user.email “你的邮箱”</span></span><br></pre></td></tr></table></figure>
-<h6 id="检查配置信息"><a href="#检查配置信息" class="headerlink" title="检查配置信息"></a>检查配置信息</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --list</span><br><span class="line">$ git config user.name //检查 git 的某一项配置，例如名字</span><br></pre></td></tr></table></figure>
-<h6 id="gitignore-里配置需要忽略的文件。"><a href="#gitignore-里配置需要忽略的文件。" class="headerlink" title="gitignore 里配置需要忽略的文件。"></a>gitignore 里配置需要忽略的文件。</h6><p>养成初始化就配置 gitignore 文件的习惯，要不每回 <code>git status</code> 的时候会看到一大堆没必要提交的文件，Xcode 里可以做如下配置：</p>
+<p>配置用户信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name “你的名字<span class="string">"</span></span><br><span class="line"><span class="string">$ git config --global user.email “你的邮箱”</span></span><br></pre></td></tr></table></figure>
+<p>检查配置信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --list</span><br><span class="line">$ git config user.name //检查 git 的某一项配置，例如名字</span><br></pre></td></tr></table></figure>
+<p>gitignore 里配置需要忽略的文件。<br>养成初始化就配置 gitignore 文件的习惯，要不每回 <code>git status</code> 的时候会看到一大堆没必要提交的文件，Xcode 里可以做如下配置：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Xcode</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore &amp; Swift.gitignore</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Build generated</span></span><br><span class="line">build/</span><br><span class="line">DerivedData/</span><br><span class="line"></span><br><span class="line"><span class="comment">## Various settings</span></span><br><span class="line">*.pbxuser</span><br><span class="line">!default.pbxuser</span><br><span class="line">*.mode1v3</span><br><span class="line">!default.mode1v3</span><br><span class="line">*.mode2v3</span><br><span class="line">!default.mode2v3</span><br><span class="line">*.perspectivev3</span><br><span class="line">!default.perspectivev3</span><br><span class="line">xcuserdata/</span><br><span class="line"></span><br><span class="line"><span class="comment">## Other</span></span><br><span class="line">*.moved-aside</span><br><span class="line">*.xccheckout</span><br><span class="line">*.xcscmblueprint</span><br><span class="line"></span><br><span class="line"><span class="comment">## Obj-C/Swift specific</span></span><br><span class="line">*.hmap</span><br><span class="line">*.ipa</span><br><span class="line">*.dSYM.zip</span><br><span class="line">*.dSYM</span><br><span class="line"></span><br><span class="line"><span class="comment"># CocoaPods</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># We recommend against adding the Pods directory to your .gitignore. However</span></span><br><span class="line"><span class="comment"># you should judge for yourself, the pros and cons are mentioned at:</span></span><br><span class="line"><span class="comment"># https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Pods/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Carthage</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Add this line if you want to avoid checking in source code from Carthage dependencies.</span></span><br><span class="line"><span class="comment"># Carthage/Checkouts</span></span><br><span class="line"></span><br><span class="line">Carthage/Build</span><br><span class="line"></span><br><span class="line"><span class="comment"># fastlane</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the</span></span><br><span class="line"><span class="comment"># screenshots whenever they are needed.</span></span><br><span class="line"><span class="comment"># For more information about the recommended setup visit:</span></span><br><span class="line"><span class="comment"># https://docs.fastlane.tools/best-practices/source-control/#source-control</span></span><br><span class="line"></span><br><span class="line">fastlane/report.xml</span><br><span class="line">fastlane/Preview.html</span><br><span class="line">fastlane/screenshots</span><br><span class="line">fastlane/test_output</span><br><span class="line"></span><br><span class="line"><span class="comment"># Code Injection</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># After new code Injection tools there's a generated folder /iOSInjectionProject</span></span><br><span class="line"><span class="comment"># https://github.com/johnno1962/injectionforxcode</span></span><br><span class="line"></span><br><span class="line">iOSInjectionProject/</span><br></pre></td></tr></table></figure>
 <p>更多的配置可以参考<a href="https://github.com/github/gitignore"> 这里</a>。</p>
 <h3 id="获取-git-仓库"><a href="#获取-git-仓库" class="headerlink" title="获取 git 仓库"></a>获取 git 仓库</h3><h4 id="在现有目录中初始化仓库"><a href="#在现有目录中初始化仓库" class="headerlink" title="在现有目录中初始化仓库"></a>在现有目录中初始化仓库</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
@@ -177,11 +211,16 @@
 </ol>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git status  //检查当前文件状态</span><br><span class="line">$ git add .	//添加文件到暂存区</span><br><span class="line">$ git commit -m <span class="string">"message"</span>	//提交更新</span><br></pre></td></tr></table></figure>
 <p>其实 <code>git add</code> 的潜台词就是把目标文件快照放入暂存区域，也就是 add file into staged area，同时未曾跟踪过的文件标记为需要跟踪。这样就好理解后续 add 操作的实际意义了。它是一个多功能命令，可以用它开始跟踪新文件，或者把已跟踪的文件放到暂存区，还能用于合并时把有冲突的文件标记为已解决状态等。</p>
-<h6 id="移除文件"><a href="#移除文件" class="headerlink" title="移除文件"></a>移除文件</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git rm 文件</span><br></pre></td></tr></table></figure>
-<h6 id="删除文件但是让文件留在磁盘上"><a href="#删除文件但是让文件留在磁盘上" class="headerlink" title="删除文件但是让文件留在磁盘上"></a>删除文件但是让文件留在磁盘上</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git rm --cached README</span><br></pre></td></tr></table></figure>
-<h6 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
-<h6 id="用-oneline-将每个提交放在一行显示"><a href="#用-oneline-将每个提交放在一行显示" class="headerlink" title="用 oneline 将每个提交放在一行显示"></a>用 oneline 将每个提交放在一行显示</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=oneline</span><br></pre></td></tr></table></figure>
-<h6 id="用-ASCII-字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况"><a href="#用-ASCII-字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况" class="headerlink" title="用 ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况"></a>用 ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> --pretty=format:<span class="string">"%h %s"</span> --graph</span><br></pre></td></tr></table></figure>
+<p>移除文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git rm 文件</span><br></pre></td></tr></table></figure>
+<p>删除文件但是让文件留在磁盘上</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git rm --cached README</span><br></pre></td></tr></table></figure>
+<p>查看提交历史</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<p>用 oneline 将每个提交放在一行显示</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=oneline</span><br></pre></td></tr></table></figure>
+<p>用 ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> --pretty=format:<span class="string">"%h %s"</span> --graph</span><br></pre></td></tr></table></figure>
 <p>format 常用的格式占位符写法及其代表的意义</p>
 <table>
 <thead>
@@ -301,42 +340,64 @@
 </tr>
 </tbody>
 </table>
-<h6 id="撤消对文件的修改"><a href="#撤消对文件的修改" class="headerlink" title="撤消对文件的修改"></a>撤消对文件的修改</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -- [file]</span><br></pre></td></tr></table></figure>
-<h6 id="撤消对所有文件的修改"><a href="#撤消对所有文件的修改" class="headerlink" title="撤消对所有文件的修改"></a>撤消对所有文件的修改</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -- . 或者 $ git checkout .</span><br></pre></td></tr></table></figure>
-<h6 id="显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异"><a href="#显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异" class="headerlink" title="显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异"></a>显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git diff</span><br></pre></td></tr></table></figure>
-<h6 id="已经暂存起来的文件和上次提交时的快照之间的差异"><a href="#已经暂存起来的文件和上次提交时的快照之间的差异" class="headerlink" title="已经暂存起来的文件和上次提交时的快照之间的差异"></a>已经暂存起来的文件和上次提交时的快照之间的差异</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git diff --cached //git 1.6.1 及更高版本还允许使用 git diff --staged，效果是相同的</span><br></pre></td></tr></table></figure>
-<h6 id="git-别名"><a href="#git-别名" class="headerlink" title="git 别名"></a>git 别名</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global alias.st status</span><br></pre></td></tr></table></figure>
+<p>撤消对文件的修改<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -- [file]</span><br></pre></td></tr></table></figure></p>
+<p>撤消对所有文件的修改<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -- . 或者 $ git checkout .</span><br></pre></td></tr></table></figure></p>
+<p>显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git diff</span><br></pre></td></tr></table></figure></p>
+<p>已经暂存起来的文件和上次提交时的快照之间的差异<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git diff --cached //git 1.6.1 及更高版本还允许使用 git diff --staged，效果是相同的</span><br></pre></td></tr></table></figure></p>
+<p>git 别名<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global alias.st status</span><br></pre></td></tr></table></figure></p>
 <p>这意味着，当要输入 <code>git status</code> 时，只需要输入 <code>git st</code>。查看别名的位置可以使用上面提到的 <code>git config -—list</code> 命令。如果想要执行外部命令，可以在命令前面加入 <code>!</code> 符号，操作如下：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global alias.ls <span class="string">'!ls'</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="3-git-分支"><a href="#3-git-分支" class="headerlink" title="3.git 分支"></a>3.git 分支</h2><h3 id="3-1分支基础"><a href="#3-1分支基础" class="headerlink" title="3.1分支基础"></a>3.1分支基础</h3><p>分支是 git 最大的亮点，也是它的杀手锏。git 的分支分为远程分支，远程跟踪分支和跟踪分支。</p>
+<h2 id="git-分支"><a href="#git-分支" class="headerlink" title="git 分支"></a>git 分支</h2><h3 id="分支基础"><a href="#分支基础" class="headerlink" title="分支基础"></a>分支基础</h3><p>分支是 git 最大的亮点，也是它的杀手锏。git 的分支分为远程分支，远程跟踪分支和跟踪分支。</p>
 <p>远程分支就是在远程仓库上的普通分支。</p>
 <p>远程跟踪分支是在本地的只读的记录远程分支状态的分支，其指向用户无法移动，当你做任何网络通信操作时，它们会自动移动。</p>
 <p>跟踪分支是从远程跟踪分支上生成的本地分支。</p>
-<h3 id="3-2分支常用命令"><a href="#3-2分支常用命令" class="headerlink" title="3.2分支常用命令"></a>3.2分支常用命令</h3><h6 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch</span><br></pre></td></tr></table></figure>
-<h6 id="分支创建"><a href="#分支创建" class="headerlink" title="分支创建"></a>分支创建</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch 分支名</span><br></pre></td></tr></table></figure>
-<h6 id="分支切换"><a href="#分支切换" class="headerlink" title="分支切换"></a>分支切换</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout 分支名</span><br></pre></td></tr></table></figure>
-<h6 id="查看每一个分支的最后一次提交"><a href="#查看每一个分支的最后一次提交" class="headerlink" title="查看每一个分支的最后一次提交"></a>查看每一个分支的最后一次提交</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch -v</span><br></pre></td></tr></table></figure>
-<h6 id="查看哪些分支已经合并到当前分支"><a href="#查看哪些分支已经合并到当前分支" class="headerlink" title="查看哪些分支已经合并到当前分支"></a>查看哪些分支已经合并到当前分支</h6><p><code>$ git branch —merged</code></p>
-<h6 id="查看所有包含未合并工作的分支"><a href="#查看所有包含未合并工作的分支" class="headerlink" title="查看所有包含未合并工作的分支"></a>查看所有包含未合并工作的分支</h6><p><code>$ git branch --no-merged</code></p>
-<h6 id="分支合并，如把-test-分支合并到-master-分支"><a href="#分支合并，如把-test-分支合并到-master-分支" class="headerlink" title="分支合并，如把 test 分支合并到 master 分支"></a>分支合并，如把 test 分支合并到 master 分支</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">$ git merge <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-<h6 id="查看分支历史"><a href="#查看分支历史" class="headerlink" title="查看分支历史"></a>查看分支历史</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline --graph</span><br></pre></td></tr></table></figure>
-<h6 id="新建一个分支并同时切换到该分支上"><a href="#新建一个分支并同时切换到该分支上" class="headerlink" title="新建一个分支并同时切换到该分支上"></a>新建一个分支并同时切换到该分支上</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -b 分支名</span><br></pre></td></tr></table></figure>
-<h6 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch -d 分支名</span><br></pre></td></tr></table></figure>
-<h6 id="查看当前配置有哪些远程仓库"><a href="#查看当前配置有哪些远程仓库" class="headerlink" title="查看当前配置有哪些远程仓库"></a>查看当前配置有哪些远程仓库</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote</span><br></pre></td></tr></table></figure>
-<h6 id="显示对应的克隆地址"><a href="#显示对应的克隆地址" class="headerlink" title="显示对应的克隆地址"></a>显示对应的克隆地址</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
-<h6 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote add [shortname] [url]</span><br></pre></td></tr></table></figure>
-<h6 id="推送数据到远程仓库"><a href="#推送数据到远程仓库" class="headerlink" title="推送数据到远程仓库"></a>推送数据到远程仓库</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
-<h6 id="远程仓库的重命名"><a href="#远程仓库的重命名" class="headerlink" title="远程仓库的重命名"></a>远程仓库的重命名</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote rename a b</span><br></pre></td></tr></table></figure>
-<h6 id="远程仓库的删除"><a href="#远程仓库的删除" class="headerlink" title="远程仓库的删除"></a>远程仓库的删除</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote rm xxx</span><br></pre></td></tr></table></figure>
-<h6 id="查看远端仓库的详细信息"><a href="#查看远端仓库的详细信息" class="headerlink" title="查看远端仓库的详细信息"></a>查看远端仓库的详细信息</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote show origin</span><br></pre></td></tr></table></figure>
-<h6 id="某个远程仓库在本地的简短名称，比如想把-pb-改成-paul"><a href="#某个远程仓库在本地的简短名称，比如想把-pb-改成-paul" class="headerlink" title="某个远程仓库在本地的简短名称，比如想把 pb 改成 paul"></a>某个远程仓库在本地的简短名称，比如想把 pb 改成 paul</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote rename pb paul</span><br></pre></td></tr></table></figure>
-<h2 id="4-git-tag"><a href="#4-git-tag" class="headerlink" title="4.git tag"></a>4.git tag</h2><p>打标签是我们经常用到的命令，通常是在发布新版本或者切换到以前的特定版本修改 bug 的时候用。<br>git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。<br>轻量标签很像一个不会改变的分支，它只是一个特定提交的引用。<br>附注标签是存储在 git 数据库中的一个完整对象。</p>
-<h6 id="创建附注标签"><a href="#创建附注标签" class="headerlink" title="创建附注标签"></a>创建附注标签</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag -a v1.4 -m <span class="string">'my version 1.4’</span></span><br></pre></td></tr></table></figure>
-<h6 id="创建轻量标签"><a href="#创建轻量标签" class="headerlink" title="创建轻量标签"></a>创建轻量标签</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag v1.4-lw</span><br></pre></td></tr></table></figure>
-<h6 id="后期打标签"><a href="#后期打标签" class="headerlink" title="后期打标签"></a>后期打标签</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag -a v1.2 9fceb02 （需要在命令的末尾指定提交的校验和或部分校验和）</span><br></pre></td></tr></table></figure>
-<h6 id="列出标签"><a href="#列出标签" class="headerlink" title="列出标签"></a>列出标签</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag</span><br></pre></td></tr></table></figure>
-<h6 id="把标签推送到远程仓库服务器上"><a href="#把标签推送到远程仓库服务器上" class="headerlink" title="把标签推送到远程仓库服务器上"></a>把标签推送到远程仓库服务器上</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push origin [tagname]</span><br></pre></td></tr></table></figure>
-<h6 id="检出标签（也就是在特定的标签上创建一个新分支）"><a href="#检出标签（也就是在特定的标签上创建一个新分支）" class="headerlink" title="检出标签（也就是在特定的标签上创建一个新分支）"></a>检出标签（也就是在特定的标签上创建一个新分支）</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -b version2 v2.0.0</span><br></pre></td></tr></table></figure>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2</a></p>
+<h3 id="分支常用命令"><a href="#分支常用命令" class="headerlink" title="分支常用命令"></a>分支常用命令</h3><p>查看分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch</span><br></pre></td></tr></table></figure>
+<p>分支创建</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch 分支名</span><br></pre></td></tr></table></figure>
+<p>分支切换</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout 分支名</span><br></pre></td></tr></table></figure>
+<p>查看每一个分支的最后一次提交</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch -v</span><br></pre></td></tr></table></figure>
+<p>查看哪些分支已经合并到当前分支</p>
+<p><code>$ git branch —merged</code></p>
+<p>查看所有包含未合并工作的分支<br><code>$ git branch --no-merged</code></p>
+<p>分支合并，如把 test 分支合并到 master 分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">$ git merge <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p>查看分支历史</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline --graph</span><br></pre></td></tr></table></figure>
+<p>新建一个分支并同时切换到该分支上</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -b 分支名</span><br></pre></td></tr></table></figure>
+<p>删除分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch -d 分支名</span><br></pre></td></tr></table></figure>
+<p>查看当前配置有哪些远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote</span><br></pre></td></tr></table></figure>
+<p>显示对应的克隆地址</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
+<p>添加远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote add [shortname] [url]</span><br></pre></td></tr></table></figure>
+<p>推送数据到远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+<p>远程仓库的重命名</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote rename a b</span><br></pre></td></tr></table></figure>
+<p>远程仓库的删除</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote rm xxx</span><br></pre></td></tr></table></figure>
+<p>查看远端仓库的详细信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote show origin</span><br></pre></td></tr></table></figure>
+<p>某个远程仓库在本地的简短名称，比如想把 pb 改成 paul</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote rename pb paul</span><br></pre></td></tr></table></figure>
+<h2 id="git-tag"><a href="#git-tag" class="headerlink" title="git tag"></a>git tag</h2><p>打标签是我们经常用到的命令，通常是在发布新版本或者切换到以前的特定版本修改 bug 的时候用。<br>git 使用两种主要类型的标签：轻量标签（lightweight）与附注标签（annotated）。<br>轻量标签很像一个不会改变的分支，它只是一个特定提交的引用。<br>附注标签是存储在 git 数据库中的一个完整对象。<br>创建附注标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag -a v1.4 -m <span class="string">'my version 1.4’</span></span><br></pre></td></tr></table></figure>
+<p>创建轻量标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag v1.4-lw</span><br></pre></td></tr></table></figure>
+<p>后期打标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag -a v1.2 9fceb02 （需要在命令的末尾指定提交的校验和或部分校验和）</span><br></pre></td></tr></table></figure>
+<p>列出标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git tag</span><br></pre></td></tr></table></figure>
+<p>把标签推送到远程仓库服务器上</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git push origin [tagname]</span><br></pre></td></tr></table></figure>
+<p>检出标签（也就是在特定的标签上创建一个新分支）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -b version2 v2.0.0</span><br></pre></td></tr></table></figure>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2</a></p>
 
       
     </div>
@@ -377,7 +438,7 @@
 <nav id="article-nav">
   
     <a href="/2018/05/22/Mach-O-学习/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
           Mach-O 学习
@@ -386,9 +447,9 @@
     </a>
   
   
-    <a href="/2018/03/19/春天里的故事/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">春天里的故事</div>
+    <a href="/2018/03/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Hello World</div>
     </a>
   
 </nav>
@@ -400,9 +461,9 @@
 
   <aside id="toc-sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+    <strong class="toc-title">Catalog</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-git-是什么"><span class="nav-number">2.</span> <span class="nav-text">1.git 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-git-基础操作"><span class="nav-number">3.</span> <span class="nav-text">2.git 基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-git"><span class="nav-number">3.1.</span> <span class="nav-text">配置 git</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#配置用户信息"><span class="nav-number">3.1.0.0.1.</span> <span class="nav-text">配置用户信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#检查配置信息"><span class="nav-number">3.1.0.0.2.</span> <span class="nav-text">检查配置信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#gitignore-里配置需要忽略的文件。"><span class="nav-number">3.1.0.0.3.</span> <span class="nav-text">gitignore 里配置需要忽略的文件。</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-git-仓库"><span class="nav-number">3.2.</span> <span class="nav-text">获取 git 仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在现有目录中初始化仓库"><span class="nav-number">3.2.1.</span> <span class="nav-text">在现有目录中初始化仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#克隆现有的仓库"><span class="nav-number">3.2.2.</span> <span class="nav-text">克隆现有的仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#克隆一个带子模块的项目"><span class="nav-number">3.2.3.</span> <span class="nav-text">克隆一个带子模块的项目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础命令"><span class="nav-number">3.3.</span> <span class="nav-text">基础命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#移除文件"><span class="nav-number">3.3.0.0.1.</span> <span class="nav-text">移除文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除文件但是让文件留在磁盘上"><span class="nav-number">3.3.0.0.2.</span> <span class="nav-text">删除文件但是让文件留在磁盘上</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看提交历史"><span class="nav-number">3.3.0.0.3.</span> <span class="nav-text">查看提交历史</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#用-oneline-将每个提交放在一行显示"><span class="nav-number">3.3.0.0.4.</span> <span class="nav-text">用 oneline 将每个提交放在一行显示</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#用-ASCII-字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况"><span class="nav-number">3.3.0.0.5.</span> <span class="nav-text">用 ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#撤消对文件的修改"><span class="nav-number">3.3.0.0.6.</span> <span class="nav-text">撤消对文件的修改</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#撤消对所有文件的修改"><span class="nav-number">3.3.0.0.7.</span> <span class="nav-text">撤消对所有文件的修改</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异"><span class="nav-number">3.3.0.0.8.</span> <span class="nav-text">显示还没有暂存起来的改动，不是这次工作和上次提交之间的差异</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#已经暂存起来的文件和上次提交时的快照之间的差异"><span class="nav-number">3.3.0.0.9.</span> <span class="nav-text">已经暂存起来的文件和上次提交时的快照之间的差异</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#git-别名"><span class="nav-number">3.3.0.0.10.</span> <span class="nav-text">git 别名</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-git-分支"><span class="nav-number">4.</span> <span class="nav-text">3.git 分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1分支基础"><span class="nav-number">4.1.</span> <span class="nav-text">3.1分支基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2分支常用命令"><span class="nav-number">4.2.</span> <span class="nav-text">3.2分支常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#查看分支"><span class="nav-number">4.2.0.0.1.</span> <span class="nav-text">查看分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分支创建"><span class="nav-number">4.2.0.0.2.</span> <span class="nav-text">分支创建</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分支切换"><span class="nav-number">4.2.0.0.3.</span> <span class="nav-text">分支切换</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看每一个分支的最后一次提交"><span class="nav-number">4.2.0.0.4.</span> <span class="nav-text">查看每一个分支的最后一次提交</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看哪些分支已经合并到当前分支"><span class="nav-number">4.2.0.0.5.</span> <span class="nav-text">查看哪些分支已经合并到当前分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看所有包含未合并工作的分支"><span class="nav-number">4.2.0.0.6.</span> <span class="nav-text">查看所有包含未合并工作的分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分支合并，如把-test-分支合并到-master-分支"><span class="nav-number">4.2.0.0.7.</span> <span class="nav-text">分支合并，如把 test 分支合并到 master 分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看分支历史"><span class="nav-number">4.2.0.0.8.</span> <span class="nav-text">查看分支历史</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#新建一个分支并同时切换到该分支上"><span class="nav-number">4.2.0.0.9.</span> <span class="nav-text">新建一个分支并同时切换到该分支上</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除分支"><span class="nav-number">4.2.0.0.10.</span> <span class="nav-text">删除分支</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看当前配置有哪些远程仓库"><span class="nav-number">4.2.0.0.11.</span> <span class="nav-text">查看当前配置有哪些远程仓库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#显示对应的克隆地址"><span class="nav-number">4.2.0.0.12.</span> <span class="nav-text">显示对应的克隆地址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#添加远程仓库"><span class="nav-number">4.2.0.0.13.</span> <span class="nav-text">添加远程仓库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#推送数据到远程仓库"><span class="nav-number">4.2.0.0.14.</span> <span class="nav-text">推送数据到远程仓库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#远程仓库的重命名"><span class="nav-number">4.2.0.0.15.</span> <span class="nav-text">远程仓库的重命名</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#远程仓库的删除"><span class="nav-number">4.2.0.0.16.</span> <span class="nav-text">远程仓库的删除</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查看远端仓库的详细信息"><span class="nav-number">4.2.0.0.17.</span> <span class="nav-text">查看远端仓库的详细信息</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#某个远程仓库在本地的简短名称，比如想把-pb-改成-paul"><span class="nav-number">4.2.0.0.18.</span> <span class="nav-text">某个远程仓库在本地的简短名称，比如想把 pb 改成 paul</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-git-tag"><span class="nav-number">5.</span> <span class="nav-text">4.git tag</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建附注标签"><span class="nav-number">5.0.0.0.1.</span> <span class="nav-text">创建附注标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#创建轻量标签"><span class="nav-number">5.0.0.0.2.</span> <span class="nav-text">创建轻量标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#后期打标签"><span class="nav-number">5.0.0.0.3.</span> <span class="nav-text">后期打标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#列出标签"><span class="nav-number">5.0.0.0.4.</span> <span class="nav-text">列出标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#把标签推送到远程仓库服务器上"><span class="nav-number">5.0.0.0.5.</span> <span class="nav-text">把标签推送到远程仓库服务器上</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#检出标签（也就是在特定的标签上创建一个新分支）"><span class="nav-number">5.0.0.0.6.</span> <span class="nav-text">检出标签（也就是在特定的标签上创建一个新分支）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">5.1.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-是什么"><span class="nav-number">2.</span> <span class="nav-text">git 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-基础操作"><span class="nav-number">3.</span> <span class="nav-text">git 基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-git"><span class="nav-number">3.1.</span> <span class="nav-text">配置 git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-git-仓库"><span class="nav-number">3.2.</span> <span class="nav-text">获取 git 仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在现有目录中初始化仓库"><span class="nav-number">3.2.1.</span> <span class="nav-text">在现有目录中初始化仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#克隆现有的仓库"><span class="nav-number">3.2.2.</span> <span class="nav-text">克隆现有的仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#克隆一个带子模块的项目"><span class="nav-number">3.2.3.</span> <span class="nav-text">克隆一个带子模块的项目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础命令"><span class="nav-number">3.3.</span> <span class="nav-text">基础命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-分支"><span class="nav-number">4.</span> <span class="nav-text">git 分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支基础"><span class="nav-number">4.1.</span> <span class="nav-text">分支基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支常用命令"><span class="nav-number">4.2.</span> <span class="nav-text">分支常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-tag"><span class="nav-number">5.</span> <span class="nav-text">git tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol>
     
     </div>
   </aside>

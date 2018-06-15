@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://github.com/caozhenwei/2018/05/28/iOS-逆向之砸壳/index.html">
 <meta property="og:site_name" content="caozhenwei">
 <meta property="og:description" content="前言从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有好多种，其核心原理就是将内存中已解密的镜像 “dump” 出来，再生成新的镜像文件，从而达到解密的效果。">
-<meta property="og:updated_time" content="2018-05-28T08:27:15.988Z">
+<meta property="og:updated_time" content="2018-06-15T07:56:18.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 逆向之砸壳">
 <meta name="twitter:description" content="前言从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有好多种，其核心原理就是将内存中已解密的镜像 “dump” 出来，再生成新的镜像文件，从而达到解密的效果。">
@@ -97,11 +97,43 @@
                 
                   <li> <a class="main-nav-link" href="/">Home</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                  <li> <a class="main-nav-link" href="/archives">Archive</a> </li>
                 
                   <li><div id="search-form-wrap">
 
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="index.search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="https://github.com/caozhenwei"></form>
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Schreib etwas..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Beiträge',
+            PAGES: 'Seiten',
+            CATEGORIES: 'Kategorien',
+            TAGS: 'Tags',
+            UNTITLED: '(Unbenannt)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
 
 </div></li>
             </div>
@@ -150,8 +182,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有好多种，其核心原理就是将内存中已解密的镜像 “dump” 出来，再生成新的镜像文件，从而达到解密的效果。可执行程序要想运行起来，必须由操作系统把可执行文件加载进内存，iOS 中用的是 DYLD。</p>
-<h4 id="一、dumpdecrypted"><a href="#一、dumpdecrypted" class="headerlink" title="一、dumpdecrypted"></a>一、dumpdecrypted</h4><p>dumpdecrypted 就是由越狱社区的知名人士 Stefan Esser（ @i0n1c） 出品的一款砸壳工具， 被越狱社区广泛运用在 iOS 逆向工程研究中。下面介绍怎么用 dumpdecrypted 给 app 砸壳。<br>下载 dumpdecrypted 地址为 <a href="https://github.com/stefanesser/dumpdecrypted/">https://github.com/stefanesser/dumpdecrypted/</a><br>下载完成后直接 make （如果安装了不同的 iOS SDK，可以调整 Makefile 文件），一切顺利的话会生成名为 dumpdecrypted.dylib 的动态库，先暂时放在这里留着备用。</p>
-<h4 id="二、SSH-连接越狱-iDivice"><a href="#二、SSH-连接越狱-iDivice" class="headerlink" title="二、SSH 连接越狱 iDivice"></a>二、SSH 连接越狱 iDivice</h4><p>为了书写和描述，我们把 iPhone、iPad、iPod 等 统称为 iDivice 。iDivice 越狱后有 root 和 mobile 两个账户，默认密码为 alpine ，建议马上修改这个默认的密码，防止其他人通过这个默认密码登录 iDivice 。修改命令如下：</p>
+<h4 id="dumpdecrypted"><a href="#dumpdecrypted" class="headerlink" title="dumpdecrypted"></a>dumpdecrypted</h4><p>dumpdecrypted 就是由越狱社区的知名人士 Stefan Esser（ @i0n1c） 出品的一款砸壳工具， 被越狱社区广泛运用在 iOS 逆向工程研究中。下面介绍怎么用 dumpdecrypted 给 app 砸壳。<br>下载 dumpdecrypted 地址为 <a href="https://github.com/stefanesser/dumpdecrypted/">https://github.com/stefanesser/dumpdecrypted/</a><br>下载完成后直接 make （如果安装了不同的 iOS SDK，可以调整 Makefile 文件），一切顺利的话会生成名为 dumpdecrypted.dylib 的动态库，先暂时放在这里留着备用。</p>
+<h4 id="SSH-连接越狱-iDivice"><a href="#SSH-连接越狱-iDivice" class="headerlink" title="SSH 连接越狱 iDivice"></a>SSH 连接越狱 iDivice</h4><p>为了书写和描述，我们把 iPhone、iPad、iPod 等 统称为 iDivice 。iDivice 越狱后有 root 和 mobile 两个账户，默认密码为 alpine ，建议马上修改这个默认的密码，防止其他人通过这个默认密码登录 iDivice 。修改命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ su root</span><br><span class="line">$ passwd</span><br><span class="line">Changing password <span class="keyword">for</span> root.</span><br><span class="line">New password:</span><br><span class="line">Retype new password:</span><br></pre></td></tr></table></figure>
 <p>越狱 iDivice 使用 Cydia 搜索 openSSH ，安装即可。连接方式有两种</p>
 <h5 id="2-1-WiFi-连接"><a href="#2-1-WiFi-连接" class="headerlink" title="2.1 WiFi 连接"></a>2.1 WiFi 连接</h5><p>首先确保 iDivice 和 电脑在统一局域网，连接操作如下</p>
@@ -162,24 +194,24 @@
 <p>相当于把 iDivice 的 22 端口映射到电脑的 2345 端口</p>
 <h5 id="2-2-3-连接"><a href="#2-2-3-连接" class="headerlink" title="2.2.3 连接"></a>2.2.3 连接</h5><p>新开一个终端窗口，并且保持 2.2 中的终端窗口没有被关闭</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh -p 2345 root@127.0.0.1</span><br></pre></td></tr></table></figure>
-<h4 id="三、获取两个路径"><a href="#三、获取两个路径" class="headerlink" title="三、获取两个路径"></a>三、获取两个路径</h4><p>查看 app 进程，这里以 WeChat 为例    ，这里要保证 WeChat 在前台运行</p>
+<h4 id="获取两个路径"><a href="#获取两个路径" class="headerlink" title="获取两个路径"></a>获取两个路径</h4><p>查看 app 进程，这里以 WeChat 为例    ，这里要保证 WeChat 在前台运行</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ps -ef | grep /var/mobile/</span><br><span class="line">  501   506     1   0   0:00.00 ??         1:19.23 /var/mobile/Containers/Bundle/Application/F14174A6-AEC8-4AD4-A09A-9049FDCBB55E/WeChat.app/WeChat</span><br><span class="line">    0  1529  1482   0   0:00.00 ttys001    0:00.01 grep /var/mobile/</span><br></pre></td></tr></table></figure>
 <p>先记下这个路径备用</p>
 <p>查看 app Document 路径<br>这个需要用到 cycript 这个工具。cycript 是混合了 oc 与 js 语法的一个工具, 让开发者在命令行下和应用交互，在运行时查看和修改应用，挂钩相关的进程后，我们就可以用 oc 的方法来查看 app Document 路径了。<br>挂钩进程    </p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cycript -p WeChat</span><br><span class="line">cy<span class="comment"># [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask]</span></span><br><span class="line">@[<span class="comment">#"file:///var/mobile/Containers/Data/Application/6475E209-3EF7-4264-ADC5-FBE0264516BF/Documents/"]</span></span><br><span class="line">cy<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 <p>退出 cy# 模式的快捷键为 ctl + d，把上面输出的路径也记下来备用。</p>
-<h4 id="四、把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下"><a href="#四、把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下" class="headerlink" title="四、把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下"></a>四、把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下</h4><p>该操作要用到 scp 命令。scp 是 secure copy 的缩写, 基于 ssh 登陆进行安全的远程文件拷贝命令。例子：两台机器IP分别为：A 192.168.11.10，B 192.168.11.11，如果想把 A 根目录上的 a.jpg 文件拷到 B 上，命令如下：在A服务器上操作 命令为：</p>
+<h4 id="把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下"><a href="#把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下" class="headerlink" title="把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下"></a>把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下</h4><p>该操作要用到 scp 命令。scp 是 secure copy 的缩写, 基于 ssh 登陆进行安全的远程文件拷贝命令。例子：两台机器IP分别为：A 192.168.11.10，B 192.168.11.11，如果想把 A 根目录上的 a.jpg 文件拷到 B 上，命令如下：在A服务器上操作 命令为：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ scp /a.jpg root@192.168.11.11:/</span><br></pre></td></tr></table></figure>
 <p>所以此时把生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录，命令如下：<br>在 mac的终端上操作</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ scp dumpdecrypted.dylib root@x.x.x.x:/var/mobile/Containers/Data/Application/6475E209-3EF7-4264-ADC5-FBE0264516BF/Documents/</span><br></pre></td></tr></table></figure>
-<h4 id="五、开始砸壳"><a href="#五、开始砸壳" class="headerlink" title="五、开始砸壳"></a>五、开始砸壳</h4><p>进入 Document    目录<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /var/mobile/Containers/Data/Application/6475E209-3EF7-4264-ADC5-FBE0264516BF/Documents/</span><br></pre></td></tr></table></figure></p>
+<h4 id="开始砸壳"><a href="#开始砸壳" class="headerlink" title="开始砸壳"></a>开始砸壳</h4><p>进入 Document    目录<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /var/mobile/Containers/Data/Application/6475E209-3EF7-4264-ADC5-FBE0264516BF/Documents/</span><br></pre></td></tr></table></figure></p>
 <p>砸壳</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Containers/Bundle/Application/F14174A6-AEC8-4AD4-A09A-9049FDCBB55E/WeChat.app/WeChat</span><br><span class="line">mach-o decryption dumper</span><br><span class="line"></span><br><span class="line">DISCLAIMER: This tool is only meant <span class="keyword">for</span> security research purposes, not <span class="keyword">for</span> application crackers.</span><br><span class="line"></span><br><span class="line">[+] detected 64bit ARM binary <span class="keyword">in</span> memory.</span><br><span class="line">[+] offset to cryptid found: @0x1000fcca8(from 0x1000fc000) = ca8</span><br><span class="line">[+] Found encrypted data at address 00004000 of length 58818560 bytes - <span class="built_in">type</span> 1.</span><br><span class="line">[+] Opening /private/var/mobile/Containers/Bundle/Application/F14174A6-AEC8-4AD4-A09A-9049FDCBB55E/WeChat.app/WeChat <span class="keyword">for</span> reading.</span><br><span class="line">[+] Reading header</span><br><span class="line">[+] Detecting header <span class="built_in">type</span></span><br><span class="line">[+] Executable is a plain MACH-O image</span><br><span class="line">[+] Opening WeChat.decrypted <span class="keyword">for</span> writing.</span><br><span class="line">[+] Copying the not encrypted start of the file</span><br><span class="line">[+] Dumping the decrypted data into the file</span><br><span class="line">[+] Copying the not encrypted remainder of the file</span><br><span class="line">[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset ca8</span><br><span class="line">[+] Closing original file</span><br><span class="line">[+] Closing dump file</span><br><span class="line">$ ls</span><br><span class="line">00000000000000000000000000000000  MMResourceMgr  OpenImResource    db.globalconfig</span><br><span class="line">CrashReport			  MMappedKV	 SafeMode.dat	   dumpdecrypted.dylib</span><br><span class="line">LocalInfo.lst			  MemoryStat	 WeChat.decrypted  heavy_user_id_mapping.dat</span><br></pre></td></tr></table></figure>
 <p>此时就可以在当前目录下看到被砸壳后的 WeChat.decrypted。</p>
-<h4 id="六、获取可执行文件的所有头文件"><a href="#六、获取可执行文件的所有头文件" class="headerlink" title="六、获取可执行文件的所有头文件"></a>六、获取可执行文件的所有头文件</h4><p>从 iDvice 上把解密后的文件拷到电脑的桌面上，在电脑终端上操作</p>
+<h4 id="获取可执行文件的所有头文件"><a href="#获取可执行文件的所有头文件" class="headerlink" title="获取可执行文件的所有头文件"></a>获取可执行文件的所有头文件</h4><p>从 iDvice 上把解密后的文件拷到电脑的桌面上，在电脑终端上操作</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ scp root@x.x.x.x:/var/mobile/Containers/Data/Application/6475E209-3EF7-4264-ADC5-FBE0264516BF/Documents/WeChat.decrypted ~/Desktop/</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">获取 .h 文件需要用到 class-dump 工具，下载地址为 http://stevenygard.com/projects/class-dump/。把砸壳后的可执行文件的所有 .h 文件输出到 wechat_test_h 文件夹下</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">class-dump -H WeChat.decrypted -o wechat_test_h</span><br></pre></td></tr></table></figure>
 <p>这时候就能看到所有 WeChat 的头文件了。</p>
-<h4 id="七、相关链接"><a href="#七、相关链接" class="headerlink" title="七、相关链接"></a>七、相关链接</h4><p>FairPlay <a href="https://en.wikipedia.org/wiki/FairPlay" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/FairPlay</a><br>dumpdecrypted <a href="https://github.com/stefanesser/dumpdecrypted/">https://github.com/stefanesser/dumpdecrypted/</a><br>class-dump <a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="noopener">http://stevenygard.com/projects/class-dump/</a></p>
+<h4 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h4><p>FairPlay <a href="https://en.wikipedia.org/wiki/FairPlay" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/FairPlay</a><br>dumpdecrypted <a href="https://github.com/stefanesser/dumpdecrypted/">https://github.com/stefanesser/dumpdecrypted/</a><br>class-dump <a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="noopener">http://stevenygard.com/projects/class-dump/</a></p>
 
       
     </div>
@@ -220,7 +252,7 @@
 <nav id="article-nav">
   
     <a href="/2018/05/28/Cycript-简单使用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
           Cycript 简单使用
@@ -230,7 +262,7 @@
   
   
     <a href="/2018/05/24/Logos-语法/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">Logos 语法</div>
     </a>
   
@@ -243,9 +275,9 @@
 
   <aside id="toc-sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+    <strong class="toc-title">Catalog</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一、dumpdecrypted"><span class="nav-number">2.</span> <span class="nav-text">一、dumpdecrypted</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、SSH-连接越狱-iDivice"><span class="nav-number">3.</span> <span class="nav-text">二、SSH 连接越狱 iDivice</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-WiFi-连接"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 WiFi 连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-USB连接"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 USB连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-安装-usbmuxd"><span class="nav-number">3.3.</span> <span class="nav-text">2.2.1 安装 usbmuxd</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-端口映射"><span class="nav-number">3.4.</span> <span class="nav-text">2.2.2 端口映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-连接"><span class="nav-number">3.5.</span> <span class="nav-text">2.2.3 连接</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、获取两个路径"><span class="nav-number">4.</span> <span class="nav-text">三、获取两个路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下"><span class="nav-number">5.</span> <span class="nav-text">四、把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、开始砸壳"><span class="nav-number">6.</span> <span class="nav-text">五、开始砸壳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、获取可执行文件的所有头文件"><span class="nav-number">7.</span> <span class="nav-text">六、获取可执行文件的所有头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、相关链接"><span class="nav-number">8.</span> <span class="nav-text">七、相关链接</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dumpdecrypted"><span class="nav-number">2.</span> <span class="nav-text">dumpdecrypted</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH-连接越狱-iDivice"><span class="nav-number">3.</span> <span class="nav-text">SSH 连接越狱 iDivice</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-WiFi-连接"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 WiFi 连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-USB连接"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 USB连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-安装-usbmuxd"><span class="nav-number">3.3.</span> <span class="nav-text">2.2.1 安装 usbmuxd</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-端口映射"><span class="nav-number">3.4.</span> <span class="nav-text">2.2.2 端口映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-连接"><span class="nav-number">3.5.</span> <span class="nav-text">2.2.3 连接</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取两个路径"><span class="nav-number">4.</span> <span class="nav-text">获取两个路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下"><span class="nav-number">5.</span> <span class="nav-text">把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开始砸壳"><span class="nav-number">6.</span> <span class="nav-text">开始砸壳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取可执行文件的所有头文件"><span class="nav-number">7.</span> <span class="nav-text">获取可执行文件的所有头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关链接"><span class="nav-number">8.</span> <span class="nav-text">相关链接</span></a></li></ol>
     
     </div>
   </aside>

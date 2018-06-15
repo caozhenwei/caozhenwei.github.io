@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://github.com/caozhenwei/2018/03/16/用-Octopress-搭建属于自己的-github-博客/index.html">
 <meta property="og:site_name" content="caozhenwei">
 <meta property="og:description" content="本文章介绍了自己用 Octopress 搭建 blog 的过程，其中查了好多资料，看了好多文章，也走了不少弯路。现在记录下来，方便后人学习，自己也做个备忘。废话不多说，开工！">
-<meta property="og:updated_time" content="2018-03-21T13:59:25.125Z">
+<meta property="og:updated_time" content="2018-06-15T07:17:18.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用 Octopress 搭建属于自己的 github 博客 ">
 <meta name="twitter:description" content="本文章介绍了自己用 Octopress 搭建 blog 的过程，其中查了好多资料，看了好多文章，也走了不少弯路。现在记录下来，方便后人学习，自己也做个备忘。废话不多说，开工！">
@@ -100,11 +100,43 @@
                 
                   <li> <a class="main-nav-link" href="/">Home</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                  <li> <a class="main-nav-link" href="/archives">Archive</a> </li>
                 
                   <li><div id="search-form-wrap">
 
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="index.search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="https://github.com/caozhenwei"></form>
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Schreib etwas..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Beiträge',
+            PAGES: 'Seiten',
+            CATEGORIES: 'Kategorien',
+            TAGS: 'Tags',
+            UNTITLED: '(Unbenannt)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
 
 </div></li>
             </div>
@@ -154,93 +186,49 @@
       
         <p>本文章介绍了自己用 Octopress 搭建 blog 的过程，其中查了好多资料，看了好多文章，也走了不少弯路。现在记录下来，方便后人学习，自己也做个备忘。废话不多说，开工！</p>
 <a id="more"></a>
-<h3 id="搭建-blog-时的本机环境"><a href="#搭建-blog-时的本机环境" class="headerlink" title="搭建 blog 时的本机环境"></a>搭建 blog 时的本机环境</h3><p>macOS High Sierra (10.13.3)</p>
+<h2 id="搭建-blog-时的本机环境"><a href="#搭建-blog-时的本机环境" class="headerlink" title="搭建 blog 时的本机环境"></a>搭建 blog 时的本机环境</h2><p>macOS High Sierra (10.13.3)</p>
 <p>ruby 2.3.1p112</p>
 <p>gem 2.5.1</p>
 <p>bundle 1.16.1</p>
 <p>git version 2.14.3 (Apple Git-98)</p>
-<h3 id="1-安装-Octopress"><a href="#1-安装-Octopress" class="headerlink" title="1 安装 Octopress"></a>1 安装 Octopress</h3><p>什么是 Octopress ？</p>
+<h2 id="安装-Octopress"><a href="#安装-Octopress" class="headerlink" title="安装 Octopress"></a>安装 Octopress</h2><p>什么是 Octopress ？</p>
 <p>Octopress 是一个基于 Ruby 的开源 Blogging Framework，从写 blog，到发布，你完全可以用 Shell 里面的命令搞定。这样，写起 Blog 来，会让技术控们觉得很有成就感。。。</p>
 <p>安装 Octopress</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git://github.com/imathis/octopress.git octopress</span><br><span class="line">$ <span class="built_in">cd</span> octopress</span><br></pre></td></tr></table></figure>
 <p>因为墙的原因，所以要修改 gem 的 source</p>
-<pre><code>$ gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
-$ gem sources -l
-*** CURRENT SOURCES ***
-
-https://ruby.taobao.org
-//请确保只有 ruby.taobao.org
-</code></pre><p>安装依赖    </p>
-<pre><code>$ gem install bundler
-$ bundle install
-</code></pre><p>安装默认的 Octopress 主题</p>
-<pre><code>rake install
-</code></pre><h3 id="2-在-github-上创建仓库"><a href="#2-在-github-上创建仓库" class="headerlink" title="2 在 github 上创建仓库"></a>2 在 github 上创建仓库</h3><h5 id="2-1-到-github-上创建仓库"><a href="#2-1-到-github-上创建仓库" class="headerlink" title="2.1 到 github 上创建仓库"></a>2.1 到 github 上创建仓库</h5><p>到 github 上创建一个 <code>username.github.io</code> 的 repo，比如我的github 名字为 <code>caozhenwei</code> ，我就创建了一个名字为 <code>caozhenwei.github.io</code> 的仓库。</p>
-<h5 id="2-2-完成-github-和-Octopress-的关联"><a href="#2-2-完成-github-和-Octopress-的关联" class="headerlink" title="2.2 完成 github 和 Octopress 的关联"></a>2.2 完成 github 和 Octopress 的关联</h5><p>执行下面的命令并依照提示完成 github 和 Octopress 的关联</p>
-<pre><code>$ rake setup_github_pages
-
-//提示如下：
-(For example, &apos;git@github.com:your_username/your_username.github.io.git)
-       or &apos;https://github.com/your_username/your_username.github.io&apos;)
-</code></pre><p>比如我的我就输入如下：</p>
-<pre><code>git@github.com: caozhenwei/caozhenwei.github.io.git           
-</code></pre><h3 id="3-创建配置"><a href="#3-创建配置" class="headerlink" title="3 创建配置"></a>3 创建配置</h3><h5 id="3-1-生成博客"><a href="#3-1-生成博客" class="headerlink" title="3.1 生成博客"></a>3.1 生成博客</h5><pre><code>$ rake generate
-$ rake deploy
-</code></pre><p>生成后 push 到 github 上，在这之前需要配置下 SSH Key。在终端下输入：</p>
-<pre><code>ssh-keygen -t rsa -C &quot;邮箱地址&quot;
-</code></pre><p>按三次回车即可，成功后就可以在用户目录下找到 .ssh 目录，里面有 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 两个文件，把 <code>id_rsa.pub</code> 放到 github 的 SSH keys 即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/</span><br><span class="line">$ gem sources -l</span><br></pre></td></tr></table></figure>
+<p>请确保只有 ruby.taobao.org</p>
+<p>安装依赖    </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ gem install bundler</span><br><span class="line">$ bundle install</span><br></pre></td></tr></table></figure>
+<p>安装默认的 Octopress 主题<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ rake install</span><br></pre></td></tr></table></figure></p>
+<h2 id="在-github-上创建仓库"><a href="#在-github-上创建仓库" class="headerlink" title="在 github 上创建仓库"></a>在 github 上创建仓库</h2><h3 id="到-github-上创建仓库"><a href="#到-github-上创建仓库" class="headerlink" title="到 github 上创建仓库"></a>到 github 上创建仓库</h3><p>到 github 上创建一个 <code>username.github.io</code> 的 repo，比如我的github 名字为 <code>caozhenwei</code> ，我就创建了一个名字为 <code>caozhenwei.github.io</code> 的仓库。</p>
+<h3 id="完成-github-和-Octopress-的关联"><a href="#完成-github-和-Octopress-的关联" class="headerlink" title="完成 github 和 Octopress 的关联"></a>完成 github 和 Octopress 的关联</h3><p>执行下面的命令并依照提示完成 github 和 Octopress 的关联</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ rake setup_github_pages</span><br><span class="line">(For example, <span class="string">'git@github.com:your_username/your_username.github.io.git)</span></span><br><span class="line"><span class="string">       or '</span>https://github.com/your_username/your_username.github.io<span class="string">')</span></span><br><span class="line"><span class="string">//比如我的我就输入如下：</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">git@github.com: caozhenwei/caozhenwei.github.io.git</span></span><br></pre></td></tr></table></figure>
+<h2 id="创建配置"><a href="#创建配置" class="headerlink" title="创建配置"></a>创建配置</h2><p>生成博客</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ rake generate</span><br><span class="line">$ rake deploy</span><br></pre></td></tr></table></figure>
+<p>生成后 push 到 github 上，在这之前需要配置下 SSH Key。在终端下输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"邮箱地址"</span></span><br></pre></td></tr></table></figure>
+<p>按三次回车即可，成功后就可以在用户目录下找到 .ssh 目录，里面有 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 两个文件，把 <code>id_rsa.pub</code> 放到 github 的 SSH keys 即可。</p>
 <p>git 用户账户信息的配置：</p>
-<pre><code>git config --global user.name &quot;你的github用户名&quot;
-git config --global user.email &quot;你的github邮箱地址&quot;
-</code></pre><p>然后再提交：</p>
-<pre><code>$ git add .
-$ git commit -m &apos;create blog&apos;
-$ git push origin source
-</code></pre><p>完成后等待几秒就能访问 <code>http://username.github.io</code> 看到自己的博客了。</p>
-<p>当然，你也可以在 push 到 github 上之前先在本地预览一下，命令如下</p>
-<pre><code>$ rake preview
-</code></pre><p>你可以在本地的浏览器里打开 <code>localhost:4000</code>     来预览生成的 blog 。</p>
-<h5 id="3-2-安装第三方主题"><a href="#3-2-安装第三方主题" class="headerlink" title="3.2 安装第三方主题"></a>3.2 安装第三方主题</h5><p>如果你喜欢上面的默认的主题，这里的步骤就没必要执行了。我比较 abacus 主题，下面是安装步骤：</p>
-<pre><code>$ cd octopress
-  $ git clone https://github.com/bhrigu123/abacus.themes/abacus
-  $ rake install[&apos;abacus&apos;]
-  $ rake generate
-</code></pre><p>到这一步，你的 blog 已经基本搭建完了，终于能写了。blog 是用 Markdown 语言来写的。Markdown 是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。在 mac 下可以使用 MacDown 软件来写。想下载 MacDown <a href="http://macdown.uranusjr.com/" target="_blank" rel="noopener">点我</a>。<br>需要更多的主题<a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">点我</a>。</p>
-<p>开始写 blog：</p>
-<pre><code>$ rake new_post[&apos;title&apos;] ＃title 是你要写的 blog 的标题
-</code></pre><p>执行完上面的命令后会在 <code>source/_posts</code> 下面生成 xxx.markdown 文件，我们的 blog 就在 xxx.markdown 中编写。<br>编写完后执行：</p>
-<pre><code>$ rake generate
-$ rake preview    
-//在浏览器输入： localhost:4000 在本地先预览效果，满意后在 push 到 github 上。
-
-$ git add .
-$ git commit -m &quot;comment&quot; 
-$ git push origin source
-$ rake deploy
-</code></pre><h3 id="4-折腾后的收获"><a href="#4-折腾后的收获" class="headerlink" title="4 折腾后的收获"></a>4 折腾后的收获</h3><p>在执行 <code>gem install bundler</code>的时候，一会儿切换源，一会说 ruby 版本不对。看来是对 gem 不熟悉。那什么是RubyGems？<br>RubyGems 是一个方便而强大的 Ruby 程序包管理器，Ruby 的第三方插件是用 gem 方式来管理，非常容易发布和共享，一个简单的命令就可以安装上第三方的扩展库。特点：能远程安装包，包之间依赖关系的管理，简单可靠的卸载，查询机制，能查询本地和远程服务器的包信息，能保持一个包的不同版本，基于 Web 的查看接口，能查看你安装的 gem 的信息。Ruby1.9.1 以后的版本自带 RubyGems。要切换 ruby 版本用什么好呢？笔者刚开始用了 <code>rvm</code>, 后来又用了 <code>rbenv</code>。安装的时候又用到了 <code>homebrew</code>。本着 <code>生命不息，折腾不止</code>的精神，重新的学习了以上各命令的用法。常用方法如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"你的github用户名"</span></span><br><span class="line">$ git config --global user.email <span class="string">"你的github邮箱地址"</span></span><br></pre></td></tr></table></figure>
+<p>然后再提交：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">'create blog'</span></span><br><span class="line">$ git push origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+<p>完成后等待几秒就能访问 <code>http://username.github.io</code> 看到自己的博客了。</p>
+<p>当然，你也可以在 push 到 github 上之前先在本地预览一下，命令如下<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ rake preview</span><br></pre></td></tr></table></figure></p>
+<p>你可以在本地的浏览器里打开 <code>localhost:4000</code>     来预览生成的 blog 。</p>
+<p>安装第三方主题<br>如果你喜欢上面的默认的主题，这里的步骤就没必要执行了。我比较 abacus 主题，下面是安装步骤：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> octopress</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/bhrigu123/abacus.themes/abacus</span><br><span class="line">$ rake install[<span class="string">'abacus'</span>]</span><br><span class="line">$ rake generate</span><br></pre></td></tr></table></figure></p>
+<p>到这一步，你的 blog 已经基本搭建完了，终于能写了。blog 是用 Markdown 语言来写的。Markdown 是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。在 mac 下可以使用 MacDown 软件来写。想下载 MacDown <a href="http://macdown.uranusjr.com/" target="_blank" rel="noopener">点我</a>。<br>需要更多的主题<a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">点我</a>。</p>
+<p>开始写 blog：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ rake new_post[<span class="string">'title'</span>] ＃title 是你要写的 blog 的标题</span><br></pre></td></tr></table></figure></p>
+<p>执行完上面的命令后会在 <code>source/_posts</code> 下面生成 xxx.markdown 文件，我们的 blog 就在 xxx.markdown 中编写。<br>编写完后执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ rake generate</span><br><span class="line">$ rake preview	</span><br><span class="line">//在浏览器输入： localhost:4000 在本地先预览效果，满意后在 push 到 github 上。</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">"comment"</span> </span><br><span class="line">$ git push origin <span class="built_in">source</span></span><br><span class="line">$ rake deploy</span><br></pre></td></tr></table></figure>
+<h2 id="折腾后的收获"><a href="#折腾后的收获" class="headerlink" title="折腾后的收获"></a>折腾后的收获</h2><p>在执行 <code>gem install bundler</code>的时候，一会儿切换源，一会说 ruby 版本不对。看来是对 gem 不熟悉。那什么是RubyGems？<br>RubyGems 是一个方便而强大的 Ruby 程序包管理器，Ruby 的第三方插件是用 gem 方式来管理，非常容易发布和共享，一个简单的命令就可以安装上第三方的扩展库。特点：能远程安装包，包之间依赖关系的管理，简单可靠的卸载，查询机制，能查询本地和远程服务器的包信息，能保持一个包的不同版本，基于 Web 的查看接口，能查看你安装的 gem 的信息。Ruby1.9.1 以后的版本自带 RubyGems。要切换 ruby 版本用什么好呢？笔者刚开始用了 <code>rvm</code>, 后来又用了 <code>rbenv</code>。安装的时候又用到了 <code>homebrew</code>。本着 <code>生命不息，折腾不止</code>的精神，重新的学习了以上各命令的用法。常用方法如下：</p>
 <p>rvm 常用命令</p>
-<pre><code>rvm remove ruby-1.8.7 --docs —gems ＃删除某个版本的ruby，并且把文档和gems都删除
-rvm use ruby-1.8.7 --default ＃选择版本
-rvm info ＃查询当前版本
-rvm list ＃列出版本
-rvm implode ＃删除rvm命令
-</code></pre><p>rbenv 常用命令</p>
-<pre><code>rbenv install --list ＃列出所有可以安装的Ruby版本
-rbenv install version ＃version是具体要安装的版本，在上面列出的可以安装的目录中选择一个
-rbenv versions ＃查看本地安装的ruby版本
-rbenv global version #设置全局使用的ruby版本
-rbenv shell version ＃设置在当前shell中使用的ruby版本，生成了一个RBENV_VERSION的变量
-rbenv local version ＃设置在当前目录中的ruby版本，会在当前目录下生成.rbenv-version文件。
-rbenv uninstall 2.00 #卸载指定ruby版本
-rbenv rehash #每当安装新的 Ruby 版本，或 gem 都要运行一下，不然有可能会出现新安装的不起作用的现象
-</code></pre><p>Homebrew 常用命令</p>
-<pre><code>brew uninstall rbenv ＃卸载rbenv
-brew list ＃列出已安装的软件
-brew update ＃更新brew
-brew home ＃用浏览器打开 brew 的官方网站
-brew info ＃显示软件信息
-brew deps ＃ 显示包依赖    
-</code></pre><h3 id="附录-参考链接："><a href="#附录-参考链接：" class="headerlink" title="附录 参考链接："></a>附录 参考链接：</h3><p><a href="http://octopress.org/docs/configuring" target="_blank" rel="noopener">Octopress 的配置</a>、<a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">Octopress 主题</a>、<a href="https://ruby.taobao.org/" target="_blank" rel="noopener">RubyGems 镜像</a>、<a href="https://github.com/Homebrew/legacy-homebrew">homebrew</a>、<a href="http://brew.sh/index_zh-cn.html" target="_blank" rel="noopener">homebrew 官网</a>、<a href="https://github.com/rbenv/rbenv">rbenv</a>、<a href="https://github.com/rvm/rvm">rvm</a> </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rvm remove ruby-1.8.7 --docs —gems ＃删除某个版本的ruby，并且把文档和gems都删除</span><br><span class="line">rvm use ruby-1.8.7 --default ＃选择版本</span><br><span class="line">rvm info ＃查询当前版本</span><br><span class="line">rvm list ＃列出版本</span><br><span class="line">rvm implode ＃删除rvm命令</span><br></pre></td></tr></table></figure>
+<p>rbenv 常用命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rbenv install --list ＃列出所有可以安装的Ruby版本</span><br><span class="line">rbenv install version ＃version是具体要安装的版本，在上面列出的可以安装的目录中选择一个</span><br><span class="line">rbenv versions ＃查看本地安装的ruby版本</span><br><span class="line">rbenv global version <span class="comment">#设置全局使用的ruby版本</span></span><br><span class="line">rbenv shell version ＃设置在当前shell中使用的ruby版本，生成了一个RBENV_VERSION的变量</span><br><span class="line">rbenv <span class="built_in">local</span> version ＃设置在当前目录中的ruby版本，会在当前目录下生成.rbenv-version文件。</span><br><span class="line">rbenv uninstall 2.00 <span class="comment">#卸载指定ruby版本</span></span><br><span class="line">rbenv <span class="built_in">rehash</span> <span class="comment">#每当安装新的 Ruby 版本，或 gem 都要运行一下，不然有可能会出现新安装的不起作用的现象</span></span><br></pre></td></tr></table></figure>
+<p>Homebrew 常用命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew uninstall rbenv ＃卸载rbenv</span><br><span class="line">brew list ＃列出已安装的软件</span><br><span class="line">brew update ＃更新brew</span><br><span class="line">brew home ＃用浏览器打开 brew 的官方网站</span><br><span class="line">brew info ＃显示软件信息</span><br><span class="line">brew deps ＃ 显示包依赖</span><br></pre></td></tr></table></figure>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://octopress.org/docs/configuring" target="_blank" rel="noopener">Octopress 的配置</a>、<a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">Octopress 主题</a>、<a href="https://ruby.taobao.org/" target="_blank" rel="noopener">RubyGems 镜像</a>、<a href="https://github.com/Homebrew/legacy-homebrew">homebrew</a>、<a href="http://brew.sh/index_zh-cn.html" target="_blank" rel="noopener">homebrew 官网</a>、<a href="https://github.com/rbenv/rbenv">rbenv</a>、<a href="https://github.com/rvm/rvm">rvm</a> </p>
 
       
     </div>
@@ -281,7 +269,7 @@ brew deps ＃ 显示包依赖
 <nav id="article-nav">
   
     <a href="/2018/03/17/使用-hexo-搭建-blog/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
           使用 hexo 搭建 blog
@@ -299,9 +287,9 @@ brew deps ＃ 显示包依赖
 
   <aside id="toc-sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+    <strong class="toc-title">Catalog</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建-blog-时的本机环境"><span class="nav-number">1.</span> <span class="nav-text">搭建 blog 时的本机环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装-Octopress"><span class="nav-number">2.</span> <span class="nav-text">1 安装 Octopress</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-在-github-上创建仓库"><span class="nav-number">3.</span> <span class="nav-text">2 在 github 上创建仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-到-github-上创建仓库"><span class="nav-number">3.0.1.</span> <span class="nav-text">2.1 到 github 上创建仓库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-完成-github-和-Octopress-的关联"><span class="nav-number">3.0.2.</span> <span class="nav-text">2.2 完成 github 和 Octopress 的关联</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建配置"><span class="nav-number">4.</span> <span class="nav-text">3 创建配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-生成博客"><span class="nav-number">4.0.1.</span> <span class="nav-text">3.1 生成博客</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-安装第三方主题"><span class="nav-number">4.0.2.</span> <span class="nav-text">3.2 安装第三方主题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-折腾后的收获"><span class="nav-number">5.</span> <span class="nav-text">4 折腾后的收获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附录-参考链接："><span class="nav-number">6.</span> <span class="nav-text">附录 参考链接：</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建-blog-时的本机环境"><span class="nav-number">1.</span> <span class="nav-text">搭建 blog 时的本机环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Octopress"><span class="nav-number">2.</span> <span class="nav-text">安装 Octopress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-github-上创建仓库"><span class="nav-number">3.</span> <span class="nav-text">在 github 上创建仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#到-github-上创建仓库"><span class="nav-number">3.1.</span> <span class="nav-text">到 github 上创建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完成-github-和-Octopress-的关联"><span class="nav-number">3.2.</span> <span class="nav-text">完成 github 和 Octopress 的关联</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建配置"><span class="nav-number">4.</span> <span class="nav-text">创建配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#折腾后的收获"><span class="nav-number">5.</span> <span class="nav-text">折腾后的收获</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol>
     
     </div>
   </aside>
