@@ -151,7 +151,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Markdown基本语法"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-CSS选择器"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -159,7 +159,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/06/25/Markdown基本语法/"> Markdown基本语法</a>
+      <a class="article-title" href="/2018/06/27/CSS选择器/">CSS选择器</a>
     </h1>
   
 
@@ -167,8 +167,8 @@
     
     <div class="article-meta">
       
-	<a href="/2018/06/25/Markdown基本语法/" class="article-date">
-	  <time datetime="2018-06-25T09:27:31.000Z" itemprop="datePublished">2018-06-25</time>
+	<a href="/2018/06/27/CSS选择器/" class="article-date">
+	  <time datetime="2018-06-27T11:23:50.000Z" itemprop="datePublished">2018-06-27</time>
 	</a>
 
       
@@ -177,10 +177,72 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
+          基本规则每个规则有两个基本部分：选择器和声名块（可以由一个或多个声名组成）。
+元素选择器
+h1 &#123;color: gray;&#125;
+选择器分组
+h2, p &#123;color: gray;&#125;
+通配选择器
+* &#123;color: gray;&#125;
+声名分组
+h1 &#123;color: gray; font: 18px;&#125;
+结合选择器和声名分组
+h2, p &#123;color: gray; font: 18px;&#125;
+类选择器&...
         </p>
         <p class="article-more-link">
-          <a href="/2018/06/25/Markdown基本语法/#more">Read More</a>
+          <a href="/2018/06/27/CSS选择器/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-CSS之float"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/06/25/CSS之float/">CSS之float</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/06/25/CSS之float/" class="article-date">
+	  <time datetime="2018-06-25T11:48:47.000Z" itemprop="datePublished">2018-06-25</time>
+	</a>
+
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          设置了 float 属性的元素会根据属性值向左或向右浮动，我们称设置了 float 属性的元素为浮动元素。浮动元素会从普通文档流中脱离，但浮动元素影响的不仅是自己，它会影响周围的元素对齐进行环绕。如果被设置了浮动，那浮动元素会生成一个块级框。
+浮动元素的包含块就是离浮动元素最近的块级祖先元素。
+
+浮动元素在浮动的时候，其 margin 不会超过包含块的 padding 。
+如果有多个浮动元素，后面的浮动元素的 margin 不会超过前面浮动元素的 margin。
+如果两个元素一个向左浮动，...
+        </p>
+        <p class="article-more-link">
+          <a href="/2018/06/25/CSS之float/#more">Read More</a>
         </p>
       
     </div>
@@ -470,53 +532,6 @@ CSS选择器CSS 的语法如下：例子如下：
         </p>
         <p class="article-more-link">
           <a href="/2018/04/20/CSS学习之盒子模型/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-css-学习"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/04/11/css-学习/">CSS入门学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/04/11/css-学习/" class="article-date">
-	  <time datetime="2018-04-11T08:38:20.000Z" itemprop="datePublished">2018-04-11</time>
-	</a>
-
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          CSS是什么CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。根据层叠样式表来理解下 CSS ，样式表好理解，就是有样式的“表”，那层叠指的是什么呢？层叠指的是一层一层叠加的效果，我们可以在多个地方来设置某个元素的样式，这个元素的最终显示结果是它们共同叠加的效果。叠加效果是有相关规则的，比如谁的优先级更高、谁会覆盖谁等，下面会有相关介绍。CSS 是用来写样式的，但是写几个元素放在浏览器里就有样式了，这是什么鬼？例子如下：
-...
-        </p>
-        <p class="article-more-link">
-          <a href="/2018/04/11/css-学习/#more">Read More</a>
         </p>
       
     </div>
