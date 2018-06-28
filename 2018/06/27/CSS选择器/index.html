@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://github.com/caozhenwei/2018/06/27/CSS选择器/index.html">
 <meta property="og:site_name" content="caozhenwei">
 <meta property="og:description" content="基本规则每个规则有两个基本部分：选择器和声名块（可以由一个或多个声名组成）。 元素选择器 h1 &amp;#123;color: gray;&amp;#125; 选择器分组 h2, p &amp;#123;color: gray;&amp;#125; 通配选择器 * &amp;#123;color: gray;&amp;#125; 声名分组 h1 &amp;#123;color: gray; font: 18px;&amp;#125; 结合选择器和声名分组 h">
-<meta property="og:updated_time" content="2018-06-27T11:57:54.512Z">
+<meta property="og:updated_time" content="2018-06-28T06:29:07.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS选择器">
 <meta name="twitter:description" content="基本规则每个规则有两个基本部分：选择器和声名块（可以由一个或多个声名组成）。 元素选择器 h1 &amp;#123;color: gray;&amp;#125; 选择器分组 h2, p &amp;#123;color: gray;&amp;#125; 通配选择器 * &amp;#123;color: gray;&amp;#125; 声名分组 h1 &amp;#123;color: gray; font: 18px;&amp;#125; 结合选择器和声名分组 h">
@@ -203,6 +203,39 @@
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-attr">[class]</span> &#123;<span class="attribute">color</span>: gray;&#125;</span><br></pre></td></tr></table></figure>
 <p>根据多个属性选择，下面的例子将同时有 href 和 title 属性的 a 标签的文本设置为粗体</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[herf]</span><span class="selector-attr">[title]</span> &#123;<span class="attribute">font-weight</span>: bold;&#125;</span><br></pre></td></tr></table></figure>
+<p>根据具体属性值选择</p>
+<p>只选 moons 属性值为 1 的那些 planet 元素</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">planet</span><span class="selector-attr">[moons= "1"]</span> &#123;<span class="attribute">font-weight</span>: bold;&#125;</span><br></pre></td></tr></table></figure>
+<p>根据部分属性选择</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"test test1"</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-attr">[class~"test"]</span> &#123;<span class="attribute">color</span>: gray;&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[p^=”test”]</td>
+<td>选择 p 属性值以 test 开头的所有元素</td>
+</tr>
+<tr>
+<td>[p$”test”]</td>
+<td>选择 p 属性值以 test 结尾的所有元素</td>
+</tr>
+<tr>
+<td>[p^=”test”]</td>
+<td>选择 p 属性值中包含字符串 test 的所有元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="后代选择器"><a href="#后代选择器" class="headerlink" title="后代选择器"></a>后代选择器</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> <span class="selector-tag">p</span> &#123;<span class="attribute">color</span>: gray;&#125;</span><br></pre></td></tr></table></figure>
+<p>只选择 h1 子元素的 p 元素</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &gt; <span class="selector-tag">p</span> &#123;<span class="attribute">color</span>: gray;&#125;</span><br></pre></td></tr></table></figure>
+<p>选择相邻兄弟元素，例如下面的修改紧接着 h1 元素后出现的 p 元素颜色</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> + <span class="selector-tag">p</span> &#123;<span class="attribute">color</span>: gray;&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -259,7 +292,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Catalog</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本规则"><span class="nav-number">1.</span> <span class="nav-text">基本规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类选择器"><span class="nav-number">2.</span> <span class="nav-text">类选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ID-选择器"><span class="nav-number">3.</span> <span class="nav-text">ID 选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性选择器"><span class="nav-number">4.</span> <span class="nav-text">属性选择器</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本规则"><span class="nav-number">1.</span> <span class="nav-text">基本规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类选择器"><span class="nav-number">2.</span> <span class="nav-text">类选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ID-选择器"><span class="nav-number">3.</span> <span class="nav-text">ID 选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性选择器"><span class="nav-number">4.</span> <span class="nav-text">属性选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后代选择器"><span class="nav-number">5.</span> <span class="nav-text">后代选择器</span></a></li></ol>
     
     </div>
   </aside>
