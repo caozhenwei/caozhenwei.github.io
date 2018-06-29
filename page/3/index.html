@@ -3,22 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title> markdown基本语法 | caozhenwei</title>
+  <title>caozhenwei</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="插入数学公式 &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$   $$x=\frac{-">
-<meta property="og:type" content="article">
-<meta property="og:title" content=" Markdown基本语法">
-<meta property="og:url" content="https://github.com/caozhenwei/2018/01/25/Markdown基本语法/index.html">
+  <meta name="description" content="caozhenwei 在 Github 上的个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="caozhenwei">
+<meta property="og:url" content="https://github.com/caozhenwei/page/3/index.html">
 <meta property="og:site_name" content="caozhenwei">
-<meta property="og:description" content="插入数学公式 &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$   $$x=\frac{-">
-<meta property="og:updated_time" content="2018-06-29T07:34:59.853Z">
+<meta property="og:description" content="caozhenwei 在 Github 上的个人博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" Markdown基本语法">
-<meta name="twitter:description" content="插入数学公式 &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$   $$x=\frac{-">
+<meta name="twitter:title" content="caozhenwei">
+<meta name="twitter:description" content="caozhenwei 在 Github 上的个人博客">
   
     <link rel="alternate" href="/atom.xml" title="caozhenwei" type="application/atom+xml">
   
@@ -47,7 +46,7 @@
   <link rel="stylesheet" href="/css/bootstrap.css" >
 
   
-    <link rel="stylesheet" href="/css/dialog.css">
+    <link rel="stylesheet" href="/css/home.css" >
   
 
   
@@ -64,7 +63,7 @@
 
 
 
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
+  <body>
 
 
   
@@ -87,7 +86,7 @@
             
               <a class="brand" style="
                  border-width: 0px;  margin-top: 0px;"  
-                href="#" data-toggle="modal" data-target="#myModal" >
+                 >
                   <img width="80px" height="80px" alt="Hike News" src="/css/images/mylogo.png">
               </a>
             
@@ -150,15 +149,17 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-Markdown基本语法" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;">
+  
+    <article id="post-iOS-中-native-和-JavaScript-的交互原理"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
       <header class="article-header">
         
   
-    <h1 class="thumb" class="article-title" itemprop="name">
-       Markdown基本语法
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/12/02/iOS-中-native-和-JavaScript-的交互原理/">iOS 中 native 和 JavaScript 的交互原理</a>
     </h1>
   
 
@@ -166,104 +167,48 @@
     
     <div class="article-meta">
       
-	<a href="/2018/01/25/Markdown基本语法/" class="article-date">
-	  <time datetime="2018-01-25T09:27:31.000Z" itemprop="datePublished">2018-01-25</time>
+	<a href="/2017/12/02/iOS-中-native-和-JavaScript-的交互原理/" class="article-date">
+	  <time datetime="2017-12-02T06:17:45.000Z" itemprop="datePublished">2017-12-02</time>
 	</a>
 
       
       
-	<a class="article-views">
-	<span id="busuanzi_container_page_pv">
-		PV:<span id="busuanzi_value_page_pv"></span>
-	</span>
-	</a>
-
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>插入数学公式</p>
-<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
-$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
-</code></pre><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
-<p>$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$</p>
-<p>代码高亮</p>
-<pre><code>```bash        
-代码
-``` 
-</code></pre><p>f</p>
-
+        <p class="article-excerpt-content">
+          前言在 iOS 开发中经常要用到 UIWebView ( iOS8 中可以用 WKWebView，本文章以 UIWebView 为例 ) 来展示一些东西，其中就难免要和网页进行交互。服务端提供 H5 供多个平台使用，我们就不用在 native 中开发了，是不是很棒。Hybrid App 的优势很明显，这就要求我们必须具备 native 和网页交互的技能。学点儿 JavaScript 的知识能帮我们更好的理解交互的原理。本文主要来介绍 UIWebView 和 JavaScript 的交互原理...
+        </p>
+        <p class="article-more-link">
+          <a href="/2017/12/02/iOS-中-native-和-JavaScript-的交互原理/#more">Read More</a>
+        </p>
       
     </div>
     <footer class="article-footer">
       
-      
-        
-	<div id="comment">
-		<!-- 来必力City版安装代码 -->
-		<div id="lv-container" data-id="city" data-uid="MTAyMC8zNDg5MS8xMTQyOA==">
-		<script type="text/javascript">
-		   (function(d, s) {
-		       var j, e = d.getElementsByTagName(s)[0];
-
-		       if (typeof LivereTower === 'function') { return; }
-
-		       j = d.createElement(s);
-		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-		       j.async = true;
-
-		       e.parentNode.insertBefore(j, e);
-		   })(document, 'script');
-		</script>
-		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-		</div>
-		<!-- City版安装代码已完成 -->
-	</div>
-
-
-
       
       
 
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2018/02/19/mac下常用命令/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          mac下常用命令和快捷键
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/12/02/iOS-中-native-和-JavaScript-的交互原理/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">iOS 中 native 和 JavaScript 的交互原理</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
 <!-- Table of Contents -->
 
-  <aside id="toc-sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">Catalog</strong>
+  
+
+
+  <nav id="page-nav">
     
-        <ol class="nav">Empty</ol>
-    
-    </div>
-  </aside>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 </section>
         
       </div>
+      
+        <div align="center" style="margin-top: 30px;"><hr class="hr" style="margin:0px; height:3px;"></div>
       
       <footer id="footer">
   
@@ -350,8 +295,6 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
 
 
 
-  <script src="/js/dialog.js"></script>
-
 
 
 
@@ -435,8 +378,6 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
   
   <a id="rocket" href="#top" class=""></a>
   <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-  
-    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
   
 </body>
 </html>
