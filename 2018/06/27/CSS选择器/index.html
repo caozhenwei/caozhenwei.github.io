@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://github.com/caozhenwei/2018/06/27/CSS选择器/index.html">
 <meta property="og:site_name" content="caozhenwei">
 <meta property="og:description" content="基本规则每个规则有两个基本部分：选择器和声名块（可以由一个或多个声名组成）。">
-<meta property="og:updated_time" content="2018-07-04T09:24:12.040Z">
+<meta property="og:updated_time" content="2018-07-09T09:28:26.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS选择器">
 <meta name="twitter:description" content="基本规则每个规则有两个基本部分：选择器和声名块（可以由一个或多个声名组成）。">
@@ -97,7 +97,7 @@
                 
                   <li> <a class="main-nav-link" href="/">Home</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/archives">Archive</a> </li>
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
                 
                   <li><div id="search-form-wrap">
 
@@ -109,7 +109,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Search ..." />
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -121,11 +121,11 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Beiträge',
-            PAGES: 'Seiten',
-            CATEGORIES: 'Kategorien',
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
             TAGS: 'Tags',
-            UNTITLED: '(Unbenannt)',
+            UNTITLED: '(Untitled)',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
@@ -193,6 +193,7 @@
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;<span class="attribute">color</span>: gray; <span class="attribute">font</span>: <span class="number">18px</span>;&#125;</span><br></pre></td></tr></table></figure>
 <p>结合选择器和声名分组</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h2</span>, <span class="selector-tag">p</span> &#123;<span class="attribute">color</span>: gray; <span class="attribute">font</span>: <span class="number">18px</span>;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h2</span>&#123;                                 <span class="comment">/*  标签选择 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span>,<span class="selector-tag">h1</span>&#123;                               <span class="comment">/* 使用逗号实现元素合集  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">h1</span>,<span class="selector-tag">div</span> <span class="selector-tag">h2</span>&#123;                      <span class="comment">/* 使用空格实现后代元素(子元素和子孙元素)查询，表示div的后代元素h1，h1和div的合集，在从合集中查找后代元素h2，最后查询到的为h2列表 */</span></span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#2b542c</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span>&gt;<span class="selector-tag">h1</span>&#123;                                <span class="comment">/*  &gt;表示直接子元素  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span>+<span class="selector-tag">h1</span>&#123;                                <span class="comment">/*  +表示紧接在后面的同胞元素，选择h1元素  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">html</span>&gt;<span class="selector-tag">body</span> <span class="selector-tag">table</span>+<span class="selector-tag">ul</span>&#123;                 <span class="comment">/*  在html元素中查询直接子元素body，在body中查询后代元素table，在table元素后面查询同胞元素ul，即在最后选择的为ul列表  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> *&#123;                              <span class="comment">/*  *通配符选择器，匹配所有元素，表示匹配body的所有后代元素  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span><span class="selector-class">.class1</span><span class="selector-class">.class2</span>&#123;                    <span class="comment">/*  .表示class类选择器，p为标签，连在一块写，表示多重筛选，一个元素可以有多个样式  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#id1</span>&#123;                                <span class="comment">/*  #id选择器，一个元素只能有一个id，所有元素的id不能相同   */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="类选择器"><a href="#类选择器" class="headerlink" title="类选择器"></a>类选择器</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"test"</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.p</span> &#123;<span class="attribute">color</span>: gray;&#125;</span><br></pre></td></tr></table></figure>
 <p>多类选择器</p>
@@ -232,6 +233,7 @@
 </tr>
 </tbody>
 </table>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-attr">[attribute1]</span><span class="selector-attr">[attribute2]</span>&#123;         <span class="comment">/*  [] 属性选择器，表示具有某种属性的所有元素，多个参数表示同时具有多个属性，class也可以作为一个属性筛选 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[href="http://www.123.com"]</span>&#123;      <span class="comment">/*  =具有某个属性，且属性值等于指定值的所有元素 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[class~="class1"]</span>&#123;               <span class="comment">/*  ~=具有某个属性，且属性值包含指定值的所有元素  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[title^="title1"]</span>&#123;             <span class="comment">/*  ^=指定属性的值以指定字符串开头   */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[title$="title1"]</span>&#123;             <span class="comment">/*  $=指定属性的值以指定字符串结尾   */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[title*="title1"]</span>&#123;             <span class="comment">/*  *=指定属性的值包含指定字符串   */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[title|="title1"]</span>&#123;             <span class="comment">/*  |=指定属性的值等于title1或者以title1-开头   */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="后代选择器"><a href="#后代选择器" class="headerlink" title="后代选择器"></a>后代选择器</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> <span class="selector-tag">p</span> &#123;<span class="attribute">color</span>: gray;&#125;</span><br></pre></td></tr></table></figure>
 <p>只选择 h1 子元素的 p 元素</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &gt; <span class="selector-tag">p</span> &#123;<span class="attribute">color</span>: gray;&#125;</span><br></pre></td></tr></table></figure>
@@ -300,7 +302,7 @@
 
   <aside id="toc-sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Catalog</strong>
+    <strong class="toc-title">Contents</strong>
     
         <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本规则"><span class="nav-number">1.</span> <span class="nav-text">基本规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类选择器"><span class="nav-number">2.</span> <span class="nav-text">类选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ID-选择器"><span class="nav-number">3.</span> <span class="nav-text">ID 选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性选择器"><span class="nav-number">4.</span> <span class="nav-text">属性选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后代选择器"><span class="nav-number">5.</span> <span class="nav-text">后代选择器</span></a></li></ol>
     
