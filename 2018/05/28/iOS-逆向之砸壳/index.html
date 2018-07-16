@@ -1,186 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>ios 逆向之砸壳 | caozhenwei</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  
-  
-  
-  <meta name="description" content="前言从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有好多种，其核心原理就是将内存中已解密的镜像 “dump” 出来，再生成新的镜像文件，从而达到解密的效果。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS 逆向之砸壳">
-<meta property="og:url" content="https://github.com/caozhenwei/2018/05/28/iOS-逆向之砸壳/index.html">
-<meta property="og:site_name" content="caozhenwei">
-<meta property="og:description" content="前言从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有好多种，其核心原理就是将内存中已解密的镜像 “dump” 出来，再生成新的镜像文件，从而达到解密的效果。">
-<meta property="og:updated_time" content="2018-07-04T09:16:40.812Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 逆向之砸壳">
-<meta name="twitter:description" content="前言从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有好多种，其核心原理就是将内存中已解密的镜像 “dump” 出来，再生成新的镜像文件，从而达到解密的效果。">
-  
-    <link rel="alternate" href="/atom.xml" title="caozhenwei" type="application/atom+xml">
-  
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 
   
+  <script src="/js/script.js"></script>
+  
 
-  <link rel="icon" href="/css/images/mylogo.png">
-  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <title>caozhenwei</title>
   <link rel="stylesheet" href="/css/style.css">
-
-  <script src="/js/jquery-3.1.1.min.js"></script>
-  <script src="/js/bootstrap.js"></script>
-
-  <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" >
-
-  
-    <link rel="stylesheet" href="/css/dialog.css">
-  
-
-  
-
-  
-    <link rel="stylesheet" href="/css/header-post.css" >
-  
-
-  
-  
-  
-
 </head>
-
-
-
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
-
-
-  
-  <div id="container">
-    <div id="wrap">
+  <body>
+    <header class="header-content">
+<div class="header">
+  <div class="blog-title">
+    <img class="logo" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/header_image_small.jpeg">
+    <a href="/" class="title">caozhenwei</a>
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
       
-        <header>
-
-    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="navbar-inner">
-          
-          <div class="container"> 
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            
-              <a class="brand" style="
-                 border-width: 0px;  margin-top: 0px;"  
-                href="#" data-toggle="modal" data-target="#myModal" >
-                  <img width="80px" height="80px" alt="Hike News" src="/css/images/mylogo.png">
-              </a>
-            
-            
-            <div class="navbar-collapse collapse">
-              <ul class="hnav navbar-nav">
-                
-                  <li> <a class="main-nav-link" href="/">Home</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
-                
-                  <li><div id="search-form-wrap">
-
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." />
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives" class="menu-item-link">Archives</a>
+        </li>
+      
+    </ul>
+  </nav>
 </div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: '(Untitled)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div></li>
-            </div>
-          </div>
-                
-      </div>
-    </div>
-
 </header>
+    <main class="main">
+      <div class="content">
+  <article class="article">
+    <div class="article-detail">
+      <!-- 标题 -->
+      <div class="article-title">
+        <h2 class="title">iOS 逆向之砸壳</h2>
+      </div>
 
+      <!-- 时间 -->
+      <div class="article-meta">
+        <span class="article-time">2018-05-28</span>
+      </div>
 
-
-      
-            
-      <div id="content" class="outer">
-        
-          <section id="main" style="float:none;"><article id="post-iOS-逆向之砸壳" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      iOS 逆向之砸壳
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2018/05/28/iOS-逆向之砸壳/" class="article-date">
-	  <time datetime="2018-05-28T01:45:17.000Z" itemprop="datePublished">2018-05-28</time>
-	</a>
-
-      
-      
-	<a class="article-views">
-	<span id="busuanzi_container_page_pv">
-		PV:<span id="busuanzi_value_page_pv"></span>
-	</span>
-	</a>
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
+      <!-- 文章内容 -->
+      <div class="article-content">
         <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>从 AppStore 下载的 App 是被苹果使用 FairPlay 技术加密过的， 可执行文件被套上了一层保护壳， 而 class-dump Hopper 等工具无法作用于加密过的 App。 在这种情况下， 想要获取头文件， 需要先解密 App 的可执行文件， 俗称“砸壳”。 砸壳的工具有好多种，其核心原理就是将内存中已解密的镜像 “dump” 出来，再生成新的镜像文件，从而达到解密的效果。可执行程序要想运行起来，必须由操作系统把可执行文件加载进内存，iOS 中用的是 DYLD。<br><a id="more"></a></p>
 <h4 id="dumpdecrypted"><a href="#dumpdecrypted" class="headerlink" title="dumpdecrypted"></a>dumpdecrypted</h4><p>dumpdecrypted 就是由越狱社区的知名人士 Stefan Esser（ @i0n1c） 出品的一款砸壳工具， 被越狱社区广泛运用在 iOS 逆向工程研究中。下面介绍怎么用 dumpdecrypted 给 app 砸壳。<br>下载 dumpdecrypted 地址为 <a href="https://github.com/stefanesser/dumpdecrypted/">https://github.com/stefanesser/dumpdecrypted/</a><br>下载完成后直接 make （如果安装了不同的 iOS SDK，可以调整 Makefile 文件），一切顺利的话会生成名为 dumpdecrypted.dylib 的动态库，先暂时放在这里留着备用。</p>
 <h4 id="SSH-连接越狱-iDivice"><a href="#SSH-连接越狱-iDivice" class="headerlink" title="SSH 连接越狱 iDivice"></a>SSH 连接越狱 iDivice</h4><p>为了书写和描述，我们把 iPhone、iPad、iPod 等 统称为 iDivice 。iDivice 越狱后有 root 和 mobile 两个账户，默认密码为 alpine ，建议马上修改这个默认的密码，防止其他人通过这个默认密码登录 iDivice 。修改命令如下：</p>
@@ -213,250 +82,30 @@
 <p>这时候就能看到所有 WeChat 的头文件了。</p>
 <h4 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h4><p>FairPlay <a href="https://en.wikipedia.org/wiki/FairPlay" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/FairPlay</a><br>dumpdecrypted <a href="https://github.com/stefanesser/dumpdecrypted/">https://github.com/stefanesser/dumpdecrypted/</a><br>class-dump <a href="http://stevenygard.com/projects/class-dump/" target="_blank" rel="noopener">http://stevenygard.com/projects/class-dump/</a></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-        
-	<div id="comment">
-		<!-- 来必力City版安装代码 -->
-		<div id="lv-container" data-id="city" data-uid="MTAyMC8zNDg5MS8xMTQyOA==">
-		<script type="text/javascript">
-		   (function(d, s) {
-		       var j, e = d.getElementsByTagName(s)[0];
-
-		       if (typeof LivereTower === 'function') { return; }
-
-		       j = d.createElement(s);
-		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-		       j.async = true;
-
-		       e.parentNode.insertBefore(j, e);
-		   })(document, 'script');
-		</script>
-		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-		</div>
-		<!-- City版安装代码已完成 -->
-	</div>
-
-
-
-      
-      
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/05/28/Cycript-简单使用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Cycript 简单使用
-        
       </div>
-    </a>
-  
-  
-    <a href="/2018/05/24/Logos-语法/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Logos 语法</div>
-    </a>
-  
-</nav>
+    </div>
+  </article>
 
-  
-</article>
-
-<!-- Table of Contents -->
-
+  <!-- 目录 -->
   <aside id="toc-sidebar">
     <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
+    <strong class="toc-title">目录</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dumpdecrypted"><span class="nav-number">2.</span> <span class="nav-text">dumpdecrypted</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH-连接越狱-iDivice"><span class="nav-number">3.</span> <span class="nav-text">SSH 连接越狱 iDivice</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-WiFi-连接"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 WiFi 连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-USB连接"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 USB连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-安装-usbmuxd"><span class="nav-number">3.3.</span> <span class="nav-text">2.2.1 安装 usbmuxd</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-端口映射"><span class="nav-number">3.4.</span> <span class="nav-text">2.2.2 端口映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-连接"><span class="nav-number">3.5.</span> <span class="nav-text">2.2.3 连接</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取两个路径"><span class="nav-number">4.</span> <span class="nav-text">获取两个路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下"><span class="nav-number">5.</span> <span class="nav-text">把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开始砸壳"><span class="nav-number">6.</span> <span class="nav-text">开始砸壳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取可执行文件的所有头文件"><span class="nav-number">7.</span> <span class="nav-text">获取可执行文件的所有头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关链接"><span class="nav-number">8.</span> <span class="nav-text">相关链接</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dumpdecrypted"><span class="nav-text">dumpdecrypted</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH-连接越狱-iDivice"><span class="nav-text">SSH 连接越狱 iDivice</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-WiFi-连接"><span class="nav-text">2.1 WiFi 连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-USB连接"><span class="nav-text">2.2 USB连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-安装-usbmuxd"><span class="nav-text">2.2.1 安装 usbmuxd</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-端口映射"><span class="nav-text">2.2.2 端口映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-连接"><span class="nav-text">2.2.3 连接</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取两个路径"><span class="nav-text">获取两个路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#把第一步中生成的-dumpdecripted-dylib-动态库拷贝到该-app-的-Document-目录下"><span class="nav-text">把第一步中生成的 dumpdecripted.dylib 动态库拷贝到该 app 的 Document 目录下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开始砸壳"><span class="nav-text">开始砸壳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取可执行文件的所有头文件"><span class="nav-text">获取可执行文件的所有头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关链接"><span class="nav-text">相关链接</span></a></li></ol>
     
     </div>
   </aside>
-</section>
-        
-      </div>
-      
-      <footer id="footer">
-  
-
-  <div class="container">
-      	<div class="row">
-	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2018 caozhenwei All Rights Reserved.</p>
-	      
-	      
-    		<p class="busuanzi_uv">
-				UV : <span id="busuanzi_value_site_uv"></span> |  
-				PV : <span id="busuanzi_value_site_pv"></span>
-		    </p>
-  		   
-		</div>
-
-		
-  </div>
-</footer>
-
-
-<!-- min height -->
-
-<script>
-    var wrapdiv = document.getElementById("wrap");
-    var contentdiv = document.getElementById("content");
-    var allheader = document.getElementById("allheader");
-
-    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
-    if (allheader != null) {
-      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
-    } else {
-      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
-    }
-</script>
-    </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav> -->
-    
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-
-<script src="/js/scripts.js"></script>
-
-
-  <script src="/js/home.js"></script>
-
-
-
-  <script src="/js/dialog.js"></script>
-
-
-
-
-
-
-
-
-	<div style="display: none;">
-    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-  </div>
-
-
-
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
-
-
-
-
-
-
-  </div>
-
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" id="myModalLabel">设置</h2>
-      </div>
-      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
-      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
-
-
-      <div class="modal-body">
-          <div style="margin:6px;">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
-              正文字号大小
-            </a>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-          <div class="panel-body">
-            您已调整页面字体大小
-          </div>
-        </div>
-      
-
-
-          <div style="margin:6px;">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
-              夜间护眼模式
-            </a>
-        </div>
-          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-          <div class="panel-body">
-            夜间模式已经开启，再次单击按钮即可关闭 
-          </div>
-        </div>
-
-        <div>
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-        </div>
-         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-          <div class="panel-body">
-            caozhenwei
-          </div>
-          <div class="panel-body">
-            Copyright © 2018 caozhenwei All Rights Reserved.
-          </div>
-        </div>
-      </div>
-
-
-      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
-      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
-      <div class="modal-footer">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-      </div>
-    </div>
-  </div>
 </div>
-  
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-  
-    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
-  
-</body>
+
+<footer id="footer">
+    <p> Powered_by
+     <a href="http://hexo.io/" target="_blank">Hexo</a>
+     and 
+     <a href="https://github.com/caozhenwei/zw_theme" target="_blank">Hexo-theme-zw_theme  
+     </a> 
+      , copyright &copy; 2017 - 2018 caozhenwei All Rights Reserved.
+    </p>
+</footer>
+    </main>
+  </body>
 </html>

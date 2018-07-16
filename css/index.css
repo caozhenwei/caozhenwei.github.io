@@ -1,0 +1,37 @@
+.posts .post:first-child {
+  margin-top: 20;
+}
+.posts .post-title {
+  font-size: 1.5em;
+}
+.posts .post-title .post-title-link {
+  color: #008000;
+  text-decoration: none;
+}
+.posts .post-title .post-title-link:hover {
+  color: #368ccb;
+}
+.posts .post-content a {
+  color: #368ccb;
+  text-decoration: none;
+}
+.posts .post-meta {
+  color: #bababa;
+}
+.posts .post-meta .read-more-link {
+  color: #008000;
+  text-decoration: none;
+}
+.posts .post-meta .read-more-link:hover {
+  color: #368ccb;
+}
+.post {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+/*background-color: #fff;*/
+  border-bottom: 1px dashed #aaa;
+/*border-radius: 20px;*/
+/*box-shadow: 0 0 4px #ddd;*/
+}
