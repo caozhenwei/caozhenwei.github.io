@@ -50,7 +50,7 @@
 
       <!-- 文章内容 -->
       <div class="article-content">
-        <p>前面学习了 8086 CPU 通过从 CS：IP 指向的内存取指令并执行，内存中数据的方法为 DS：[xxx]以及栈的相关知识。从这里开始，我们正式开始编写汇编代码，来体验下真正和 CPU 寄存器打交道的乐趣。</p>
+        <p>前面学习了 8086 CPU 通过从 CS：IP 指向的内存取指令并执行，内存中数据的方法为 DS：[xxx]，以及栈的相关知识。从这里开始，我们正式开始编写汇编代码，来体验下真正和 CPU 寄存器打交道的乐趣。</p>
 <a id="more"></a>
 <h4 id="第一个程序"><a href="#第一个程序" class="headerlink" title="第一个程序"></a>第一个程序</h4><p>程序如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line"></span><br><span class="line">start: mov ax,0123H</span><br><span class="line">	   mov bx,0456H</span><br><span class="line">	   add ax,bx</span><br><span class="line">	   </span><br><span class="line">	   mov ax,4c00h</span><br><span class="line">	   int 21H</span><br><span class="line">codesg ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
