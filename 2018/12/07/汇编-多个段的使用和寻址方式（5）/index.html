@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+
+  
+  <script src="/js/script.js"></script>
+  
+
+  <title>caozhenwei</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+</head>
+  <body>
+    <header class="header-content">
+<div class="header">
+  <div class="blog-title">
+    <img class="logo" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/header_image_small.jpeg">
+    <a href="/" class="title">caozhenwei</a>
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives" class="menu-item-link">Archives</a>
+        </li>
+      
+    </ul>
+  </nav>
+</div>
+</header>
+    <main class="main">
+      <div class="content">
+  <article class="article">
+    <div class="article-detail">
+      <!-- 标题 -->
+      <div class="article-title">
+        <h2 class="title">汇编--多个段的使用和寻址方式（5）</h2>
+      </div>
+
+      <!-- 时间 -->
+      <div class="article-meta">
+        <span class="article-time">2018-12-07</span>
+      </div>
+
+      <!-- 文章内容 -->
+      <div class="article-content">
+        <p>本篇介绍在汇编中使用多个段编写代码以及更多的寻址方式。</p>
+<a id="more"></a>
+<h4 id="栈的使用"><a href="#栈的使用" class="headerlink" title="栈的使用"></a>栈的使用</h4><p>利用栈将程序中定义的数据逆序存放，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">	dw 0001H,0002H,0003H,0004H,0005H,0006H,0007H,0008H</span><br><span class="line">	dw 0,0,0,0,0,0,0,0</span><br><span class="line">	</span><br><span class="line">	start:  mov ax,cs </span><br><span class="line">			mov ss,ax </span><br><span class="line">			mov sp,32</span><br><span class="line">			mov bx,0</span><br><span class="line">			mov cx,8</span><br><span class="line">		s:  push cs:[bx]</span><br><span class="line">			add bx,2</span><br><span class="line">			loop s	</span><br><span class="line">			</span><br><span class="line">			mov bx,0</span><br><span class="line">			mov cx,8</span><br><span class="line">		s0: pop cs:[bx]</span><br><span class="line">			add bx,2</span><br><span class="line">			loop s0	</span><br><span class="line">			</span><br><span class="line">			mov ax,4c00h</span><br><span class="line">			int 21H	</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+<h4 id="将数据、代码、栈放入不同的段"><a href="#将数据、代码、栈放入不同的段" class="headerlink" title="将数据、代码、栈放入不同的段"></a>将数据、代码、栈放入不同的段</h4><p>上面的程序稍加修改，改为下面的，则可将数据、代码、栈放入不同的段，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg,ds:data,ss:stack</span><br><span class="line">data segment</span><br><span class="line">	dw 0001H,0002H,0003H,0004H,0005H,0006H,0007H,0008H</span><br><span class="line">data ends</span><br><span class="line">stack segment</span><br><span class="line">	dw 0,0,0,0,0,0,0,0</span><br><span class="line">stack ends</span><br><span class="line">codesg segment</span><br><span class="line">    start:	mov ax,stack</span><br><span class="line">			mov ss,ax</span><br><span class="line">			mov sp,16</span><br><span class="line"></span><br><span class="line">			mov ax,data</span><br><span class="line">			mov ds,ax</span><br><span class="line">			mov bx,0</span><br><span class="line">			mov cx,8</span><br><span class="line">		s: 	push [bx]</span><br><span class="line">			add bx,2</span><br><span class="line">			loop s </span><br><span class="line">			mov bx,0</span><br><span class="line">			mov cx,8</span><br><span class="line">	   s0:  pop [bx]</span><br><span class="line">			add bx,2</span><br><span class="line">			loop s0</span><br><span class="line">			</span><br><span class="line">			mov ax,4c00h</span><br><span class="line">			int 21H</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+<p>从程序中看出，定义多个段和前面的定义代码一样，都是用 assume 的方法。</p>
+<p>指令 mov ax，stack 的意义是将 stack 段的段地址放入 ax，然后 mov ss，ax 表示把 stack 段的段地址放入 ss 中，这样我们就正确的设置栈段的段地址。同理 mov ax，data 和 mov ds：ax 表示一样的意思，是将代码段的段地址放入 ds 中。</p>
+<h4 id="and-和-or-指令"><a href="#and-和-or-指令" class="headerlink" title="and 和 or 指令"></a>and 和 or 指令</h4><p>and 表示按位与指令，or 表示逻辑或指令，进行按位或运算。</p>
+<p>例如指令<br>mov al，01110000B<br>and al，00010000B<br>执行后 al 中的内容为 00010000B</p>
+<p>再例如指令<br>mov al，00000000B<br> or al，11111110B<br>执行后 al 中的内容为 11111110B</p>
+<h4 id="更灵活的寻址方式"><a href="#更灵活的寻址方式" class="headerlink" title="更灵活的寻址方式"></a>更灵活的寻址方式</h4><p>前面介绍过用 [idata] 的方式进行寻址，当然也可以用 [bx] 的方式寻址，同样也可以用 [bx + idata] 的方式寻址，它表示的意义为 [bx + idata] 表示一个内存单元，它的偏移地址为 bx 中的值加上 idata 的值，段地址在 ds 中。例如指令 mov ax，[bx + 200] ,它表示将一个内存单元中的内容送入 ax 中，这个内存单元的偏移地址为 bx 中的内容加上 200，段地址在 ds 中。该指令还可以用以下的形式表示：</p>
+<ul>
+<li>mov ax，[200 + bx]</li>
+<li>mov ax, 200[bx]</li>
+<li>mov ax, [bx].200</li>
+</ul>
+<p>SI 和 DI 是 8086CPU 中和 bx 功能相近的寄存器，但是它们不能够用作两个 8 为寄存器来使用。当然也能够用 [bx + si] 或者 [bx + di] 的方式来寻址，同样的也可以用 [bx + si + idata] 或者 [bx + di + idata] 的方式来寻址。指令 mov ax，[bx + si + 200] 的含义为：它表示一个内存单元中的内容送入 ax 中，这个内存单元的偏移地址为 bx 加 si 加 200 ，段地址在 ds 中。该指令也可以用以下常用的形式表示：</p>
+<ul>
+<li>mov ax,[dx + 200 + si]</li>
+<li>mov ax,[200 + dx + si]</li>
+<li>mov ax,200[bx][si]</li>
+<li>mov ax,[bx].200[si]</li>
+<li>mov ax,[bx][si].200</li>
+</ul>
+<p>目前为止，已经学到了很多种寻址的方法，总结如下：</p>
+<ul>
+<li>[idata] 用一个常量定位一个内存单元</li>
+<li>[bx] 用一个变量定位一个内存单元</li>
+<li>[bx + idata] 用一个变量和常量定位一个内存单元</li>
+<li>[bx + si] 或 [bx + di] 用两个变量来定位一个内存单元</li>
+<li>[bx + si + idata] 或 [bx + di + idata] 用两个变量和一个常量来定位一个内存单元</li>
+</ul>
+<p>实战：用 si 和 di 实现将字符串 ‘welcome to masm！’ 复制到它后面的数据区中，代码如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg</span><br><span class="line">datasg segment</span><br><span class="line">	db &apos;welcome to masm!&apos;</span><br><span class="line">	db &apos;................&apos;</span><br><span class="line">datasg ends</span><br><span class="line">	</span><br><span class="line">codesg segment</span><br><span class="line">	start:  mov ax,datasg</span><br><span class="line">			mov ds,ax</span><br><span class="line">			mov si,0</span><br><span class="line">			mov di,16</span><br><span class="line">			mov cx,8</span><br><span class="line">        s:	mov ax,[si]</span><br><span class="line">			mov [di],ax</span><br><span class="line">			add si,2</span><br><span class="line">			add di,2</span><br><span class="line">			loop s </span><br><span class="line">	</span><br><span class="line">			mov ax,4c00h</span><br><span class="line">			int 21H</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+<p>代码执行后，从下图可以看出复制成功了。</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/5/1.png" alt="1"></p>
+<p>在 8086CPU 中只有 bx、si、di、bp 这四个寄存器能用 […] 的方式寻址。当然也可以是这组合形式，比如：bx 和 si，bx 和 di，bp 和 si，bp 和 di，而 bx 和 bp 或者 si 和 di 却是错误的。</p>
+<h4 id="寻址方式总结"><a href="#寻址方式总结" class="headerlink" title="寻址方式总结"></a>寻址方式总结</h4><p>通过前面的学习，现将 8086CPU 的寻址方式做以下总结：</p>
+<table>
+<thead>
+<tr>
+<th>寻址方式</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[idata]</td>
+<td>直接寻址</td>
+<td></td>
+</tr>
+<tr>
+<td>[bx],[bp],[si],[di]</td>
+<td>寄存器间接寻址</td>
+<td></td>
+</tr>
+<tr>
+<td>[bx+idata],[bp+idata],[si+idata],[di+idata]</td>
+<td>寄存器相对寻址</td>
+<td></td>
+</tr>
+<tr>
+<td>[bx+si],[bx+di],[bp+si],[bp+di]</td>
+<td>基址变址寻址</td>
+<td></td>
+</tr>
+<tr>
+<td>[bx+si+idata],[bx+di+idata],[bp+si+idata],[bp+di+idata]</td>
+<td>相对基址变址寻址</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过本次学习，我们知道了怎么在汇编中运用多个段来编写程序，了解了 and 指令和 or 指令的用法，总结了 8086CPU 的寻址方式，收获颇丰，继续努力！</p>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- 目录 -->
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈的使用"><span class="nav-text">栈的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将数据、代码、栈放入不同的段"><span class="nav-text">将数据、代码、栈放入不同的段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#and-和-or-指令"><span class="nav-text">and 和 or 指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更灵活的寻址方式"><span class="nav-text">更灵活的寻址方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻址方式总结"><span class="nav-text">寻址方式总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol>
+    
+    </div>
+  </aside>
+</div>
+
+<footer id="footer">
+    <p> Powered_by
+     <a href="http://hexo.io/" target="_blank">Hexo</a>
+     and 
+     <a href="https://github.com/caozhenwei/zw_theme" target="_blank">Hexo-theme-zw_theme  
+     </a> 
+      , copyright &copy; 2017 - 2018 caozhenwei All Rights Reserved.
+    </p>
+</footer>
+    </main>
+  </body>
+</html>
