@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+
+  
+  <script src="/js/script.js"></script>
+  
+
+  <title>caozhenwei</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+</head>
+  <body>
+    <header class="header-content">
+<div class="header">
+  <div class="blog-title">
+    <img class="logo" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/header_image_small.jpeg">
+    <a href="/" class="title">caozhenwei</a>
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives" class="menu-item-link">Archives</a>
+        </li>
+      
+    </ul>
+  </nav>
+</div>
+</header>
+    <main class="main">
+      <div class="content">
+  <article class="article">
+    <div class="article-detail">
+      <!-- 标题 -->
+      <div class="article-title">
+        <h2 class="title">汇编--标志寄存器（9）</h2>
+      </div>
+
+      <!-- 时间 -->
+      <div class="article-meta">
+        <span class="article-time">2018-12-07</span>
+      </div>
+
+      <!-- 文章内容 -->
+      <div class="article-content">
+        <p>8086 CPU 内部有 14 个 16 位寄存器，前面已经已经学习了 AX、BX、CX、DX、CS、DS、SS、ES、SI、DI、IP、SP、BP 这 13 个寄存器，还差一个，这就是本篇要介绍的标志寄存器，简称 flag。</p>
+<a id="more"></a>
+<p>flag 寄存器是一个特殊的寄存器，它是按位起作用的，它具有 3 种作用：</p>
+<ul>
+<li>用来存储相关指令的某些执行结果</li>
+<li>用来为 CPU 执行相关指令提供行为依据</li>
+<li>用来控制 CPU 的相关工作方式</li>
+</ul>
+<p>8086CPU 的 flag 寄存器结果如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/1.png" alt="1"></p>
+<p>下图是各个标志位的简介（图片来自百度百科）：</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/2.png" alt="2"></p>
+<h4 id="CF"><a href="#CF" class="headerlink" title="CF"></a>CF</h4><p>进位标志，在无符号数进行运算的时候，它记录了运算结果的的最高位进位或借位的情况。</p>
+<p>adc 是带进位加法指令，利用了 CF 上的进位值</p>
+<p>指令格式： adc 操作对象1，操作对象2</p>
+<p>功能：操作对象1 = 操作对象1 + 操作对象2 + CF</p>
+<p>利用这个我们可以实现任意位数的数相加。</p>
+<p>sbb 是带借位减法指令，利用了 CF 上记录的借位值，利用这个指令可以计算任意两个数的减法。</p>
+<p>通过学习 adc 和 sbb 指令能使我们更好的认识 CF 标志位。</p>
+<h4 id="PF"><a href="#PF" class="headerlink" title="PF"></a>PF</h4><p>奇偶标志位，它记录了相关指令执行后，其结果的所有二进制位中 1 的个数是否为偶数，如果 1 的个数为偶数，PF = 1，如果为奇数，PF = 0。</p>
+<h4 id="AF"><a href="#AF" class="headerlink" title="AF"></a>AF</h4><p>算数操作结果的第三位（从0开始计数）如果产生了进位或者借位则将其置为1，否则置为0，常在BCD(binary-codedecimal)算术运算中被使用。</p>
+<h4 id="ZF"><a href="#ZF" class="headerlink" title="ZF"></a>ZF</h4><p>零标志位，它记录了相关指令执行后，其结果是否为 0 ，结果为 0 则 ZF = 1，结果不为 1 则 ZF = 0。</p>
+<h4 id="SF"><a href="#SF" class="headerlink" title="SF"></a>SF</h4><p>符号标志位，它记录了相关指令执行后，其结果是否为负。当我们将数据当做有符号数来计算的时候，它记录结果的正负，如果为负则 SF = 1，不为负则 SF = 0。如果把数据当做无符号数来计算，则 SF 标志无意义。</p>
+<h4 id="TF"><a href="#TF" class="headerlink" title="TF"></a>TF</h4><p>当TF被设置为1时，CPU进入单步模式，所谓单步模式就是CPU在每执行一步指令后都产生一个单步中断。主要用于程序的调试。8086/8088中没有专门用来置位和清零TF的命令，需要用其他办法。</p>
+<h4 id="IF"><a href="#IF" class="headerlink" title="IF"></a>IF</h4><p>决定CPU是否响应外部可屏蔽中断请求。IF为1时，CPU允许响应外部的可屏蔽中断请求。</p>
+<h4 id="DF"><a href="#DF" class="headerlink" title="DF"></a>DF</h4><p>方向标志位，在串处理指令中，控制每次操作后 si 和 di 的增减</p>
+<ul>
+<li>DF = 0，每次操作后 si 和 di 递增</li>
+<li>DF = 1，每次操作后 si 和 di 递减</li>
+</ul>
+<p>串传送指令 movsb ，执行后相当于如下操作</p>
+<ul>
+<li>把 DS：[si] 中的一个字节送入 ES：[di] 中</li>
+<li>如果 DF = 0，si 和 di 的值递增 1</li>
+</ul>
+<p>串传送指令 movsw ，它的功能和 movsb 差不多，只不过它每次传送一个字，具体功能为将 DS：[si] 指向内存的字单元送入 ES:[di] 中，根据 DF 的值将 si 和 di 递增或者递减 2。</p>
+<h4 id="OF"><a href="#OF" class="headerlink" title="OF"></a>OF</h4><p>溢出标志位，记录了有符号数运算结果是否发生了溢出。如果发生溢出，OF = 1，没有的话则 OF = 0 。</p>
+<h4 id="类似于高级语言中的逻辑判断"><a href="#类似于高级语言中的逻辑判断" class="headerlink" title="类似于高级语言中的逻辑判断"></a>类似于高级语言中的逻辑判断</h4><p>在高级语言中我们可以使用 if 和 else 来进行逻辑判断，那么汇编能实现类似的功能吗？必须的可以啊，在讲解之前先来学习下 cmp 指令和一系列检测比较结果的条件转移指令。</p>
+<p>cmp 指令是比较指令，<mark>相当于减法指令，只是不保存结果，将对标志寄存器产生影响</mark>。例如下面的指令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mov ax,8</span><br><span class="line">mov bx,3</span><br><span class="line">cmp ax,bx</span><br></pre></td></tr></table></figure>
+<p>执行后 ax 中的值仍为 8，ZF=0（执行后结果不为0）,PF=1（执行后结果为5，即101中1的个数为偶数），CF=0（没有发生进位或借位），OF=0（没有发生溢出）。</p>
+<p>检测比较结果的条件指令如下所示</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+<th>检测的相关标志位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>je</td>
+<td>等于则转移</td>
+<td>ZF=1</td>
+<td></td>
+</tr>
+<tr>
+<td>jne</td>
+<td>不等于则转移</td>
+<td>ZF=0</td>
+<td></td>
+</tr>
+<tr>
+<td>jb</td>
+<td>低于则转移</td>
+<td>CF=1（发生借位）</td>
+<td></td>
+</tr>
+<tr>
+<td>jnb</td>
+<td>不低于则转移</td>
+<td>CF=0（没有发生借位）</td>
+<td></td>
+</tr>
+<tr>
+<td>ja</td>
+<td>高于则转移</td>
+<td>CF=0且ZF=0（没有借位且结果不为0）</td>
+<td></td>
+</tr>
+<tr>
+<td>jna</td>
+<td>不高于则转移</td>
+<td>CF=1或ZF=1（有借位或执行结果为0）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>上面的指令很好记，根据英文意思便可知道要表达的意思</p>
+<p>e：equal</p>
+<p>ne：not equal</p>
+<p>b：blow</p>
+<p>nb：not blow</p>
+<p>a：above</p>
+<p>na：not above</p>
+<p>可以用 cmp 指令和一系列检测比较结果的条件转移指令来实现类似于高级语言中的逻辑判断，例子：实现如下功能</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if (ah == bh) &#123;</span><br><span class="line">	ah = ah + ah</span><br><span class="line">&#125; else &#123;</span><br><span class="line">	ah = ah + bh</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>核心汇编代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	 cmp ah,bh</span><br><span class="line">	 je s</span><br><span class="line">	 add ah,bh</span><br><span class="line">	 jmp short s1</span><br><span class="line">s:  add ah,ah</span><br><span class="line">s1: ...</span><br></pre></td></tr></table></figure>
+<h4 id="pushf-和-popf"><a href="#pushf-和-popf" class="headerlink" title="pushf 和 popf"></a>pushf 和 popf</h4><p>pushf 是将标志寄存器的值压栈</p>
+<p>popf 是将标志寄存器的值出栈</p>
+<p>有了这两个指令就能和上篇中执行子程序前将标志寄存器的内容压栈，等待子程序执行完后再将栈中的数据恢复到标志寄存器中。</p>
+<h4 id="debug-中标志寄存器的表示方法"><a href="#debug-中标志寄存器的表示方法" class="headerlink" title="debug 中标志寄存器的表示方法"></a>debug 中标志寄存器的表示方法</h4><p>标志寄存器在 debug 中的表示不像其它寄存器那么直观，它是按位展示的，在 9 个标志位中 TF 没有表示出来，其它 8 个位的表示如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/3.png" alt="3"></p>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- 目录 -->
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#CF"><span class="nav-text">CF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PF"><span class="nav-text">PF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AF"><span class="nav-text">AF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZF"><span class="nav-text">ZF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SF"><span class="nav-text">SF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TF"><span class="nav-text">TF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IF"><span class="nav-text">IF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DF"><span class="nav-text">DF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OF"><span class="nav-text">OF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类似于高级语言中的逻辑判断"><span class="nav-text">类似于高级语言中的逻辑判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pushf-和-popf"><span class="nav-text">pushf 和 popf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#debug-中标志寄存器的表示方法"><span class="nav-text">debug 中标志寄存器的表示方法</span></a></li></ol>
+    
+    </div>
+  </aside>
+</div>
+
+<footer id="footer">
+    <p> Powered_by
+     <a href="http://hexo.io/" target="_blank">Hexo</a>
+     and 
+     <a href="https://github.com/caozhenwei/zw_theme" target="_blank">Hexo-theme-zw_theme  
+     </a> 
+      , copyright &copy; 2017 - 2018 caozhenwei All Rights Reserved.
+    </p>
+</footer>
+    </main>
+  </body>
+</html>
