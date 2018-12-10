@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+
+  
+  <script src="/js/script.js"></script>
+  
+
+  <title>caozhenwei</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+</head>
+  <body>
+    <header class="header-content">
+<div class="header">
+  <div class="blog-title">
+    <img class="logo" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/header_image_small.jpeg">
+    <a href="/" class="title">caozhenwei</a>
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives" class="menu-item-link">Archives</a>
+        </li>
+      
+    </ul>
+  </nav>
+</div>
+</header>
+    <main class="main">
+      <div class="content">
+  <article class="article">
+    <div class="article-detail">
+      <!-- 标题 -->
+      <div class="article-title">
+        <h2 class="title">汇编--中断（10）</h2>
+      </div>
+
+      <!-- 时间 -->
+      <div class="article-meta">
+        <span class="article-time">2018-12-10</span>
+      </div>
+
+      <!-- 文章内容 -->
+      <div class="article-content">
+        <p>任何一个通用的 CPU ，比如 8086 都具备这样一种能力，检测从 CPU 内部或者外部发过来的一种信息，并且可以立即对收到的信息进行处理。这种信息就是我们常说的中断信息。从 CPU 内存产生的这种信息称为内中断，从 CPU 外部产生的这种信息称为外中断。</p>
+<a id="more"></a>
+<p>对于 8086CPU，内部有下面的情况发生后，将产生相应的中断信息：</p>
+<ul>
+<li>除法错误</li>
+<li>单步执行</li>
+<li>执行 int0 指令</li>
+<li>执行 int 指令</li>
+</ul>
+<p>我们将产生中断信息的事件，即中断信息的来源称为中断源。中断信息中包含识别来源的编码，这个编码为一个字节型数据，可以表示 256 种中断源。上述 4 种中断源，在 8086 中的中断类型码如下：</p>
+<ul>
+<li>除法错误：0</li>
+<li>单步执行：1</li>
+<li>执行 int0：4</li>
+<li>执行 int 指令，该指令的格式为 int n ，指令中的 n 为字节型立即数，是提供给 CPU 的中断类型码</li>
+</ul>
+<p>CPU 收到中断信息后，需要对中断信息进行处理，这个可以由我们编写代码来确定。用来处理中断的程序被称为中断处理程序。可以设置 CS：IP 的值来执行我们编写的中断处理程序。问题在于中断信息中只有一个中断类型码，怎么来设置 CS：IP 呢？CPU 用 8 位的中断类型码可以从中断向量表中找到对应的 CS 和 IP。中断向量就是中断处理程序的入口，即 CS 和 IP 的值，中断向量表就是中断处理程序入口的列表。可见 CPU 只要知道了中断类型码，就可以通过查找中断向量表找出对应的中断处理程序入口。</p>
+<p>中断可能随时发生，要想在发生中断时去执行中断处理程序，那么在发生中断前中断处理程序就应该放在某个地方等待执行。对于 8086PC 机，中断向量表指定放在内存地址 0 处，从内存 0000:0000 ~ 0000:03e8 的 1000 个单元中。</p>
+<h4 id="中断过程"><a href="#中断过程" class="headerlink" title="中断过程"></a>中断过程</h4><p>下面描述的 8086CPU 的中断过程 </p>
+<ul>
+<li>取得中断类型码</li>
+<li>标志寄存器入栈</li>
+<li>设置标志寄存器的 TF 和 IF（在进入中断处理程序后禁止其它可屏蔽中断） 为 0</li>
+<li>CS 的内容入栈</li>
+<li>IP 的内容入栈</li>
+<li>从中断向量表中找到入口设置 CS 和 IP</li>
+</ul>
+<h4 id="int-指令"><a href="#int-指令" class="headerlink" title="int 指令"></a>int 指令</h4><p>格式为 int n，功能为引发中断过程。</p>
+<h4 id="BIOS-和-DOS-中断安装过程"><a href="#BIOS-和-DOS-中断安装过程" class="headerlink" title="BIOS 和 DOS 中断安装过程"></a>BIOS 和 DOS 中断安装过程</h4><ul>
+<li>CPU 一加电，初始化 CS：IP 为 0FFFFH：0，自动从 FFFF：0 这个单元执行程序。 FFFF：0 处有一条跳转指令，转去执行 BIOS 中的硬件系统检测和初始化程序。</li>
+<li>初始化程序建立 BIOS 中断向量表，它是固化在 ROM 中的程序，一直存在内存中。</li>
+<li>硬件系统检测和初始化完成后，调用 19h 进行操作系统的引导。</li>
+<li>DOS 启动后，除完成其它工作外，还将它提供的中断向量表装入内存。</li>
+</ul>
+<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><p>在 PC 机系统中，和 CPU 通过总线相连的芯片除各种寄存器外，还有以下 3 种芯片</p>
+<ul>
+<li>各种接口卡（网卡、显卡）上的接口芯片，它们控制接口卡进行工作</li>
+<li>主板上的接口芯片，CPU 通过它们对部分外设进行访问</li>
+<li>其它芯片，用来存储相关系统信息</li>
+</ul>
+<p>在上述的这些芯片中，都有一组可以由 CPU 读写的寄存器。CPU 对它们进行读或写的时候都通过控制线向它们所在的芯片发出端口读写命令。</p>
+<p>端口的读写只有两条指令 in 和 out ，分别表示从端口读数据和写数据。</p>
+<h4 id="外中断"><a href="#外中断" class="headerlink" title="外中断"></a>外中断</h4><p>外中段分为以下两种：</p>
+<ul>
+<li>可屏蔽中断</li>
+<li>不可屏蔽中断</li>
+</ul>
+<p>可屏蔽中断是当中断到来时，CPU 可以不处理中断。CPU 是否响应可屏蔽中断，要看标志寄存器 IF 位的设置。如果 IF = 1，则 CPU 执行完当前指令后响应中断，如果 IF = 0，则不响应可屏蔽中断。</p>
+<p>不可屏蔽中断的中断类型码固定为 2 。</p>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- 目录 -->
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#中断过程"><span class="nav-text">中断过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#int-指令"><span class="nav-text">int 指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BIOS-和-DOS-中断安装过程"><span class="nav-text">BIOS 和 DOS 中断安装过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口"><span class="nav-text">端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外中断"><span class="nav-text">外中断</span></a></li></ol>
+    
+    </div>
+  </aside>
+</div>
+
+<footer id="footer">
+    <p> Powered_by
+     <a href="http://hexo.io/" target="_blank">Hexo</a>
+     and 
+     <a href="https://github.com/caozhenwei/zw_theme" target="_blank">Hexo-theme-zw_theme  
+     </a> 
+      , copyright &copy; 2017 - 2018 caozhenwei All Rights Reserved.
+    </p>
+</footer>
+    </main>
+  </body>
+</html>
