@@ -177,9 +177,21 @@
 <li>用来控制 CPU 的相关工作方式</li>
 </ul>
 <p>8086CPU 的 flag 寄存器结果如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/1.png" alt="1"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/1.png" alt="1" title="">
+                </div>
+                <div class="image-caption">1</div>
+            </figure>
 <p>下图是各个标志位的简介（图片来自百度百科）：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/2.png" alt="2"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/2.png" alt="2" title="">
+                </div>
+                <div class="image-caption">2</div>
+            </figure>
 <h4 id="CF"><a href="#CF" class="headerlink" title="CF"></a>CF</h4><p>进位标志，在无符号数进行运算的时候，它记录了运算结果的的最高位进位或借位的情况。</p>
 <p>adc 是带进位加法指令，利用了 CF 上的进位值</p>
 <p>指令格式： adc 操作对象1，操作对象2</p>
@@ -272,8 +284,13 @@
 <p>popf 是将标志寄存器的值出栈</p>
 <p>有了这两个指令就能和上篇中执行子程序前将标志寄存器的内容压栈，等待子程序执行完后再将栈中的数据恢复到标志寄存器中。</p>
 <h4 id="debug-中标志寄存器的表示方法"><a href="#debug-中标志寄存器的表示方法" class="headerlink" title="debug 中标志寄存器的表示方法"></a>debug 中标志寄存器的表示方法</h4><p>标志寄存器在 debug 中的表示不像其它寄存器那么直观，它是按位展示的，在 9 个标志位中 TF 没有表示出来，其它 8 个位的表示如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/3.png" alt="3"></p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/3.png" alt="3" title="">
+                </div>
+                <div class="image-caption">3</div>
+            </figure>
         </div>
 
         <blockquote class="post-copyright">
@@ -391,6 +408,23 @@
 
 
 
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
 
 
 
@@ -435,7 +469,7 @@
 
 </div>
 
-        <footer class="footer">
+        <!-- <footer class="footer">
     <div class="top">
         
 <p>
@@ -462,9 +496,9 @@
         </p>
     </div>
 </footer>
-
+ -->
     </main>
-    <!-- <div class="mask" id="mask"></div>
+    <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
@@ -513,7 +547,7 @@
 
 
 
- -->
+
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };

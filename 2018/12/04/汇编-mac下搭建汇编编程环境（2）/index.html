@@ -179,29 +179,89 @@
 <a id="more"></a>
 <h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>在 mac 上搭建汇编环境首先要用到两个软件 DOSBox 和 asm5 。这连个工具在<a href="https://github.com/caozhenwei/blog_pic/tree/master/software">这里</a>可以下载。</p>
 <p>运行 DOSBox 后挂载<br>mount c ~/Dos/masm5         因为我的 masm5 文件夹在这里： ~/Dos/masm5</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/1.png" alt="1"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/1.png" alt="1" title="">
+                </div>
+                <div class="image-caption">1</div>
+            </figure>
 <p>编写汇编程序，可以先不用知道具体汇编指令是什么意思，这里主要是想展示下汇编代码怎么通过编译链接成为最终的可执行问津。例如我的 hello.asm 内容如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line"></span><br><span class="line">start: mov ax,0123H</span><br><span class="line">       mov bx,0456H</span><br><span class="line">       add ax,bx</span><br><span class="line">       </span><br><span class="line">       mov ax,4c00h</span><br><span class="line">       int 21H</span><br><span class="line">codesg ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>通过挂载后要进入 c 盘，命令如下</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">c：</span><br></pre></td></tr></table></figure>
 <p>编译：masm hello.asm</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/2.png" alt="2"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/2.png" alt="2" title="">
+                </div>
+                <div class="image-caption">2</div>
+            </figure>
 <p>链接:link hell0.obj</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/3.png" alt="3"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/3.png" alt="3" title="">
+                </div>
+                <div class="image-caption">3</div>
+            </figure>
 <p>运行：hello.exe</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/4.png" alt="4"></p>
-<h4 id="调试常用命令"><a href="#调试常用命令" class="headerlink" title="调试常用命令"></a>调试常用命令</h4><p>r 查看、改变 CPU 寄存器的内容，如下所示的为修改 ax 中的内容<br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/5.png" alt="5"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/4.png" alt="4" title="">
+                </div>
+                <div class="image-caption">4</div>
+            </figure>
+<h4 id="调试常用命令"><a href="#调试常用命令" class="headerlink" title="调试常用命令"></a>调试常用命令</h4><p>r 查看、改变 CPU 寄存器的内容，如下所示的为修改 ax 中的内容<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/5.png" alt="5" title="">
+                </div>
+                <div class="image-caption">5</div>
+            </figure></p>
 <p>d 命令查看内存中的内容 查看 10000H 处的内存命令如下所示</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/6.png" alt="6"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/6.png" alt="6" title="">
+                </div>
+                <div class="image-caption">6</div>
+            </figure>
 <p>e 命令来修改内存中的内容，如下所示</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/7.png" alt="7"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/7.png" alt="7" title="">
+                </div>
+                <div class="image-caption">7</div>
+            </figure>
 <p>用 e 命令向机器中写入机器码，并用 u 命令查看</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/8.png" alt="8"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/8.png" alt="8" title="">
+                </div>
+                <div class="image-caption">8</div>
+            </figure>
 <p>用 t 命令执行机器指令，首页要把 CS：IP 设置下，如下所示</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/9.png" alt="9"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/9.png" alt="9" title="">
+                </div>
+                <div class="image-caption">9</div>
+            </figure>
 <p>可以使用 g 命令让程序跑完。</p>
 <p>用 a 命令以汇编的形式向内存中写入指令</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/10.png" alt="10"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/mac下搭建汇编编程环境/10.png" alt="10" title="">
+                </div>
+                <div class="image-caption">10</div>
+            </figure>
 
         </div>
 
@@ -320,6 +380,23 @@
 
 
 
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
 
 
 
@@ -364,7 +441,7 @@
 
 </div>
 
-        <footer class="footer">
+        <!-- <footer class="footer">
     <div class="top">
         
 <p>
@@ -391,9 +468,9 @@
         </p>
     </div>
 </footer>
-
+ -->
     </main>
-    <!-- <div class="mask" id="mask"></div>
+    <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
@@ -442,7 +519,7 @@
 
 
 
- -->
+
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };

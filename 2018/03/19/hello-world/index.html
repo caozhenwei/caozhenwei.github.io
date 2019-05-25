@@ -268,18 +268,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2018/03/19/春天里的故事/" id="post-prev" class="post-nav-link">
+      <a href="/2018/03/19/常用-git-命令总结/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">春天里的故事</h4>
+        <h4 class="title">常用 git 命令总结</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2018/03/17/使用-hexo-搭建-blog/" id="post-next" class="post-nav-link">
+      <a href="/2018/03/19/春天里的故事/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">使用 hexo 搭建 blog</h4>
+        <h4 class="title">春天里的故事</h4>
       </a>
     </div>
   
@@ -295,6 +295,23 @@
 
 
 
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
 
 
 
@@ -340,7 +357,7 @@
 
 </div>
 
-        <footer class="footer">
+        <!-- <footer class="footer">
     <div class="top">
         
 <p>
@@ -367,9 +384,9 @@
         </p>
     </div>
 </footer>
-
+ -->
     </main>
-    <!-- <div class="mask" id="mask"></div>
+    <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
@@ -418,7 +435,7 @@
 
 
 
- -->
+
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };

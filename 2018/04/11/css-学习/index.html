@@ -173,7 +173,13 @@
 <a id="more"></a>
 <p>CSS 是用来写样式的，但是写几个元素放在浏览器里就有样式了，这是什么鬼？例子如下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">id</span>=<span class="string">"body"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">H1</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">H1</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">H2</span>&gt;</span>bbb<span class="tag">&lt;/<span class="name">H2</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>ccc<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/默认样式.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/默认样式.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>可以很明显的看到 <code>aaa</code>、<code>bbb</code> 被放大并且加粗了。这是因为浏览器有默认的样式，并且不同浏览器会有不同的样式。这就需要考虑不同浏览器的兼容问题了，这个问题先放在这里，下面有解决的办法。</p>
 <h2 id="CSS样式怎么来写"><a href="#CSS样式怎么来写" class="headerlink" title="CSS样式怎么来写"></a>CSS样式怎么来写</h2><p>怎么来写样式呢？主要有以下几种方法：</p>
 <ul>
@@ -184,7 +190,13 @@
 <h3 id="属性样式"><a href="#属性样式" class="headerlink" title="属性样式"></a>属性样式</h3><p>属性样式，html 代码还是上个例子的代码，CSS 代码如下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">H1</span> <span class="attr">style</span>=<span class="string">'color: red'</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">H1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">H2</span> <span class="attr">style</span>=<span class="string">'color: green'</span>&gt;</span>bbb<span class="tag">&lt;/<span class="name">H2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">'color: gray'</span>&gt;</span>ccc<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/设置颜色样式.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/设置颜色样式.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <h3 id="内部样式"><a href="#内部样式" class="headerlink" title="内部样式"></a>内部样式</h3><p>内部样式<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;style type="text/css"&gt;</span><br><span class="line">	<span class="selector-tag">H1</span> &#123;</span><br><span class="line">		<span class="attribute">color</span>: red;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="selector-tag">H2</span> &#123;</span><br><span class="line">		<span class="attribute">color</span>: green;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="selector-tag">p</span> &#123;</span><br><span class="line">		<span class="attribute">color</span>: gray;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
 <p>效果同上面的一样</p>
 <h3 id="引用样式"><a href="#引用样式" class="headerlink" title="引用样式"></a>引用样式</h3><p>引用样式<br>default.html</p>
@@ -216,7 +228,13 @@
 <p>CSS</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#body</span> &#123;</span><br><span class="line">		<span class="attribute">background-color</span>: <span class="number">#ccc</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">	<span class="attribute">background-color</span>: green;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">	<span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">span</span> &#123;</span><br><span class="line">	<span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/css行内元素和块级元素.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/css行内元素和块级元素.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>行内元素和块级元素是可以相互转换的，元素也可以脱离文档流，在后面的文章里会有介绍。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过上面的学习我们知道了 CSS 是什么，并且知道了怎么在 HTML 中来写样式，了解了样式的优先级，明白了浏览器的默认样式和文档流。接下来会继续学习基于盒状模型并依赖 display 属性 + position 属性 + float 属性的传统布局。</p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
@@ -342,6 +360,23 @@
 
 
 
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: '',
+            repo: '',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
 
 
 
@@ -386,7 +421,7 @@
 
 </div>
 
-        <footer class="footer">
+        <!-- <footer class="footer">
     <div class="top">
         
 <p>
@@ -413,9 +448,9 @@
         </p>
     </div>
 </footer>
-
+ -->
     </main>
-    <!-- <div class="mask" id="mask"></div>
+    <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
@@ -464,7 +499,7 @@
 
 
 
- -->
+
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
 var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
