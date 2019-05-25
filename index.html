@@ -1,159 +1,597 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<head>
+    
 
-  
+    
 
-  <title>caozhenwei</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/bootstrap.css" >
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>caozhenwei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="caozhenwei 在 Github 上的个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="caozhenwei">
+<meta property="og:url" content="https://github.com/caozhenwei/index.html">
+<meta property="og:site_name" content="caozhenwei">
+<meta property="og:description" content="caozhenwei 在 Github 上的个人博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="caozhenwei">
+<meta name="twitter:description" content="caozhenwei 在 Github 上的个人博客">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
-  <body>
-    <header class="header-content">
-<div class="header">
-  <div class="blog-title">
-    <img class="logo" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/header_image_small.jpeg">
-    <a href="/" class="title">caozhenwei</a>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/header_image_small.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">caozhenwei</h5>
+          <a href="mailto:296614451@qq.com" title="296614451@qq.com" class="mail">296614451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect active">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/caozhenwei" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="navbar">
-    <ul class="menu">
-      
-        <li class="menu-item">
-          <a href="/" class="menu-item-link">Home</a>
-        </li>
-      
-        <li class="menu-item">
-          <a href="/archives" class="menu-item-link">Archives</a>
-        </li>
-      
-    </ul>
-  </nav>
-</div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">caozhenwei</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
 </header>
-    <main class="main">
-      <section class="posts">
-  
-    <article class="post">
-      <div class="post-title">
-        <a class="post-title-link" href="/2018/12/10/汇编-中断（10）/">汇编--中断（10）</a>
-      </div>
-      <div class="post-content">
-        <p>任何一个通用的 CPU ，比如 8086 都具备这样一种能力，检测从 CPU 内部或者外部发过来的一种信息，并且可以立即对收到的信息进行处理。这种信息就是我们常说的中断信息。从 CPU 内存产生的这种信息称为内中断，从 CPU 外部产生的这种信息称为外中断。</p>
-      </div>
-      <div class="post-meta">
-        <span class="post-time">2018-12-10</span>
-        <a class="read-more-link" href="/2018/12/10/汇编-中断（10）/">阅读更多</a>
-      </div>
-    </article>
-  
-    <article class="post">
-      <div class="post-title">
-        <a class="post-title-link" href="/2018/12/07/汇编-标志寄存器（9）/">汇编--标志寄存器（9）</a>
-      </div>
-      <div class="post-content">
-        <p>8086 CPU 内部有 14 个 16 位寄存器，前面已经已经学习了 AX、BX、CX、DX、CS、DS、SS、ES、SI、DI、IP、SP、BP 这 13 个寄存器，还差一个，这就是本篇要介绍的标志寄存器，简称 flag。</p>
-      </div>
-      <div class="post-meta">
-        <span class="post-time">2018-12-07</span>
-        <a class="read-more-link" href="/2018/12/07/汇编-标志寄存器（9）/">阅读更多</a>
-      </div>
-    </article>
-  
-    <article class="post">
-      <div class="post-title">
-        <a class="post-title-link" href="/2018/12/07/汇编-ret和call指令（8）/">汇编--ret和call指令（8）</a>
-      </div>
-      <div class="post-content">
-        <p>ret 和 call 指令都是转移指令，它们都修改 IP，或同时修改 CS 和 IP，经常用它们来共同完成子程序的设计</p>
-      </div>
-      <div class="post-meta">
-        <span class="post-time">2018-12-07</span>
-        <a class="read-more-link" href="/2018/12/07/汇编-ret和call指令（8）/">阅读更多</a>
-      </div>
-    </article>
-  
-    <article class="post">
-      <div class="post-title">
-        <a class="post-title-link" href="/2018/12/07/汇编-转移指令（7）/">汇编--转移指令（7）</a>
-      </div>
-      <div class="post-content">
-        <p>本篇主要介绍 8086CPU 的转移指令。</p>
-      </div>
-      <div class="post-meta">
-        <span class="post-time">2018-12-07</span>
-        <a class="read-more-link" href="/2018/12/07/汇编-转移指令（7）/">阅读更多</a>
-      </div>
-    </article>
-  
-    <article class="post">
-      <div class="post-title">
-        <a class="post-title-link" href="/2018/12/07/汇编-div、dup、offset（6）/">汇编--div、dup、offset（6）</a>
-      </div>
-      <div class="post-content">
-        <p>本次介绍指令要处理的数据长度，div 指定，dup 和 offset 操作符等相关知识。</p>
-      </div>
-      <div class="post-meta">
-        <span class="post-time">2018-12-07</span>
-        <a class="read-more-link" href="/2018/12/07/汇编-div、dup、offset（6）/">阅读更多</a>
-      </div>
-    </article>
-  
-    <article class="post">
-      <div class="post-title">
-        <a class="post-title-link" href="/2018/12/07/汇编-多个段的使用和寻址方式（5）/">汇编--多个段的使用和寻址方式（5）</a>
-      </div>
-      <div class="post-content">
-        <p>本篇介绍在汇编中使用多个段编写代码以及更多的寻址方式。</p>
-      </div>
-      <div class="post-meta">
-        <span class="post-time">2018-12-07</span>
-        <a class="read-more-link" href="/2018/12/07/汇编-多个段的使用和寻址方式（5）/">阅读更多</a>
-      </div>
-    </article>
-  
-    <article class="post">
-      <div class="post-title">
-        <a class="post-title-link" href="/2018/12/06/汇编-第一个程序（4）/">汇编--第一个程序（4）</a>
-      </div>
-      <div class="post-content">
-        <p>前面学习了 8086 CPU 通过从 CS：IP 指向的内存取指令并执行，内存中数据的方法为 DS：[xxx]，以及栈的相关知识。从这里开始，我们正式开始编写汇编代码，来体验下真正和 CPU 寄存器打交道的乐趣。</p>
-      </div>
-      <div class="post-meta">
-        <span class="post-time">2018-12-06</span>
-        <a class="read-more-link" href="/2018/12/06/汇编-第一个程序（4）/">阅读更多</a>
-      </div>
-    </article>
-  
-    <article class="post">
-      <div class="post-title">
-        <a class="post-title-link" href="/2018/12/05/汇编-内存访问（3）/">汇编--内存访问（3）</a>
-      </div>
-      <div class="post-content">
-        <h4 id="内存中字的存储"><a href="#内存中字的存储" class="headerlink" title="内存中字的存储"></a>内存中字的存储</h4><p>8086 的寄存器是 16 位的，怎么存储一个字呢？很简单，因为一个字为 2 个字节，那么高 8 位存放高位字节，低 8 位存储低位字节就行了。</p>
-      </div>
-      <div class="post-meta">
-        <span class="post-time">2018-12-05</span>
-        <a class="read-more-link" href="/2018/12/05/汇编-内存访问（3）/">阅读更多</a>
-      </div>
-    </article>
-  
-</section>
+<header class="content-header index-header">
 
-  <nav class="page-nav">
+    <div class="container fade-scale">
+        <h1 class="title">caozhenwei</h1>
+        <h5 class="subtitle">
+            
+                
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+<div class="container body-wrap">
+
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-汇编-中断（10）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-10 10:55:47" datetime="2018-12-10T02:55:47.000Z"  itemprop="datePublished">2018-12-10</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/10/汇编-中断（10）/">汇编--中断（10）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        任何一个通用的 CPU ，比如 8086 都具备这样一种能力，检测从 CPU 内部或者外部发过来的一种信息，并且可以立即对收到的信息进行处理。这种信息就是我们常说的中断信息。从 CPU 内存产生的这种信息称为内中断，从 CPU 外部产生的这种信息称为外中断。
+    
+
+        <a href="/2018/12/10/汇编-中断（10）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-汇编-标志寄存器（9）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-07 17:24:08" datetime="2018-12-07T09:24:08.000Z"  itemprop="datePublished">2018-12-07</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/07/汇编-标志寄存器（9）/">汇编--标志寄存器（9）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        8086 CPU 内部有 14 个 16 位寄存器，前面已经已经学习了 AX、BX、CX、DX、CS、DS、SS、ES、SI、DI、IP、SP、BP 这 13 个寄存器，还差一个，这就是本篇要介绍的标志寄存器，简称 flag。
+    
+
+        <a href="/2018/12/07/汇编-标志寄存器（9）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-汇编-ret和call指令（8）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-07 16:25:42" datetime="2018-12-07T08:25:42.000Z"  itemprop="datePublished">2018-12-07</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/07/汇编-ret和call指令（8）/">汇编--ret和call指令（8）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        ret 和 call 指令都是转移指令，它们都修改 IP，或同时修改 CS 和 IP，经常用它们来共同完成子程序的设计
+    
+
+        <a href="/2018/12/07/汇编-ret和call指令（8）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-汇编-转移指令（7）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-07 14:30:18" datetime="2018-12-07T06:30:18.000Z"  itemprop="datePublished">2018-12-07</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/07/汇编-转移指令（7）/">汇编--转移指令（7）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        本篇主要介绍 8086CPU 的转移指令。
+    
+
+        <a href="/2018/12/07/汇编-转移指令（7）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-汇编-div、dup、offset（6）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-07 14:26:32" datetime="2018-12-07T06:26:32.000Z"  itemprop="datePublished">2018-12-07</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/07/汇编-div、dup、offset（6）/">汇编--div、dup、offset（6）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        本次介绍指令要处理的数据长度，div 指定，dup 和 offset 操作符等相关知识。
+    
+
+        <a href="/2018/12/07/汇编-div、dup、offset（6）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-汇编-多个段的使用和寻址方式（5）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-07 10:42:38" datetime="2018-12-07T02:42:38.000Z"  itemprop="datePublished">2018-12-07</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/07/汇编-多个段的使用和寻址方式（5）/">汇编--多个段的使用和寻址方式（5）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        本篇介绍在汇编中使用多个段编写代码以及更多的寻址方式。
+    
+
+        <a href="/2018/12/07/汇编-多个段的使用和寻址方式（5）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-汇编-第一个程序（4）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-06 10:43:04" datetime="2018-12-06T02:43:04.000Z"  itemprop="datePublished">2018-12-06</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/06/汇编-第一个程序（4）/">汇编--第一个程序（4）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前面学习了 8086 CPU 通过从 CS：IP 指向的内存取指令并执行，内存中数据的方法为 DS：[xxx]，以及栈的相关知识。从这里开始，我们正式开始编写汇编代码，来体验下真正和 CPU 寄存器打交道的乐趣。
+    
+
+        <a href="/2018/12/06/汇编-第一个程序（4）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-汇编-内存访问（3）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-05 10:49:00" datetime="2018-12-05T02:49:00.000Z"  itemprop="datePublished">2018-12-05</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/05/汇编-内存访问（3）/">汇编--内存访问（3）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        内存中字的存储8086 的寄存器是 16 位的，怎么存储一个字呢？很简单，因为一个字为 2 个字节，那么高 8 位存放高位字节，低 8 位存储低位字节就行了。
+    
+
+        <a href="/2018/12/05/汇编-内存访问（3）/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+    </ul>
+
+    
+<nav id="page-nav">
+    <div class="inner">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
-  </nav>
+    </div>
+</nav>
 
-<footer id="footer">
-    <p> Powered_by
-     <a href="http://hexo.io/" target="_blank">Hexo</a>
-     and 
-     <a href="https://github.com/caozhenwei/zw_theme" target="_blank">Hexo-theme-zw_theme  
-     </a> 
-      , copyright &copy; 2018 - 2019 caozhenwei All Rights Reserved.
-    </p>
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>caozhenwei &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
 </footer>
+
     </main>
-  </body>
+    <!-- <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/caozhenwei/&title=caozhenwei&pic=https://github.com/caozhenwei/img/header_image_small.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/caozhenwei/&title=caozhenwei&source=caozhenwei 在 Github 上的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/caozhenwei/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=caozhenwei&url=https://github.com/caozhenwei/&via=https://github.com/caozhenwei" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/caozhenwei/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/caozhenwei/" alt="微信分享二维码">
+</div>
+
+
+
+ -->
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'caozhenwei';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'caozhenwei';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
 </html>

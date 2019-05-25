@@ -1,56 +1,175 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<head>
+    
 
-  
-  <script src="/js/script.js"></script>
-  
+    
 
-  <title>caozhenwei</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/bootstrap.css" >
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>CSS入门学习 | caozhenwei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="CSS">
+    <meta name="description" content="CSS是什么CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。根据层叠样式表来理解下 CSS ，样式表好理解，就是有样式的“表”，那层叠指的是什么呢？层叠指的是一层一层叠加的效果，我们可以在多个地方来设置某个元素的样式，这个元素的最终显示结果是它们共同叠加的效果。叠加效果是有相关规则的，比如谁的优先级更高、谁会覆盖谁等，下面会有相">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS入门学习">
+<meta property="og:url" content="https://github.com/caozhenwei/2018/04/11/css-学习/index.html">
+<meta property="og:site_name" content="caozhenwei">
+<meta property="og:description" content="CSS是什么CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。根据层叠样式表来理解下 CSS ，样式表好理解，就是有样式的“表”，那层叠指的是什么呢？层叠指的是一层一层叠加的效果，我们可以在多个地方来设置某个元素的样式，这个元素的最终显示结果是它们共同叠加的效果。叠加效果是有相关规则的，比如谁的优先级更高、谁会覆盖谁等，下面会有相">
+<meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/默认样式.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/设置颜色样式.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/css行内元素和块级元素.jpg">
+<meta property="og:updated_time" content="2018-07-06T02:50:07.341Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS入门学习">
+<meta name="twitter:description" content="CSS是什么CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。根据层叠样式表来理解下 CSS ，样式表好理解，就是有样式的“表”，那层叠指的是什么呢？层叠指的是一层一层叠加的效果，我们可以在多个地方来设置某个元素的样式，这个元素的最终显示结果是它们共同叠加的效果。叠加效果是有相关规则的，比如谁的优先级更高、谁会覆盖谁等，下面会有相">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/CSS入门学习/默认样式.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
-  <body>
-    <header class="header-content">
-<div class="header">
-  <div class="blog-title">
-    <img class="logo" src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/header_image_small.jpeg">
-    <a href="/" class="title">caozhenwei</a>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/header_image_small.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">caozhenwei</h5>
+          <a href="mailto:296614451@qq.com" title="296614451@qq.com" class="mail">296614451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/caozhenwei" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="navbar">
-    <ul class="menu">
-      
-        <li class="menu-item">
-          <a href="/" class="menu-item-link">Home</a>
-        </li>
-      
-        <li class="menu-item">
-          <a href="/archives" class="menu-item-link">Archives</a>
-        </li>
-      
-    </ul>
-  </nav>
-</div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CSS入门学习</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
 </header>
-    <main class="main">
-      <div class="content">
-  <article class="article">
-    <div class="article-detail">
-      <!-- 标题 -->
-      <div class="article-title">
-        <h2 class="title">CSS入门学习</h2>
-      </div>
+<header class="content-header post-header">
 
-      <!-- 时间 -->
-      <div class="article-meta">
-        <span class="article-time">2018-04-11</span>
-      </div>
+    <div class="container fade-scale">
+        <h1 class="title">CSS入门学习</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-11T08:38:20.000Z" itemprop="datePublished" class="page-time">
+  2018-04-11
+</time>
 
-      <!-- 文章内容 -->
-      <div class="article-content">
-        <h2 id="CSS是什么"><a href="#CSS是什么" class="headerlink" title="CSS是什么"></a>CSS是什么</h2><p>CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。根据层叠样式表来理解下 CSS ，样式表好理解，就是有样式的“表”，那层叠指的是什么呢？层叠指的是一层一层叠加的效果，我们可以在多个地方来设置某个元素的样式，这个元素的最终显示结果是它们共同叠加的效果。叠加效果是有相关规则的，比如谁的优先级更高、谁会覆盖谁等，下面会有相关介绍。</p>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS是什么"><span class="post-toc-number">1.</span> <span class="post-toc-text">CSS是什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS样式怎么来写"><span class="post-toc-number">2.</span> <span class="post-toc-text">CSS样式怎么来写</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#属性样式"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">属性样式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内部样式"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">内部样式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引用样式"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">引用样式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#样式的优先级"><span class="post-toc-number">3.</span> <span class="post-toc-text">样式的优先级</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#浏览器的默认样式"><span class="post-toc-number">4.</span> <span class="post-toc-text">浏览器的默认样式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS标准文档流"><span class="post-toc-number">5.</span> <span class="post-toc-text">CSS标准文档流</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#块级元素"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">块级元素</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#行内元素"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">行内元素</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">6.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">7.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-css-学习"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CSS入门学习</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-11 16:38:20" datetime="2018-04-11T08:38:20.000Z"  itemprop="datePublished">2018-04-11</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="CSS是什么"><a href="#CSS是什么" class="headerlink" title="CSS是什么"></a>CSS是什么</h2><p>CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。根据层叠样式表来理解下 CSS ，样式表好理解，就是有样式的“表”，那层叠指的是什么呢？层叠指的是一层一层叠加的效果，我们可以在多个地方来设置某个元素的样式，这个元素的最终显示结果是它们共同叠加的效果。叠加效果是有相关规则的，比如谁的优先级更高、谁会覆盖谁等，下面会有相关介绍。</p>
 <a id="more"></a>
 <p>CSS 是用来写样式的，但是写几个元素放在浏览器里就有样式了，这是什么鬼？例子如下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">id</span>=<span class="string">"body"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">H1</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">H1</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">H2</span>&gt;</span>bbb<span class="tag">&lt;/<span class="name">H2</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>ccc<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -104,30 +223,304 @@
 <li><a href="http://www.w3school.com.cn" target="_blank" rel="noopener">w3school</a></li>
 </ul>
 
-      </div>
-    </div>
-  </article>
+        </div>
 
-  <!-- 目录 -->
-  <aside id="toc-sidebar">
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">目录</strong>
+        <blockquote class="post-copyright">
     
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS是什么"><span class="nav-text">CSS是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS样式怎么来写"><span class="nav-text">CSS样式怎么来写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性样式"><span class="nav-text">属性样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部样式"><span class="nav-text">内部样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用样式"><span class="nav-text">引用样式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样式的优先级"><span class="nav-text">样式的优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器的默认样式"><span class="nav-text">浏览器的默认样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS标准文档流"><span class="nav-text">CSS标准文档流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#块级元素"><span class="nav-text">块级元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行内元素"><span class="nav-text">行内元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-text">参考链接</span></a></li></ol>
-    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-07-06T02:50:07.341Z" itemprop="dateUpdated">2018-07-06 10:50:07</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/04/11/css-学习/" target="_blank" rel="external">https://github.com/caozhenwei/2018/04/11/css-学习/</a>
+        
     </div>
-  </aside>
+    
+    <footer>
+        <a href="https://github.com/caozhenwei">
+            <img src="/img/header_image_small.jpg" alt="caozhenwei">
+            caozhenwei
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
 </div>
 
-<footer id="footer">
-    <p> Powered_by
-     <a href="http://hexo.io/" target="_blank">Hexo</a>
-     and 
-     <a href="https://github.com/caozhenwei/zw_theme" target="_blank">Hexo-theme-zw_theme  
-     </a> 
-      , copyright &copy; 2018 - 2019 caozhenwei All Rights Reserved.
-    </p>
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/caozhenwei/2018/04/11/css-学习/&title=《CSS入门学习》 — caozhenwei&pic=https://github.com/caozhenwei/img/header_image_small.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/caozhenwei/2018/04/11/css-学习/&title=《CSS入门学习》 — caozhenwei&source=CSS是什么CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。根据层叠样式表来理解下 ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/caozhenwei/2018/04/11/css-学习/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CSS入门学习》 — caozhenwei&url=https://github.com/caozhenwei/2018/04/11/css-学习/&via=https://github.com/caozhenwei" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/caozhenwei/2018/04/11/css-学习/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/20/CSS学习之盒子模型/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">CSS学习之盒子模型</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/19/常用-git-命令总结/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">常用 git 命令总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>caozhenwei &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
 </footer>
+
     </main>
-  </body>
+    <!-- <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/caozhenwei/2018/04/11/css-学习/&title=《CSS入门学习》 — caozhenwei&pic=https://github.com/caozhenwei/img/header_image_small.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/caozhenwei/2018/04/11/css-学习/&title=《CSS入门学习》 — caozhenwei&source=CSS是什么CSS 指的是层叠样式表 (Cascading Style Sheets)，说白了就是来定义 HTML 元素的样式的。根据层叠样式表来理解下 ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/caozhenwei/2018/04/11/css-学习/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CSS入门学习》 — caozhenwei&url=https://github.com/caozhenwei/2018/04/11/css-学习/&via=https://github.com/caozhenwei" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/caozhenwei/2018/04/11/css-学习/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/caozhenwei/2018/04/11/css-学习/" alt="微信分享二维码">
+</div>
+
+
+
+ -->
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'caozhenwei';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'caozhenwei';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
 </html>
