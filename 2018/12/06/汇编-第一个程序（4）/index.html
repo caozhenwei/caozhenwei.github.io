@@ -105,7 +105,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -210,7 +210,13 @@
 <p>段前缀应用举例：将内存 ffff:0 ~ ffff:b 中的内容复制到 0020:0 ~ 0020:b 中，代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">;将内存 ffff:0 ~ ffff:b 中的内容复制到 0020:0 ~ 0020:b 中</span><br><span class="line">assume cs:code </span><br><span class="line">code segment</span><br><span class="line">	mov ax,0ffffh</span><br><span class="line">	mov ds,ax</span><br><span class="line">	mov ax,0020h</span><br><span class="line">	mov es,ax</span><br><span class="line">	mov bx,0</span><br><span class="line">	mov cx,12</span><br><span class="line"></span><br><span class="line">s:	mov dl,[bx]</span><br><span class="line">	mov es:[bx],dl</span><br><span class="line">	inc bx</span><br><span class="line">	loop s </span><br><span class="line">	</span><br><span class="line">	mov ax,4c00h</span><br><span class="line">	int 21H</span><br><span class="line">code ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>编译执行完成后用 debug 查看内存情况，发现程序正确执行，把 ffff:0 ~ ffff:b 中的内容复制到了 0020:0 ~ 0020:b 中。</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/4/1.png" alt="1"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/4/1.png" alt="1" title="">
+                </div>
+                <div class="image-caption">1</div>
+            </figure>
 <h4 id="在程序中使用数据"><a href="#在程序中使用数据" class="headerlink" title="在程序中使用数据"></a>在程序中使用数据</h4><p>之前的列子我们用到的数据都是在寄存器或者在内存中，比如计算 2 的 3 次方，数据直接放在寄存器中，把某段内存中的数值累加等。比如要计算已知的 n 个数的和该怎么做呢？当然可以把这个 n 个数放到内存中，累加计算其和，但是把这 n 个数放在内存中的什么地方呢？随便拿一块内存来存放数据操作系统允许你这样干吗？其实我们有两种方法取得一块合理的内存来使用，一是在操作系统装载程序的时候为程序分配内存，另一种方法是在程序中向操作系统申请内存。这里我们只讨论在操作系统装载程序为程序分配内存的情况。就像高级语言定义变量一样，汇编也可以定义一个段来存储数据。我们可以使用 db、dw、dd 来定义，它们的具体意义如下：</p>
 <ul>
 <li>db 定义字节类型变量，一个字节数据占1个字节单元，读完一个，偏移量加 1</li>
@@ -220,11 +226,23 @@
 <p>例如我们要计算 0123H,0456H,0789H,0abcH,0defH,0001H,0002H,0003H 这 8 个数据的和，结果存在 ax 中，代码可如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line">code segment</span><br><span class="line">	dw 0001H,0002H,0003H,0004H,0005H,0006H,0007H,0008H</span><br><span class="line">	mov bx,0</span><br><span class="line">	mov ax,0</span><br><span class="line">	mov cx,8</span><br><span class="line">s:  add ax,cs:[bx]</span><br><span class="line">	add bx,2</span><br><span class="line">	loop s </span><br><span class="line"></span><br><span class="line">	mov ax,4c00h</span><br><span class="line">	int 21H</span><br><span class="line">code ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>上面的代码编译链接后用 debug 查看，显示如下：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/4/2.png" alt="2"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/4/2.png" alt="2" title="">
+                </div>
+                <div class="image-caption">2</div>
+            </figure>
 <p>发现第一条指令并不是我们真正需要 CPU 执行的指令，真的指令从第 17 个字节开始，前面的 16 个字节其实是我们定义的 8 个数据。要想让 CPU 执行指令，在上面的代码中可以加入 start 标号，代码修改为下面的样子：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:code</span><br><span class="line">code segment</span><br><span class="line">	dw 0001H,0002H,0003H,0004H,0005H,0006H,0007H,0008H</span><br><span class="line">start:	mov bx,0</span><br><span class="line">		mov ax,0</span><br><span class="line">		mov cx,8</span><br><span class="line">    s:	add ax,cs:[bx]</span><br><span class="line">		add bx,2</span><br><span class="line">		loop s </span><br><span class="line"></span><br><span class="line">		mov ax,4c00h</span><br><span class="line">		int 21H</span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
 <p>这时候发现 IP 为 10H 才是我们希望 CPU 执行的指令</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/4/3.png" alt="3"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/4/3.png" alt="3" title="">
+                </div>
+                <div class="image-caption">3</div>
+            </figure>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过本次学习，我们编写了第一个汇编程序，知道了常用的伪指令：assume、segment ends、end，明白了 [bx] 和 loop 的用法，学习了段前缀及其用法，掌握了在程序中使用数据的方法，并且清楚了 start 标号的用途，收获颇丰，继续努力！</p>
 
         </div>
@@ -234,7 +252,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-12-06T02:48:14.399Z" itemprop="dateUpdated">2018-12-06 10:48:14</time>
+    最終更新：<time datetime="2018-12-06T02:48:14.399Z" itemprop="dateUpdated">2018-12-06 10:48:14</time>
 </span><br>
 
 
@@ -427,7 +445,7 @@
 
         <p>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">

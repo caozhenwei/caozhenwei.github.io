@@ -103,7 +103,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -180,7 +180,13 @@
 </ul>
 <p>通过在 ExampleApp.html 的 js 方法中创建一个隐藏的 iframe 标签，设置其 src 为一个自定义的 URL，触发 webview 的代理方法，发现是自定义的 URL，就可以让它做我们想让它做的事情了。</p>
 <p>总体流程</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/iOS%20中%20native%20和%20JavaScript%20的交互原理/1.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/iOS%20中%20native%20和%20JavaScript%20的交互原理/1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>本文以尽可能按照代码的执行顺序来分析 WebViewJavascriptBridge 源代码。那现在正式开始，native 创建好 webView 后，来 load ExampleApp.html。先来看看 ExampleApp.html，其中主要的是 script 标签里面的代码，代码如下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    window.onerror = function(err) &#123;</span></span><br><span class="line"><span class="undefined">        log('window.onerror: ' + err)</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">	</span></span><br><span class="line"><span class="undefined">    function setupWebViewJavascriptBridge(callback) &#123;</span></span><br><span class="line"><span class="undefined">        if (window.WebViewJavascriptBridge) &#123;</span></span><br><span class="line"><span class="undefined">        	 //alert("0");</span></span><br><span class="line"><span class="undefined">            return callback(WebViewJavascriptBridge);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        if (window.WVJBCallbacks) &#123;</span></span><br><span class="line"><span class="undefined">            //alert("1");</span></span><br><span class="line"><span class="undefined">            return window.WVJBCallbacks.push(callback);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        window.WVJBCallbacks = [callback];</span></span><br><span class="line"><span class="undefined">        var WVJBIframe = document.createElement('iframe');</span></span><br><span class="line"><span class="undefined">        WVJBIframe.style.display = 'none';</span></span><br><span class="line"><span class="undefined">        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';</span></span><br><span class="line"><span class="undefined">        document.documentElement.appendChild(WVJBIframe);</span></span><br><span class="line"><span class="undefined">        setTimeout(function()&#123;</span></span><br><span class="line"><span class="undefined">         document.documentElement.removeChild(WVJBIframe) </span></span><br><span class="line"><span class="undefined">         &#125;, 0)</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">	</span></span><br><span class="line"><span class="undefined">    setupWebViewJavascriptBridge(function(bridge) &#123;</span></span><br><span class="line"><span class="undefined">        var uniqueId = 1</span></span><br><span class="line"><span class="undefined">        function log(message, data) &#123;</span></span><br><span class="line"><span class="undefined">            var log = document.getElementById('log')</span></span><br><span class="line"><span class="undefined">            var el = document.createElement('div')</span></span><br><span class="line"><span class="undefined">            el.className = 'logLine'</span></span><br><span class="line"><span class="xml">            el.innerHTML = uniqueId++ + '. ' + message + ':<span class="tag">&lt;<span class="name">br</span>/&gt;</span>' + JSON.stringify(data)</span></span><br><span class="line"><span class="undefined">            if (log.children.length) &#123; log.insertBefore(el, log.children[0]) &#125;</span></span><br><span class="line"><span class="undefined">            else &#123; log.appendChild(el) &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">	</span></span><br><span class="line"><span class="undefined">        //alert("在exampleApp setupWebViewJavascriptBridge 中");</span></span><br><span class="line"><span class="undefined">        bridge.registerHandler('testJavascriptHandler', function(data, responseCallback) &#123;</span></span><br><span class="line"><span class="undefined">            log('ObjC called testJavascriptHandler with', data)</span></span><br><span class="line"><span class="undefined">            var responseData = &#123; 'oc调用js后，js给oc的回调':'hello' &#125;</span></span><br><span class="line"><span class="undefined">            log('JS responding with', responseData)</span></span><br><span class="line"><span class="undefined">            responseCallback(responseData)</span></span><br><span class="line"><span class="undefined">        &#125;)</span></span><br><span class="line"><span class="undefined">	</span></span><br><span class="line"><span class="undefined">        document.body.appendChild(document.createElement('br'))</span></span><br><span class="line"><span class="undefined">	</span></span><br><span class="line"><span class="undefined">        var callbackButton = document.getElementById('buttons').appendChild(document.createElement('button'))</span></span><br><span class="line"><span class="undefined">        callbackButton.innerHTML = '测试 JS 调用 OC 函数'</span></span><br><span class="line"><span class="undefined">        callbackButton.onclick = function(e) &#123;</span></span><br><span class="line"><span class="undefined">            e.preventDefault()</span></span><br><span class="line"><span class="undefined">            log('JS calling handler "testObjcCallback"')</span></span><br><span class="line"><span class="undefined">            bridge.callHandler('testObjcCallback', &#123;'foo': 'bar'&#125;, function(response) &#123;</span></span><br><span class="line"><span class="undefined">                log('JS 得到的回应数据：', response)</span></span><br><span class="line"><span class="undefined">            &#125;)</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>对 Objective-C 程序猿来说猛的一眼看不懂这是什么，其实就是一个简单的 JavaScript 函数调用，只不过是把另一个函数当做参数传给了 setupWebViewJavascriptBridge 函数。简化后如下：</p>
@@ -231,7 +237,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-05-25T06:14:15.461Z" itemprop="dateUpdated">2019-05-25 14:14:15</time>
+    最終更新：<time datetime="2019-05-25T06:14:15.461Z" itemprop="dateUpdated">2019-05-25 14:14:15</time>
 </span><br>
 
 
@@ -417,7 +423,7 @@
 
         <p>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">

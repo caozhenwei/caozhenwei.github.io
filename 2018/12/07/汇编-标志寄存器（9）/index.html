@@ -105,7 +105,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -177,9 +177,21 @@
 <li>用来控制 CPU 的相关工作方式</li>
 </ul>
 <p>8086CPU 的 flag 寄存器结果如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/1.png" alt="1"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/1.png" alt="1" title="">
+                </div>
+                <div class="image-caption">1</div>
+            </figure>
 <p>下图是各个标志位的简介（图片来自百度百科）：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/2.png" alt="2"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/2.png" alt="2" title="">
+                </div>
+                <div class="image-caption">2</div>
+            </figure>
 <h4 id="CF"><a href="#CF" class="headerlink" title="CF"></a>CF</h4><p>进位标志，在无符号数进行运算的时候，它记录了运算结果的的最高位进位或借位的情况。</p>
 <p>adc 是带进位加法指令，利用了 CF 上的进位值</p>
 <p>指令格式： adc 操作对象1，操作对象2</p>
@@ -272,8 +284,13 @@
 <p>popf 是将标志寄存器的值出栈</p>
 <p>有了这两个指令就能和上篇中执行子程序前将标志寄存器的内容压栈，等待子程序执行完后再将栈中的数据恢复到标志寄存器中。</p>
 <h4 id="debug-中标志寄存器的表示方法"><a href="#debug-中标志寄存器的表示方法" class="headerlink" title="debug 中标志寄存器的表示方法"></a>debug 中标志寄存器的表示方法</h4><p>标志寄存器在 debug 中的表示不像其它寄存器那么直观，它是按位展示的，在 9 个标志位中 TF 没有表示出来，其它 8 个位的表示如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/3.png" alt="3"></p>
-
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/9/3.png" alt="3" title="">
+                </div>
+                <div class="image-caption">3</div>
+            </figure>
         </div>
 
         <blockquote class="post-copyright">
@@ -281,7 +298,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-12-08T06:29:39.068Z" itemprop="dateUpdated">2018-12-08 14:29:39</time>
+    最終更新：<time datetime="2018-12-08T06:29:39.068Z" itemprop="dateUpdated">2018-12-08 14:29:39</time>
 </span><br>
 
 
@@ -474,7 +491,7 @@
 
         <p>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">

@@ -107,7 +107,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -185,10 +185,22 @@
 </ul>
 <p>下面的程序 ret 指令执行后，CS：IP 执行代码段的第一条指令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg,ss:stack</span><br><span class="line">stack segment</span><br><span class="line">	db 16 dup (0)</span><br><span class="line">stack ends</span><br><span class="line">codesg segment</span><br><span class="line">			mov ax,4c00h</span><br><span class="line">			int 21h</span><br><span class="line">	start:  mov ax,stack</span><br><span class="line">			mov ss,ax</span><br><span class="line">			mov sp,16</span><br><span class="line">			mov ax,0</span><br><span class="line">			push ax</span><br><span class="line">			mov bx,0</span><br><span class="line">			ret	</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
-<p>在 debug 中可以清楚的看到当执行完 ret 指令后，CS：IP 指向了程序的第一条指令。<br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/1.png" alt="1"></p>
+<p>在 debug 中可以清楚的看到当执行完 ret 指令后，CS：IP 指向了程序的第一条指令。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/1.png" alt="1" title="">
+                </div>
+                <div class="image-caption">1</div>
+            </figure></p>
 <p>下面的程序 retf 指令执行后，CS：IP 执行代码段的第一条指令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg,ss:stack</span><br><span class="line">stack segment</span><br><span class="line">	db 16 dup (0)</span><br><span class="line">stack ends</span><br><span class="line">codesg segment</span><br><span class="line">			mov ax,4c00h</span><br><span class="line">			int 21h</span><br><span class="line">	start:  mov ax,stack</span><br><span class="line">			mov ss,ax</span><br><span class="line">			mov sp,16</span><br><span class="line">			mov ax,0</span><br><span class="line">			push cs</span><br><span class="line">			push ax</span><br><span class="line">			mov bx,0</span><br><span class="line">			retf	</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
-<p>在 debug 中可以清楚的看到当执行完 retf 指令后，CS：IP 指向了程序的第一条指令。<br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/2.png" alt="2"></p>
+<p>在 debug 中可以清楚的看到当执行完 retf 指令后，CS：IP 指向了程序的第一条指令。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/2.png" alt="2" title="">
+                </div>
+                <div class="image-caption">2</div>
+            </figure></p>
 <h4 id="call-指令"><a href="#call-指令" class="headerlink" title="call 指令"></a>call 指令</h4><p>执行 call 指令时，进行两步操作：</p>
 <ul>
 <li>将当前的 IP 或 CS 和 IP 压入栈中</li>
@@ -224,7 +236,13 @@
 <p>比如下面的代码：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">	mov sp,10H</span><br><span class="line">	mov ax,0123H</span><br><span class="line">	mov ds:[0],ax</span><br><span class="line">	call word ptr ds:[0]</span><br><span class="line"></span><br><span class="line">	mov ax,4c00h</span><br><span class="line">	int 21h</span><br><span class="line">codesg ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>在执行完 “call word ptr 内存单元” 后相当于执行了 “push ip” 和 “jmp word ptr 内存单元地址” 两条指令，push 后栈顶要向上移动 2 个单元，即 sp 中的值减 2（10H - 2 = 0EH）。“jmp word ptr 内存单元地址” 相当于用内存单元中的值去修改 IP，执行后 IP 为 0123H（“jmp word ptr 内存单元地址” 忘了的话返回前面的文章复习一下）。在 debug 中可以清楚的看到结果。</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/3.png" alt="3"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/3.png" alt="3" title="">
+                </div>
+                <div class="image-caption">3</div>
+            </figure>
 <ol>
 <li>call dword ptr 内存单元地址</li>
 </ol>
@@ -237,11 +255,23 @@
 <p>例如下面的代码</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">	mov sp,10H</span><br><span class="line">	mov ax,0123H</span><br><span class="line">	mov ds:[0],ax</span><br><span class="line">	mov word ptr ds:[2],0</span><br><span class="line">	call dword ptr ds:[0]</span><br><span class="line"></span><br><span class="line">	mov ax,4c00H </span><br><span class="line">	int 21H</span><br><span class="line">codesg ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>执行 “call dword ptr ds:[0]” 后，cs 的值为 0 ，ip 为 0123H，sp 为 0ch，在 debug 中显示如下：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/4.png" alt="4"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/4.png" alt="4" title="">
+                </div>
+                <div class="image-caption">4</div>
+            </figure>
 <h4 id="call-和-ret-的配合使用"><a href="#call-和-ret-的配合使用" class="headerlink" title="call 和 ret 的配合使用"></a>call 和 ret 的配合使用</h4><p>我们知道使用 call 指令的时候会先进行入栈操作，然后再跳到标号处去执行程序，ret 是用栈中的数据去修改 IP 或 CS 和 IP 来达到控制 CPU 执行指令的目的，这样就可以用 call 和 ret 指令来实现调用子程序的目的。例如下面的程序是调用子程序来实现 2 的 3 次方并将结果存放到 bx 中：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">	mov ax,1</span><br><span class="line">	mov cx,3</span><br><span class="line">	call s </span><br><span class="line">	mov bx,ax</span><br><span class="line">	mov ax,4c00h</span><br><span class="line">	int 21H</span><br><span class="line">s: add ax,ax</span><br><span class="line">	loop s</span><br><span class="line">	ret</span><br><span class="line">codesg ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>执行完后，我们看到 bx 中内容为 8 ，是我们希望得到的结果，在 debug 中显示如下：</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/5.png" alt="5"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/8/5.png" alt="5" title="">
+                </div>
+                <div class="image-caption">5</div>
+            </figure>
 <h4 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h4><p>上面的程序中我们没有向子程序中传递参数，那怎么实现向子程序传递参数呢？我们可以用一个寄存器来传递，即调用者将要传递的参数放到某个合法的寄存器中，子程序执行的时候来修改这个寄存器，这样就实现了传递参数并返回的功能。那么要传递一堆参数给子程序该怎么办呢？其实可以把这堆参数放到内存里，寄存器只保留这个内存的首部地址即可。要是调用者和子程序都使用了相同的寄存器，这岂不是混乱了？一般的做法是在调用子程序的时候把寄存器的值都入栈，等到子程序返回时再把出栈来恢复主程序寄存器的值。</p>
 
         </div>
@@ -251,7 +281,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-12-07T08:32:39.763Z" itemprop="dateUpdated">2018-12-07 16:32:39</time>
+    最終更新：<time datetime="2018-12-07T08:32:39.763Z" itemprop="dateUpdated">2018-12-07 16:32:39</time>
 </span><br>
 
 
@@ -444,7 +474,7 @@
 
         <p>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">

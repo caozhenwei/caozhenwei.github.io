@@ -105,7 +105,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -196,11 +196,23 @@
 <p>例如下面的程序:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">	start:  mov ax,0			;长度为3</span><br><span class="line">			jmp short s 		;长度为2</span><br><span class="line">			add ax,1			;长度为3</span><br><span class="line">        s:  inc ax			    ;长度为1	</span><br><span class="line">			mov ax,4c00h</span><br><span class="line">			int 21H	</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
 <p>当程序执行完后 ax 中的内容为 1 ，因为执行 jmp short s 后跳过了 add ax，1。从 debug （下图所示）中可以清楚的看到 jmp short s 直接由编译器编译成了 jmp 0008。来验证一下上面的计算方法 “8 位位移 = “标号”处的地址 - jmp 指令后的第一个字节的地址”，标号处的偏移地址为 8（3+2+3） ，jmp 指令后的第一个字节的地址为 5（3+2），即 8 位位移为 3，也就是下图中 jmp 处对应的机器码 EB03 中的 03。</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/6/3.png" alt="3"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/6/3.png" alt="3" title="">
+                </div>
+                <div class="image-caption">3</div>
+            </figure>
 <p>我们在上面的 jmp 指令前后各加一条指令再来验证下，代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">	start:  mov ax,0			;长度为3</span><br><span class="line">			mov bx,0			;长度为3</span><br><span class="line">			jmp short s 		;长度为2</span><br><span class="line">			add ax,1			;长度为3</span><br><span class="line">			add ax,1			;长度为3</span><br><span class="line">        s:  inc ax			    ;长度为1	</span><br><span class="line">			mov ax,4c00h</span><br><span class="line">			int 21H	</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
 <p>标号处的偏移地址为 14，jmp 指令后的第一个字节的地址为 8，则 8 位位移为 6。如下图所示。</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/6/4.png" alt="4"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/6/4.png" alt="4" title="">
+                </div>
+                <div class="image-caption">4</div>
+            </figure>
 <p>“jmp near ptr 标号” 和 “jmp short 标号” 的功能相近，实现的段内近转移，它的功能为：</p>
 <ul>
 <li>16 位位移 = “标号”处的地址 - jmp 指令后的第一个字节的地址</li>
@@ -216,7 +228,13 @@
 <p>far ptr 表明了指令用标号段的段地址和偏移地址来同时修改 CS 和 IP。代码如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">	start:  mov ax,0</span><br><span class="line">			mov bx,0</span><br><span class="line">			jmp far ptr s </span><br><span class="line">			db 256 dup (0)</span><br><span class="line">        s:  add ax,1</span><br><span class="line">			inc ax	</span><br><span class="line">			mov ax,4c00h</span><br><span class="line">			int 21H	</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
 <p>在 debug 中能够清楚的看到 jmp far ptr s 要跳转的段地址和偏移地址</p>
-<p><img src="https://github.com/caozhenwei/blog_pic/raw/master/asm/6/5.png" alt="5"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/caozhenwei/blog_pic/raw/master/asm/6/5.png" alt="5" title="">
+                </div>
+                <div class="image-caption">5</div>
+            </figure>
 <h4 id="转移地址在内存中的-jmp-指令"><a href="#转移地址在内存中的-jmp-指令" class="headerlink" title="转移地址在内存中的 jmp 指令"></a>转移地址在内存中的 jmp 指令</h4><p>转移地址在内存中的 jmp 指令有两种方式：</p>
 <ul>
 <li>jmp word ptr 内存单元地址（段内转移）</li>
@@ -234,7 +252,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-12-07T06:30:46.655Z" itemprop="dateUpdated">2018-12-07 14:30:46</time>
+    最終更新：<time datetime="2018-12-07T06:30:46.655Z" itemprop="dateUpdated">2018-12-07 14:30:46</time>
 </span><br>
 
 
@@ -427,7 +445,7 @@
 
         <p>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">

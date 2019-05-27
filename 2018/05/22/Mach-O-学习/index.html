@@ -105,7 +105,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -170,7 +170,13 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>Mach-O，是 Mach object 文件格式的缩写，同样也是 OS X 和 iOS 系统中可执行文件格式。类似于 Linux 下的 elf。除了可执行文件外，动态链接库、静态链接库等都是这种格式的。了解 Mach-O ，也助于我们更好的学习 iOS 逆向工程。</p>
 <a id="more"></a>
-<h3 id="Mach-O-结构简单介绍"><a href="#Mach-O-结构简单介绍" class="headerlink" title="Mach-O 结构简单介绍"></a>Mach-O 结构简单介绍</h3><p>Mach-O 主要由三部分组成：<code>Header</code>、<code>Load commands</code>、<code>Raw segment data</code>，如下图所示：<br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/Mach-O%20%E5%AD%A6%E4%B9%A0/mach-o%20structure.jpg" alt=""></p>
+<h3 id="Mach-O-结构简单介绍"><a href="#Mach-O-结构简单介绍" class="headerlink" title="Mach-O 结构简单介绍"></a>Mach-O 结构简单介绍</h3><p>Mach-O 主要由三部分组成：<code>Header</code>、<code>Load commands</code>、<code>Raw segment data</code>，如下图所示：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/Mach-O%20%E5%AD%A6%E4%B9%A0/mach-o%20structure.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p><code>Header</code>保存了 Mach-O 的一些基本信息，包括了平台、文件类型、LoadCommands 的个数等等。</p>
 <p><code>LoadCommands</code>这些指令非常清晰地指示加载器如何设置并且加载二进制数据，这一段紧跟 Header，加载 Mach-O 文件时会使用这里的数据来确定内存的分布。</p>
 <p><code>Data</code> 每一个 segment 的具体数据都保存在这里，这里包含了具体的代码、数据等等。</p>
@@ -209,7 +215,19 @@ MH_DYLIB    动态库
 <p>sectname section 名<br>segname 该 section 所属的 segment 名<br>addr 该 section 在内存的启始位置<br>size 该 section 的大小<br>offset 该 section 的文件偏移<br>align 字节大小对齐<br>reloff 重定位入口的文件偏移<br>nreloc 需要重定位的入口数量<br>flags 包含 section 的 type 和 attributes</p>
 <p>可以通过 otool –s 查看某 segment 的某个 section：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ otool -s __TEXT __text WeChat</span><br><span class="line">WeChat (architecture armv7):</span><br><span class="line">Contents of (__TEXT,__text) section</span><br><span class="line">0000aff0	af03b5f0 8d04f84d f6444606 f2c070fe </span><br><span class="line">0000b000	f644304d 447871fc 314df2c0 46904479 </span><br><span class="line">0000b010	68096800 680c6800 8000f846 b9955935 </span><br><span class="line">0000b020	70e8f644 304df2c0 68004478 58306800</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h3 id="MachOView"><a href="#MachOView" class="headerlink" title="MachOView"></a>MachOView</h3><p>除了用 otool 查看 Mach-O 外，还可以通过 MachOView 可视化工具来查看<br>MachOView下载地址：<a href="http://sourceforge.net/projects/machoview/" target="_blank" rel="noopener">http://sourceforge.net/projects/machoview/</a><br>MachOView源码地址：<a href="https://github.com/gdbinit/MachOView">https://github.com/gdbinit/MachOView</a><br>效果如下：<br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/Mach-O%20%E5%AD%A6%E4%B9%A0/mach-o%20preview.jpg" alt=""><br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/Mach-O%20%E5%AD%A6%E4%B9%A0/mach-o%20preview1.jpg" alt=""></p>
+<h3 id="MachOView"><a href="#MachOView" class="headerlink" title="MachOView"></a>MachOView</h3><p>除了用 otool 查看 Mach-O 外，还可以通过 MachOView 可视化工具来查看<br>MachOView下载地址：<a href="http://sourceforge.net/projects/machoview/" target="_blank" rel="noopener">http://sourceforge.net/projects/machoview/</a><br>MachOView源码地址：<a href="https://github.com/gdbinit/MachOView">https://github.com/gdbinit/MachOView</a><br>效果如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/Mach-O%20%E5%AD%A6%E4%B9%A0/mach-o%20preview.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/Mach-O%20%E5%AD%A6%E4%B9%A0/mach-o%20preview1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://github.com/caozhenwei/document/blob/master/Mach-O-File-Format.pdf">Mach-O-File-Format</a></p>
 
         </div>
@@ -219,7 +237,7 @@ MH_DYLIB    动态库
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-06-26T09:59:28.473Z" itemprop="dateUpdated">2018-06-26 17:59:28</time>
+    最終更新：<time datetime="2018-06-26T09:59:28.473Z" itemprop="dateUpdated">2018-06-26 17:59:28</time>
 </span><br>
 
 
@@ -412,7 +430,7 @@ MH_DYLIB    动态库
 
         <p>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">

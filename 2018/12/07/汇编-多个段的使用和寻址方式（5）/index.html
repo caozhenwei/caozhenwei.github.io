@@ -103,7 +103,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -202,7 +202,13 @@
 <p>实战：用 si 和 di 实现将字符串 ‘welcome to masm！’ 复制到它后面的数据区中，代码如下</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg</span><br><span class="line">datasg segment</span><br><span class="line">	db &apos;welcome to masm!&apos;</span><br><span class="line">	db &apos;................&apos;</span><br><span class="line">datasg ends</span><br><span class="line">	</span><br><span class="line">codesg segment</span><br><span class="line">	start:  mov ax,datasg</span><br><span class="line">			mov ds,ax</span><br><span class="line">			mov si,0</span><br><span class="line">			mov di,16</span><br><span class="line">			mov cx,8</span><br><span class="line">        s:	mov ax,[si]</span><br><span class="line">			mov [di],ax</span><br><span class="line">			add si,2</span><br><span class="line">			add di,2</span><br><span class="line">			loop s </span><br><span class="line">	</span><br><span class="line">			mov ax,4c00h</span><br><span class="line">			int 21H</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
 <p>代码执行后，从下图可以看出复制成功了。</p>
-<p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/5/1.png" alt="1"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/5/1.png" alt="1" title="">
+                </div>
+                <div class="image-caption">1</div>
+            </figure>
 <p>在 8086CPU 中只有 bx、si、di、bp 这四个寄存器能用 […] 的方式寻址。当然也可以是这组合形式，比如：bx 和 si，bx 和 di，bp 和 si，bp 和 di，而 bx 和 bp 或者 si 和 di 却是错误的。</p>
 <h4 id="寻址方式总结"><a href="#寻址方式总结" class="headerlink" title="寻址方式总结"></a>寻址方式总结</h4><p>通过前面的学习，现将 8086CPU 的寻址方式做以下总结：</p>
 <table>
@@ -249,7 +255,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-12-07T02:46:20.582Z" itemprop="dateUpdated">2018-12-07 10:46:20</time>
+    最終更新：<time datetime="2018-12-07T02:46:20.582Z" itemprop="dateUpdated">2018-12-07 10:46:20</time>
 </span><br>
 
 
@@ -442,7 +448,7 @@
 
         <p>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
