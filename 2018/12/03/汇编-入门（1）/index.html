@@ -196,13 +196,7 @@
 <p>  执行后 ax = 1000H，CS = 2000H，IP = 1000H</p>
 </li>
 </ul>
-<h4 id="8086-其它寄存器"><a href="#8086-其它寄存器" class="headerlink" title="8086 其它寄存器"></a>8086 其它寄存器</h4><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/66E6F523-C27E-413B-844C-E6046F8DE297.png" alt="MacDown logo" title="">
-                </div>
-                <div class="image-caption">MacDown logo</div>
-            </figure>
+<h4 id="8086-其它寄存器"><a href="#8086-其它寄存器" class="headerlink" title="8086 其它寄存器"></a>8086 其它寄存器</h4><p><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/66E6F523-C27E-413B-844C-E6046F8DE297.png" alt="MacDown logo"></p>
 <p>从上图可以看出 8086 CPU 内部有 14 个寄存器，一下子也不用记住这么多，随着学习的深入，慢慢的就都认识了。</p>
 <p>8086 的所有寄存器都是 16 位的，其中有 4 个通用寄存器，分别为 AX，BX，CX，DX。8086 上一代的 CPU 是 8 位的，为了保持兼容，这 4 个通用寄存器又可以分为两个独立的 8 位寄存器来使用：</p>
 <ul>
@@ -361,31 +355,38 @@
 
 
 
+
+
+
+
+
+
+
+
+
 <section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
-    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
     <script>
-        var gitment = new Gitment({
-            owner: '',
-            repo: '',
-            oauth: {
-                client_id: '',
-                client_secret: '',
-            },
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: 'bb8a9564b2162d91f724',
+          clientSecret: '107d88e606e42610448a122b5bda41b95e09abc9',
+          repo: 'caozhenwei.github.io',
+          owner: 'caozhenwei',
+          admin: ['caozhenwei'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
         })
-        gitment.render('comments')
+
+        gitalk.render('gitalk-container')
     </script>
 </section>
-
-
-
-
-
-
-
-
-
 
 
 

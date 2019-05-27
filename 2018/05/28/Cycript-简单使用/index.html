@@ -308,31 +308,38 @@ Cycript 允许开发人员在 iOS 或 Mac OS ..." data-title=" QQ">
 
 
 
+
+
+
+
+
+
+
+
+
 <section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
-    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
     <script>
-        var gitment = new Gitment({
-            owner: '',
-            repo: '',
-            oauth: {
-                client_id: '',
-                client_secret: '',
-            },
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: 'bb8a9564b2162d91f724',
+          clientSecret: '107d88e606e42610448a122b5bda41b95e09abc9',
+          repo: 'caozhenwei.github.io',
+          owner: 'caozhenwei',
+          admin: ['caozhenwei'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
         })
-        gitment.render('comments')
+
+        gitalk.render('gitalk-container')
     </script>
 </section>
-
-
-
-
-
-
-
-
-
 
 
 

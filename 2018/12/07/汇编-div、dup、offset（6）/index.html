@@ -192,25 +192,13 @@
 </ul>
 <p>div 使用举例：计算 100001/100，100001 大于 65525，只能放在 dx 和 ax 中存储，dx 存放高 16 位，ax 存放低 16 位，100001 转换为 16 进制为 186a1H，则 dx 中存放高 16 位，即 dx 存放 1H，ax 存放低 16 ，即 86a1H，商存放在 ax 中，dx 存放 余数，通过口算可知商为 1000，表示成 16 进制为 03e8H，余数为 1， 代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">mov dx,1</span><br><span class="line">mov ax,86a1H</span><br><span class="line">mov bx,100</span><br><span class="line">div bx</span><br><span class="line">codesg ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p>验证结果：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/6/1.png" alt="1" title="">
-                </div>
-                <div class="image-caption">1</div>
-            </figure></p>
+<p>验证结果：<br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/6/1.png" alt="1"></p>
 <h4 id="dup"><a href="#dup" class="headerlink" title="dup"></a>dup</h4><p>dup 是一个操作符，和 db、dw、dd 配和使用用来定义重复的数据。例如 db 3 dup (0) 表示定义了 3 个字节，值都为 0，相当于 db 0,0,0</p>
 <h4 id="操作符-offset"><a href="#操作符-offset" class="headerlink" title="操作符 offset"></a>操作符 offset</h4><p>offset 是编译器要处理的符号，意义为取得标号处的偏移地址。<br>例如下面的代码</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assume cs:codesg</span><br><span class="line">codesg segment</span><br><span class="line">	start:   mov ax,offset start</span><br><span class="line">        s:   mov ax,offset s 	</span><br><span class="line">			</span><br><span class="line">			 mov ax,4c00h</span><br><span class="line">			 int 21H	</span><br><span class="line">codesg ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
 <p>mov ax,offset start 相当于 mov ax，0</p>
 <p>mov ax,offset s     相当于 mov ax，3</p>
-<p>在 debug 中可以得到验证：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/6/2.png" alt="2" title="">
-                </div>
-                <div class="image-caption">2</div>
-            </figure></p>
+<p>在 debug 中可以得到验证：<br><img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/asm/6/2.png" alt="2"></p>
 <p>如果没有 debug ，怎么能判判断处标号处的偏移地址呢，可知关键的是要知道指令的长度，指令的长度的判断有以下方法：</p>
 <ul>
 <li>没有操作数的指令，指令长度为 1 字节。如：es ，ds，cbw，xlat 等</li>
@@ -345,31 +333,38 @@
 
 
 
+
+
+
+
+
+
+
+
+
 <section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
-    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
     <script>
-        var gitment = new Gitment({
-            owner: '',
-            repo: '',
-            oauth: {
-                client_id: '',
-                client_secret: '',
-            },
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: 'bb8a9564b2162d91f724',
+          clientSecret: '107d88e606e42610448a122b5bda41b95e09abc9',
+          repo: 'caozhenwei.github.io',
+          owner: 'caozhenwei',
+          admin: ['caozhenwei'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
         })
-        gitment.render('comments')
+
+        gitalk.render('gitalk-container')
     </script>
 </section>
-
-
-
-
-
-
-
-
-
 
 
 
