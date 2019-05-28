@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?46bb8897dc1a51159a1db6b7c817ec00"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>可靠传输原理 | caozhenwei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="前言大家都知道因特网中传输层的两大协议是面向连接的、提供可靠传输的 TCP 协议和面向无连接不提供可靠传输的 UDP 协议，那么 TCP 协议是怎么实现可靠传输呢？接下来会从怎么设计可靠传输协议来一步一步的揭开 TCP 实现可靠传输的面纱。本篇文章会先介绍可靠传输原理和 GBN 协议以及 SR 协议，后面的文章会介绍 TCP 的可靠传输原理以及它的流量控制、拥塞控制等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可靠传输原理">
+<meta property="og:url" content="https://github.com/caozhenwei/2019/05/28/可靠传输原理/index.html">
+<meta property="og:site_name" content="caozhenwei">
+<meta property="og:description" content="前言大家都知道因特网中传输层的两大协议是面向连接的、提供可靠传输的 TCP 协议和面向无连接不提供可靠传输的 UDP 协议，那么 TCP 协议是怎么实现可靠传输呢？接下来会从怎么设计可靠传输协议来一步一步的揭开 TCP 实现可靠传输的面纱。本篇文章会先介绍可靠传输原理和 GBN 协议以及 SR 协议，后面的文章会介绍 TCP 的可靠传输原理以及它的流量控制、拥塞控制等。">
+<meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/5.png">
+<meta property="og:updated_time" content="2019-05-28T10:56:23.660Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="可靠传输原理">
+<meta name="twitter:description" content="前言大家都知道因特网中传输层的两大协议是面向连接的、提供可靠传输的 TCP 协议和面向无连接不提供可靠传输的 UDP 协议，那么 TCP 协议是怎么实现可靠传输呢？接下来会从怎么设计可靠传输协议来一步一步的揭开 TCP 实现可靠传输的面纱。本篇文章会先介绍可靠传输原理和 GBN 协议以及 SR 协议，后面的文章会介绍 TCP 的可靠传输原理以及它的流量控制、拥塞控制等。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/header_image_small.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">caozhenwei</h5>
+          <a href="mailto:296614451@qq.com" title="296614451@qq.com" class="mail">296614451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/caozhenwei" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">可靠传输原理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">可靠传输原理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-28T08:07:31.000Z" itemprop="datePublished" class="page-time">
+  2019-05-28
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#rdt-实现原理"><span class="post-toc-number">2.</span> <span class="post-toc-text">rdt 实现原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-1-0"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">rdt 1.0</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-2-0"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">rdt 2.0</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-2-1"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">rdt 2.1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-2-2"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">rdt 2.2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-3-0"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">rdt 3.0</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#"><span class="post-toc-number"></span> <span class="post-toc-text">
+                
+                    
+                    
+                
+                
+            </span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#流水线机制"><span class="post-toc-number">1.</span> <span class="post-toc-text">流水线机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#滑动窗口协议"><span class="post-toc-number">2.</span> <span class="post-toc-text">滑动窗口协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GBN（Go-Back-N，回退-N-步）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">GBN（Go-Back-N，回退 N 步）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#SR-（Selective-Repeat，选择重传）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">SR （Selective Repeat，选择重传）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GBN-和-SR-对比"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">GBN 和 SR 对比</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-可靠传输原理"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">可靠传输原理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-28 16:07:31" datetime="2019-05-28T08:07:31.000Z"  itemprop="datePublished">2019-05-28</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>大家都知道因特网中传输层的两大协议是面向连接的、提供可靠传输的 TCP 协议和面向无连接不提供可靠传输的 UDP 协议，那么 TCP 协议是怎么实现可靠传输呢？接下来会从怎么设计可靠传输协议来一步一步的揭开 TCP 实现可靠传输的面纱。本篇文章会先介绍可靠传输原理和 GBN 协议以及 SR 协议，后面的文章会介绍 TCP 的可靠传输原理以及它的流量控制、拥塞控制等。</p>
+<a id="more"></a>
+<p>如果要让我们设计一个传输层协议来保证数据的可靠传输，我们应该怎么来做呢？要保证可靠传输，要做到“不错”、“不丢”和“不乱”。</p>
+<p>“不错”，指的是传输的数据不能错误，比如发送端发送 <code>11110000</code>,接收端收到的一定也是 <code>11110000</code>，而不能是别的数据。数据在信道上传输可能会发生错误，比如收到外界的干扰，在物理线路上传输的高电平可能变成了低电平，低电平也可能变成了高电平。</p>
+<p>“不丢”，指的是在传输的过程中，不能出现丢包。比如当路由器的缓存满后，再来的分组会被路由器丢掉，这样接收方就不能正确收到了，我们要设计的协议就要保证路由器丢包后接收方还能正确接收。</p>
+<p>“不乱”，指的是传输的分组不能是乱的，比如说 <code>分组10</code> 比 <code>分组1</code> 先到达，或者一下子收到好多个 <code>分组1</code>，再交付给上层协议时，一定要保证分组是按顺序的并且没有重复的。</p>
+<p>物理信道的不可靠性就决定了可靠传输协议必定是复杂的。可以采取假设的思想来一步步实现 rdt（Reliable Data Transfer，可靠数据传输协议）协议。</p>
+<h3 id="rdt-实现原理"><a href="#rdt-实现原理" class="headerlink" title="rdt 实现原理"></a>rdt 实现原理</h3><h4 id="rdt-1-0"><a href="#rdt-1-0" class="headerlink" title="rdt 1.0"></a>rdt 1.0</h4><p>假设信道上不会出现位错误（有时候也称作位翻转），不会出现丢包的现象。那这个就很简答了，发送方只管发送数据，接收方只管接收数据就行。</p>
+<h4 id="rdt-2-0"><a href="#rdt-2-0" class="headerlink" title="rdt 2.0"></a>rdt 2.0</h4><p>显然 <code>rtd 1.0</code> 太过于理想化了，现实中的信道并不像我们假设的那样。现在假设信道上不会发生丢包，但是可能会发生位错误的，也就是说发送方发送的 <code>1</code> 到接收方变成了 <code>0</code>,或者发送方发送的 <code>0</code> 到接收方变成了 <code>1</code>。怎么解决这种信道上可能发生的位错误来保证呢数据的可靠传输呢？<br>可以加入校验和，也就是说发送方在发送数据的最后加上一个校验和，接收方通过校验和来校验发送方发过来的数据有没有发生错误。如果没发生错误就通知发送方发送下一个包，如果发生错误就通知发送方重新发送本次数据。在接收方检测到数据正确后可以返回给发送方一个 ACK（ACKnowledge Character，肯定字符），检测到错误后返回给发送方法一个 NAk （Negative Acknowledgment，否定应答）。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p><code>rdt 2.0</code> 在可能会发生位错误，但不会丢包的假设下，通过校验和机制能实现可靠数据传输。但它有什么问题吗？很明显，如果接收方返回的 ACK 或者 NAK 在传输过程中发生了错误，发送方接收到错误的数据后就一脸懵逼了，是该继续发送下一个包呢，还是重传上一个包呢？带着这个问题我们一起进入 <code>rdt 2.1</code> </p>
+<h4 id="rdt-2-1"><a href="#rdt-2-1" class="headerlink" title="rdt 2.1"></a>rdt 2.1</h4><p><code>rdt 2.0</code> 的致命缺陷就是 ACK 或者 NAK 发生错误后，发送方不知道该怎么办了。怎么解决这种问题呢？有以下几种思路：</p>
+<ul>
+<li>为 ACK/NAK 增加校验和，检错并纠错？检错可以，但是纠错是不是成本更高了呢？</li>
+<li>发送方接收到被破坏的 ACK/NAK 时不知道接收方发生了什么，添加额外的控制消息？这是否可行呢，显然控制信息越多，传输的数据的效率就越低。</li>
+<li>如果 ACK/NAK 坏掉，发送方重传？不能简单的重传：产生重复分组，接收方怎么做？</li>
+</ul>
+<p>其实可以在发送方为每一个分组添加一个序列号（Sequence number），在发送方收到出错的 ACK 或者 NAK 后就重传分组，在接收方收到重复的分组后丢弃即可。<br>流程图如下所示（以 ACK 在传输过程中发生错误为例，NAK 也一样）：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>上面的方法似乎无完美的解决了 ACK 或者 NAK 出错后导致发送方不知道该怎么办的问题。但是想想真的需要两个应答类型吗？即用一个 ACK 是否能代替以前的 ACK 和 NAK 呢？</p>
+<h4 id="rdt-2-2"><a href="#rdt-2-2" class="headerlink" title="rdt 2.2"></a>rdt 2.2</h4><p>针对上面的问题，当然可以用一个 ACK 来达到应答，具体就是 ACK 后面跟上序列号，这个序列号表示接收端已经接收到该序列号以及之前所有包的正确分组。</p>
+<h4 id="rdt-3-0"><a href="#rdt-3-0" class="headerlink" title="rdt 3.0"></a>rdt 3.0</h4><p>通过上面的假设我们已经能在只发生位错误，不发生丢包的信道上用校验和和 ACK 机制实现了可靠数据传输。但是现实世界总是那么的残酷，如果信道既可能发生位错误，也可能丢包，该怎么设计可靠传输协议呢？</p>
+<p>在信道上发生位错误的问题，之前已经有办法完美的解决了，现在要考虑的问题是如果发生丢包，该怎么解决？</p>
+<p>1.假设发送方发送的包在传输过程中发生了丢包，此时发送方是不会收到接收方返回的 ACK 的，这时候也不能傻傻的等着啊，所以需要设置一个“合理”的时间（这个合理的时间设置有一定的难度，以后的文章会重新提到），如果在这个时间内没有收到 ACK （不管是因为丢包还是延时），发送方就会重传之前发的包。显然，这样需要设置一个定时器来定时了。</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></h1><p>2.假设 ACK 丢失了或者超时，也能利用定时器超时重传的方法来解决。</p>
+<p>这样看起来，<code>rdt 3.0</code> 在信道可能发生位错误，可能丢包的情况下能保证可靠数据传输。但是效率是不是太低了呢？效率低的原因是因为停等机制导致的，即发了一个分组之后一直等到确认了这个分组才发下一个。怎么优化呢？</p>
+<h3 id="流水线机制"><a href="#流水线机制" class="headerlink" title="流水线机制"></a>流水线机制</h3><p>上面 <code>rdt 3.0</code> 效率低的问题是因为发了一个分组之后一直等到确认了这个分组才发下一个，可不可以在未确认之前连续发送多个分组呢？答案是可以用流水线机制来提高效率。即在收到确认之前发送多个分组。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h3 id="滑动窗口协议"><a href="#滑动窗口协议" class="headerlink" title="滑动窗口协议"></a>滑动窗口协议</h3><p>有了流水线机制，我们是不是就能在未确认之前连续发送无数的分组了呢？这就好比工厂上的流水线上，前面的工序处理的非常快，后面处理的比较慢，这样就会导致整条流水线瘫痪。同样，发送方如果不限制发送速率的话，可能造成路由器大量的丢包，接收方如果处理不过来的话也势必造成数据传输失败。滑动窗口协议就能很好的解决这一问题，能控制发送方发送的速率，从而达到路由器不出现大量丢包以及接收方能处理过来接收到的数据。滑动窗口协议控制发送方发送速率主要是通过控制滑动窗口大小来实现的。比如说设置滑动窗口为 5，即表示发送方在未确认之前最多能连续发送 5 个分组，如果未收到接收方的确认就不能再发送新分组，只有收到 ack 后，发送方才能再次发送新分组（如果有的话）。</p>
+<p>滑动窗口管理着发出去但是还未被确认的分组，当收到一个 ACK 后，窗口便能向后滑动了（滑动窗口名称的来源）。例子如下所示：假设滑动窗口的大小为 4</p>
+<p>第一步，发送方先后发送 4 个分组，这时候滑动窗口满了便不允许发送方发送数据。</p>
+<p>第二步，接收方收到一个 ack ，这时候滑动窗口便向后移动，发送方就可以重新发送一个分组了，在本例中即发送分组 5</p>
+<p>第三步，接收方再次收到了一个 ack，滑动窗口再次向后移动，以此类推</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h4 id="GBN（Go-Back-N，回退-N-步）"><a href="#GBN（Go-Back-N，回退-N-步）" class="headerlink" title="GBN（Go-Back-N，回退 N 步）"></a>GBN（Go-Back-N，回退 N 步）</h4><p>在发送方：</p>
+<ul>
+<li>窗口大小为 N，最多允许 N 个已发送但未被确认的分组</li>
+<li>收到 ACK（n）表示确认到序列号 n 的分组均已被正确接收，注意可能会收到重复的 ACK</li>
+<li>为分组设置一个定时器，当发生超时时间时，会回退 N 步重新传整个窗口中分组（GBN 名称的由来），即一旦发生超时，就回重新传送整个在窗口中的分组，不管接收方是否收到之前窗口中的分组</li>
+</ul>
+<p>如果有乱序到达的分组到达接收方</p>
+<ul>
+<li>乱序到达后直接丢掉，接收方没有缓存</li>
+<li>重新确认序列号最大的、按序到达的分组</li>
+</ul>
+<h4 id="SR-（Selective-Repeat，选择重传）"><a href="#SR-（Selective-Repeat，选择重传）" class="headerlink" title="SR （Selective Repeat，选择重传）"></a>SR （Selective Repeat，选择重传）</h4><p>想一下上面的 GBN 有上面缺陷？很明显单个分组的差错就能够引起 GBN 重传大批分组，还有分组已经到达接收方了，但发现不是自己期望的分组会直接丢掉，是不是可以先存到接收方那里以提高效率呢？当然可以，只不过接收方需要设置一个接收缓存。于是就有了 SR 协议，它的做法是</p>
+<ul>
+<li>发送方给每一个分组设置单独的定时器，这样发生超时后只传本分组就可以</li>
+<li>在接收方缓存已经收到的乱序分组</li>
+</ul>
+<h4 id="GBN-和-SR-对比"><a href="#GBN-和-SR-对比" class="headerlink" title="GBN 和 SR 对比"></a>GBN 和 SR 对比</h4><p>在发送方，GBN 只给一个窗口设置一个定时器，而 SR 是为窗口中每一个分组都设置一个定时器。当定时器超时时，GBN 重传整个窗口中的分组，SR 只重传定时器超时的那一个分组。<br>在接收方，GBN 没有缓存，乱序到达的分组直接丢掉，并回复收到的最大分组，SR 缓存乱序到达的分组，并回复 ACK 已经收到分组。</p>
+<p>写到这里，本篇基本上就要结尾了，可以想想 TCP 更像 GBN、SR 中的哪一个呢？TCP 为什么要有流量控制和拥塞控制？UDP 不需要流量控制和拥塞控制吗？ UDP 不进行流量控制和拥塞控制不会造成网络的瘫痪吗？这些问题以后的文章会慢慢解答。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-05-28T10:56:23.660Z" itemprop="dateUpdated">2019-05-28 18:56:23</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/05/28/可靠传输原理/" target="_blank" rel="external">https://github.com/caozhenwei/2019/05/28/可靠传输原理/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/caozhenwei">
+            <img src="/img/header_image_small.jpg" alt="caozhenwei">
+            caozhenwei
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/caozhenwei/2019/05/28/可靠传输原理/&title=《可靠传输原理》 — caozhenwei&pic=https://github.com/caozhenwei/img/header_image_small.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/caozhenwei/2019/05/28/可靠传输原理/&title=《可靠传输原理》 — caozhenwei&source=前言大家都知道因特网中传输层的两大协议是面向连接的、提供可靠传输的 TCP 协议和面向无连接不提供可靠传输的 UDP 协议，那么 TCP 协议是怎么实现可..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/caozhenwei/2019/05/28/可靠传输原理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《可靠传输原理》 — caozhenwei&url=https://github.com/caozhenwei/2019/05/28/可靠传输原理/&via=https://github.com/caozhenwei" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/caozhenwei/2019/05/28/可靠传输原理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/10/汇编-中断（10）/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">汇编--中断（10）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var id = location.pathname
+        if (location.pathname.length > 50) {
+          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
+        }
+        const gitalk = new Gitalk({
+          clientID: 'bb8a9564b2162d91f724',
+          clientSecret: '107d88e606e42610448a122b5bda41b95e09abc9',
+          repo: 'caozhenwei.github.io',
+          owner: 'caozhenwei',
+          admin: ['caozhenwei'],
+          id: id,      // Ensure uniqueness and length less than 50
+          title: document.title.split('|')[0],
+          distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <!-- <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>caozhenwei &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+ -->
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/caozhenwei/2019/05/28/可靠传输原理/&title=《可靠传输原理》 — caozhenwei&pic=https://github.com/caozhenwei/img/header_image_small.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/caozhenwei/2019/05/28/可靠传输原理/&title=《可靠传输原理》 — caozhenwei&source=前言大家都知道因特网中传输层的两大协议是面向连接的、提供可靠传输的 TCP 协议和面向无连接不提供可靠传输的 UDP 协议，那么 TCP 协议是怎么实现可..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/caozhenwei/2019/05/28/可靠传输原理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《可靠传输原理》 — caozhenwei&url=https://github.com/caozhenwei/2019/05/28/可靠传输原理/&via=https://github.com/caozhenwei" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/caozhenwei/2019/05/28/可靠传输原理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/caozhenwei/2019/05/28/可靠传输原理/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'caozhenwei';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'caozhenwei';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
