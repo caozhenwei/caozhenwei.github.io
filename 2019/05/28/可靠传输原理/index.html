@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/3.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/4.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/5.png">
-<meta property="og:updated_time" content="2019-05-28T10:56:23.660Z">
+<meta property="og:updated_time" content="2019-05-28T12:05:54.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="可靠传输原理">
 <meta name="twitter:description" content="前言大家都知道因特网中传输层的两大协议是面向连接的、提供可靠传输的 TCP 协议和面向无连接不提供可靠传输的 UDP 协议，那么 TCP 协议是怎么实现可靠传输呢？接下来会从怎么设计可靠传输协议来一步一步的揭开 TCP 实现可靠传输的面纱。本篇文章会先介绍可靠传输原理和 GBN 协议以及 SR 协议，后面的文章会介绍 TCP 的可靠传输原理以及它的流量控制、拥塞控制等。">
@@ -77,7 +77,7 @@
             <li class="waves-block waves-effect">
               <a href="/"  >
                 <i class="icon icon-lg icon-home"></i>
-                主页
+                Home
               </a>
             </li>
         
@@ -151,13 +151,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#rdt-实现原理"><span class="post-toc-number">2.</span> <span class="post-toc-text">rdt 实现原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-1-0"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">rdt 1.0</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-2-0"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">rdt 2.0</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-2-1"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">rdt 2.1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-2-2"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">rdt 2.2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-3-0"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">rdt 3.0</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#"><span class="post-toc-number"></span> <span class="post-toc-text">
-                
-                    
-                    
-                
-                
-            </span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#流水线机制"><span class="post-toc-number">1.</span> <span class="post-toc-text">流水线机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#滑动窗口协议"><span class="post-toc-number">2.</span> <span class="post-toc-text">滑动窗口协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GBN（Go-Back-N，回退-N-步）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">GBN（Go-Back-N，回退 N 步）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#SR-（Selective-Repeat，选择重传）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">SR （Selective Repeat，选择重传）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GBN-和-SR-对比"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">GBN 和 SR 对比</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#rdt-实现原理"><span class="post-toc-number">2.</span> <span class="post-toc-text">rdt 实现原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-1-0"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">rdt 1.0</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-2-0"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">rdt 2.0</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-2-1"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">rdt 2.1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-2-2"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">rdt 2.2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rdt-3-0"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">rdt 3.0</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#流水线机制"><span class="post-toc-number">3.</span> <span class="post-toc-text">流水线机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#滑动窗口协议"><span class="post-toc-number">4.</span> <span class="post-toc-text">滑动窗口协议</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GBN（Go-Back-N，回退-N-步）"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">GBN（Go-Back-N，回退 N 步）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#SR-（Selective-Repeat，选择重传）"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">SR （Selective Repeat，选择重传）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GBN-和-SR-对比"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">GBN 和 SR 对比</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -217,13 +211,14 @@
 <h4 id="rdt-3-0"><a href="#rdt-3-0" class="headerlink" title="rdt 3.0"></a>rdt 3.0</h4><p>通过上面的假设我们已经能在只发生位错误，不发生丢包的信道上用校验和和 ACK 机制实现了可靠数据传输。但是现实世界总是那么的残酷，如果信道既可能发生位错误，也可能丢包，该怎么设计可靠传输协议呢？</p>
 <p>在信道上发生位错误的问题，之前已经有办法完美的解决了，现在要考虑的问题是如果发生丢包，该怎么解决？</p>
 <p>1.假设发送方发送的包在传输过程中发生了丢包，此时发送方是不会收到接收方返回的 ACK 的，这时候也不能傻傻的等着啊，所以需要设置一个“合理”的时间（这个合理的时间设置有一定的难度，以后的文章会重新提到），如果在这个时间内没有收到 ACK （不管是因为丢包还是延时），发送方就会重传之前发的包。显然，这样需要设置一个定时器来定时了。</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a><figure class="image-bubble">
+<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="https://raw.githubusercontent.com/caozhenwei/blog_pic/master/network/可靠传输原理/3.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
-            </figure></h1><p>2.假设 ACK 丢失了或者超时，也能利用定时器超时重传的方法来解决。</p>
+            </figure>
+<p>2.假设 ACK 丢失了或者超时，也能利用定时器超时重传的方法来解决。</p>
 <p>这样看起来，<code>rdt 3.0</code> 在信道可能发生位错误，可能丢包的情况下能保证可靠数据传输。但是效率是不是太低了呢？效率低的原因是因为停等机制导致的，即发了一个分组之后一直等到确认了这个分组才发下一个。怎么优化呢？</p>
 <h3 id="流水线机制"><a href="#流水线机制" class="headerlink" title="流水线机制"></a>流水线机制</h3><p>上面 <code>rdt 3.0</code> 效率低的问题是因为发了一个分组之后一直等到确认了这个分组才发下一个，可不可以在未确认之前连续发送多个分组呢？答案是可以用流水线机制来提高效率。即在收到确认之前发送多个分组。<br><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -270,7 +265,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-05-28T10:56:23.660Z" itemprop="dateUpdated">2019-05-28 18:56:23</time>
+    Last updated: <time datetime="2019-05-28T12:05:54.932Z" itemprop="dateUpdated">2019-05-28 20:05:54</time>
 </span><br>
 
 
@@ -349,7 +344,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/05/29/English-word/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">English word</h4>
+      </a>
+    </div>
   
 
   
