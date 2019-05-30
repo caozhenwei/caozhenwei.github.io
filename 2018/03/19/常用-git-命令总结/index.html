@@ -33,7 +33,7 @@
 <meta property="og:url" content="https://github.com/caozhenwei/2018/03/19/常用-git-命令总结/index.html">
 <meta property="og:site_name" content="caozhenwei">
 <meta property="og:description" content="前言git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git">
-<meta property="og:updated_time" content="2019-05-23T08:07:53.314Z">
+<meta property="og:updated_time" content="2019-05-30T08:46:22.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用 git 命令总结">
 <meta name="twitter:description" content="前言git 是什么它是一个版本控制工具。 版本控制是一种记录一个或若干个文件内容变化，以便将来查阅特定版本修订情况的系统。 想想当年写毕业论文的情况，写了一个最终版，发现不行，在原来的基础上又修改下重新存为“最终版1”、“最终版2”、“打死也不改版1”、“打死也不改版2”…。如果自己知道有 git 这种强大的版本控制工具呢，肯定不会存好多版本，打开好多版本，来来回回的复制粘贴，简直蠢的要死。git">
@@ -183,7 +183,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Xcode</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore &amp; Swift.gitignore</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Build generated</span></span><br><span class="line">build/</span><br><span class="line">DerivedData/</span><br><span class="line"></span><br><span class="line"><span class="comment">## Various settings</span></span><br><span class="line">*.pbxuser</span><br><span class="line">!default.pbxuser</span><br><span class="line">*.mode1v3</span><br><span class="line">!default.mode1v3</span><br><span class="line">*.mode2v3</span><br><span class="line">!default.mode2v3</span><br><span class="line">*.perspectivev3</span><br><span class="line">!default.perspectivev3</span><br><span class="line">xcuserdata/</span><br><span class="line"></span><br><span class="line"><span class="comment">## Other</span></span><br><span class="line">*.moved-aside</span><br><span class="line">*.xccheckout</span><br><span class="line">*.xcscmblueprint</span><br><span class="line"></span><br><span class="line"><span class="comment">## Obj-C/Swift specific</span></span><br><span class="line">*.hmap</span><br><span class="line">*.ipa</span><br><span class="line">*.dSYM.zip</span><br><span class="line">*.dSYM</span><br><span class="line"></span><br><span class="line"><span class="comment"># CocoaPods</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># We recommend against adding the Pods directory to your .gitignore. However</span></span><br><span class="line"><span class="comment"># you should judge for yourself, the pros and cons are mentioned at:</span></span><br><span class="line"><span class="comment"># https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Pods/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Carthage</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Add this line if you want to avoid checking in source code from Carthage dependencies.</span></span><br><span class="line"><span class="comment"># Carthage/Checkouts</span></span><br><span class="line"></span><br><span class="line">Carthage/Build</span><br><span class="line"></span><br><span class="line"><span class="comment"># fastlane</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the</span></span><br><span class="line"><span class="comment"># screenshots whenever they are needed.</span></span><br><span class="line"><span class="comment"># For more information about the recommended setup visit:</span></span><br><span class="line"><span class="comment"># https://docs.fastlane.tools/best-practices/source-control/#source-control</span></span><br><span class="line"></span><br><span class="line">fastlane/report.xml</span><br><span class="line">fastlane/Preview.html</span><br><span class="line">fastlane/screenshots</span><br><span class="line">fastlane/test_output</span><br><span class="line"></span><br><span class="line"><span class="comment"># Code Injection</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># After new code Injection tools there's a generated folder /iOSInjectionProject</span></span><br><span class="line"><span class="comment"># https://github.com/johnno1962/injectionforxcode</span></span><br><span class="line"></span><br><span class="line">iOSInjectionProject/</span><br></pre></td></tr></table></figure>
 <p>更多的配置可以参考<a href="https://github.com/github/gitignore"> 这里</a>。</p>
 <h3 id="获取-git-仓库"><a href="#获取-git-仓库" class="headerlink" title="获取 git 仓库"></a>获取 git 仓库</h3><h4 id="在现有目录中初始化仓库"><a href="#在现有目录中初始化仓库" class="headerlink" title="在现有目录中初始化仓库"></a>在现有目录中初始化仓库</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
-<h4 id="克隆现有的仓库"><a href="#克隆现有的仓库" class="headerlink" title="克隆现有的仓库"></a>克隆现有的仓库</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> &lt;url&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="克隆现有的仓库"><a href="#克隆现有的仓库" class="headerlink" title="克隆现有的仓库"></a>克隆现有的仓库</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> &lt;url&gt;</span><br><span class="line">$ git <span class="built_in">clone</span> -b &lt;branch&gt; &lt;url&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="克隆一个带子模块的项目"><a href="#克隆一个带子模块的项目" class="headerlink" title="克隆一个带子模块的项目"></a>克隆一个带子模块的项目</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> &lt;url&gt;</span><br><span class="line">$ git submodule init</span><br><span class="line">$ git submodule update</span><br></pre></td></tr></table></figure>
 <p>查看子模块的地址可以在项目目录的 .gitmodules 中查看。</p>
 <h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><p>用 git 管理文件后，对于任何一个文件，在 git 内都只有三种状态：已提交（committed），已修改（modified）和已暂存（staged）。</p>
@@ -398,7 +398,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-05-23T08:07:53.314Z" itemprop="dateUpdated">2019-05-23 16:07:53</time>
+    Last updated: <time datetime="2019-05-30T08:46:22.782Z" itemprop="dateUpdated">2019-05-30 16:46:22</time>
 </span><br>
 
 
@@ -491,9 +491,9 @@
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2018/03/19/春天里的故事/" id="post-next" class="post-nav-link">
+      <a href="/2018/03/19/hello-world/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">春天里的故事</h4>
+        <h4 class="title">Hello World</h4>
       </a>
     </div>
   
